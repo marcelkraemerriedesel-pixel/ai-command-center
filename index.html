@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Marcel · AI Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #1a2332;
+    --muted: #5c6b7a;
+    --line: #d5dde6;
+    --paper: #f3f6f9;
+    --panel: #ffffff;
+    --accent: #0f6e56;
+    --accent-soft: #d8efe6;
+    --warn: #9a5b12;
+    --warn-soft: #f5e6d0;
+    --danger: #9b2c2c;
+    --danger-soft: #f5d6d6;
+    --info: #1d4f91;
+    --info-soft: #d9e6f5;
+    --grid: rgba(26, 35, 50, 0.05);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "IBM Plex Sans", sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(1200px 500px at 10% -10%, #dceee7 0%, transparent 55%),
+      radial-gradient(900px 420px at 100% 0%, #d7e4f2 0%, transparent 50%),
+      linear-gradient(180deg, #eef3f7 0%, var(--paper) 40%, #e9eef3 100%);
+    min-height: 100vh;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 20px 64px;
+  }
+  header.hero {
+    display: grid;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .brand {
+    font-family: Fraunces, Georgia, serif;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin: 0;
+  }
+  .brand span { color: var(--accent); }
+  .lede {
+    margin: 0;
+    max-width: 46rem;
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    border-radius: 999px;
+    padding: 5px 11px;
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .dot.auth { background: var(--warn); }
+  .stamp {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+  .stat {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 18px;
+  }
+  .stat b {
+    display: block;
+    font-family: Fraunces, Georgia, serif;
+    font-size: 2rem;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat span { color: var(--muted); font-size: 0.85rem; }
+  .stat.warn b { color: var(--warn); }
+  .stat.danger b { color: var(--danger); }
+  .stat.info b { color: var(--info); }
+  .banner {
+    background: var(--warn-soft);
+    border: 1px solid #e2c58d;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 22px;
+    color: #5c3a0c;
+    font-size: 0.92rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .grid.equal { grid-template-columns: 1fr 1fr; }
+  section.panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px 18px 14px;
+    min-width: 0;
+  }
+  section.panel h2 {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 4px;
+    letter-spacing: -0.02em;
+  }
+  .sub {
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin: 0 0 14px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  th {
+    text-align: left;
+    font-weight: 600;
+    color: var(--muted);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0 8px 8px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  td {
+    padding: 10px 8px 10px 0;
+    border-bottom: 1px solid #eef2f6;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: 0; }
+  .when { color: var(--muted); white-space: nowrap; font-size: 0.82rem; }
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  a:hover { text-decoration: underline; }
+  .links a { margin-right: 10px; }
+  .bar {
+    display: flex;
+    height: 10px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: #e8eef4;
+    margin: 8px 0 6px;
+  }
+  .bar i { display: block; height: 100%; }
+  .bar .ip { background: var(--info); width: 33.3%; }
+  .bar .pr { background: #6b8bb8; width: 6.7%; }
+  .bar .bl { background: var(--danger); width: 20%; }
+  .bar .bk { background: #9aa8b6; width: 40%; }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .legend span::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .l-ip::before { background: var(--info); }
+  .l-pr::before { background: #6b8bb8; }
+  .l-bl::before { background: var(--danger); }
+  .l-bk::before { background: #9aa8b6; }
+  .status {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #eef2f6;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .status.ip { background: var(--info-soft); color: var(--info); }
+  .status.bl { background: var(--danger-soft); color: var(--danger); }
+  .status.pr { background: var(--warn-soft); color: var(--warn); }
+  ul.actions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul.actions li {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eef2f6;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  ul.actions li:last-child { border-bottom: 0; }
+  ul.actions i {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    border: 1.5px solid var(--line);
+    border-radius: 4px;
+  }
+  .mail {
+    display: grid;
+    gap: 10px;
+  }
+  .mail article {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 14px;
+    background: #fbfcfe;
+  }
+  .mail h3 {
+    margin: 0 0 4px;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  .mail p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--info);
+    background: var(--info-soft);
+    border-radius: 4px;
+    padding: 2px 6px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .quick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .quick a {
+    border: 1px solid var(--line);
+    background: var(--panel);
+    border-radius: 999px;
+    padding: 8px 14px;
+    color: var(--ink);
+    font-weight: 500;
+    font-size: 0.85rem;
+  }
+  .quick a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+    background: var(--accent-soft);
+  }
+  footer.note {
+    margin-top: 28px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+  @media (max-width: 860px) {
+    .stats, .grid, .grid.equal { grid-template-columns: 1fr; }
+    .stamp { margin-left: 0; width: 100%; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <h1 class="brand">COMMAND<span>.</span></h1>
+      <p class="lede">
+        Dein AI Command Center: Calendar, Gmail, Jira, Confluence und Granola
+        in einer Ansicht, alles verlinkt. Snapshot aus der verbundenen
+        Cursor-Session.
+      </p>
+      <div class="meta">
+        <span class="chip"><i class="dot"></i>Calendar</span>
+        <span class="chip"><i class="dot"></i>Gmail</span>
+        <span class="chip"><i class="dot"></i>Jira</span>
+        <span class="chip"><i class="dot"></i>Confluence</span>
+        <span class="chip"><i class="dot"></i>Granola</span>
+        <span class="chip"><i class="dot"></i>Cursor</span>
+        <span class="chip"><i class="dot auth"></i>Slack · Auth nötig</span>
+        <span class="stamp">Snapshot · 30 Sep 2026 · 22:00 Europe/Berlin</span>
+      </div>
+    </header>
+
+    <div class="banner">
+      Slack-MCP ist in dieser Session noch nicht authentifiziert. Alle anderen Quellen sind live verbunden.
+    </div>
+
+    <div class="stats">
+      <div class="stat info"><b>17</b><span>Offene Jira-Issues</span></div>
+      <div class="stat"><b>5</b><span>In Progress</span></div>
+      <div class="stat danger"><b>3</b><span>Blocked</span></div>
+      <div class="stat warn"><b>5</b><span>Action Items (Granola)</span></div>
+    </div>
+
+    <section class="panel" style="margin-bottom:16px">
+      <h2>Jira workload</h2>
+      <p class="sub">assignee = currentUser(), unresolved · 15 von 17 geladen</p>
+      <div class="bar"><i class="ip"></i><i class="pr"></i><i class="bl"></i><i class="bk"></i></div>
+      <div class="legend">
+        <span class="l-ip">In Progress 5</span>
+        <span class="l-pr">Prioritised 1</span>
+        <span class="l-bl">Blocked 3</span>
+        <span class="l-bk">Backlog 6</span>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="panel">
+        <h2>Nächste Termine</h2>
+        <p class="sub">Google Calendar · 30 Sep – 5 Okt · Mittagsblöcke ausgeblendet</p>
+        <table>
+          <thead><tr><th>Wann</th><th>Termin</th><th></th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="when">Heute · 16:00</td>
+              <td>Chaimae goodbye</td>
+              <td class="links"><a href="https://meet.google.com/rxp-wtdq-arj" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+            <tr>
+              <td class="when">Do 1 Okt · 10:00</td>
+              <td>Enterprise Planning</td>
+              <td class="links"><a href="https://meet.google.com/tde-sqzy-tyd" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+            <tr>
+              <td class="when">Do 1 Okt · 16:30</td>
+              <td>Solution Factory · Planning + Show your work</td>
+              <td class="links"><a href="https://meet.google.com/fjs-tfeg-ppb" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+            <tr>
+              <td class="when">Fr 2 Okt · 09:30</td>
+              <td>PH Kapitalanlegerportal · Review</td>
+              <td class="links"><a href="https://meet.google.com/zyo-imca-gpo" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+            <tr>
+              <td class="when">Fr 2 Okt · 10:30</td>
+              <td>Anbindung Leads Engine (Allianz Webex)</td>
+              <td class="links"><a href="https://allianz-agn.webex.com/allianz-agn-de/j.php?MTID=m6040391ab1fb063ec5d530f2863f6733" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+            <tr>
+              <td class="when">Mo 5 Okt · 09:00</td>
+              <td>Wüstenrot Standup/Daily</td>
+              <td class="links"><a href="https://meet.google.com/ezt-wwqu-usb" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+            <tr>
+              <td class="when">Mo 5 Okt · 10:00</td>
+              <td>Weekly Sync Barbara / Jasser / Marcel</td>
+              <td class="links"><a href="https://meet.google.com/vac-nhhj-sst" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel">
+        <h2>Action Items</h2>
+        <p class="sub">Granola Notes 28–30 Sep · Abschlussstatus nicht bestätigt</p>
+        <ul class="actions">
+          <li><i></i><span>Wüstenrot: CSV-export hotfix mail (missing contact fields + field names) · fällig 29/30 Sep</span></li>
+          <li><i></i><span>Strenger-Ordner in Solution Factory AI Assets aktualisieren (Progress, Assets, Context)</span></li>
+          <li><i></i><span>Nächstes Prototype: Template QA testen; nächstes Brief: Solution Kickoff versuchen (für Charles)</span></li>
+          <li><i></i><span>Strenger: Back-office save error → PS ticket; Transfer Lead Role mit Barbara/Ovidiu klären</span></li>
+          <li><i></i><span>Wüstenrot testing: Uppercase-column CSV vor nächster Testwoche senden</span></li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="panel" style="margin-bottom:16px">
+      <h2>Offene Jira-Arbeit</h2>
+      <p class="sub">pricehubble.atlassian.net · SLF · top by updated</p>
+      <table>
+        <thead><tr><th>Key</th><th>Status</th><th>Summary</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><a href="https://pricehubble.atlassian.net/browse/SLF-716" target="_blank" rel="noopener">SLF-716</a></td>
+            <td><span class="status ip">In Progress</span></td>
+            <td>TopHypo · Kickoff and Planning</td>
+          </tr>
+          <tr>
+            <td><a href="https://pricehubble.atlassian.net/browse/SLF-1888" target="_blank" rel="noopener">SLF-1888</a></td>
+            <td><span class="status ip">In Progress</span></td>
+            <td>Release of Wuestenrot V4</td>
+          </tr>
+          <tr>
+            <td><a href="https://pricehubble.atlassian.net/browse/SLF-1691" target="_blank" rel="noopener">SLF-1691</a></td>
+            <td><span class="status ip">In Progress</span></td>
+            <td>Strenger · investor portal activation</td>
+          </tr>
+          <tr>
+            <td><a href="https://pricehubble.atlassian.net/browse/SLF-1291" target="_blank" rel="noopener">SLF-1291</a></td>
+            <td><span class="status ip">In Progress</span></td>
+            <td>Bavaria Direkt · Application workflow</td>
+          </tr>
+          <tr>
+            <td><a href="https://pricehubble.atlassian.net/browse/SLF-585" target="_blank" rel="noopener">SLF-585</a></td>
+            <td><span class="status ip">In Progress</span></td>
+            <td>Allianz · Insurance ownership portal</td>
+          </tr>
+          <tr>
+            <td><a href="https://pricehubble.atlassian.net/browse/SLF-1891" target="_blank" rel="noopener">SLF-1891</a></td>
+            <td><span class="status pr">Prioritised</span></td>
+            <td>W&amp;W v4 · Interest rates API → mortgage rates</td>
+          </tr>
+          <tr>
+            <td><a href="https://pricehubble.atlassian.net/browse/SLF-778" target="_blank" rel="noopener">SLF-778</a></td>
+            <td><span class="status bl">Blocked internally</span></td>
+            <td>TopHypo · Input Flow creation</td>
+          </tr>
+          <tr>
+            <td><a href="https://pricehubble.atlassian.net/browse/SLF-710" target="_blank" rel="noopener">SLF-710</a></td>
+            <td><span class="status bl">Blocked externally</span></td>
+            <td>TopHypo · Ownership Portal V1</td>
+          </tr>
+          <tr>
+            <td><a href="https://pricehubble.atlassian.net/browse/SLF-1027" target="_blank" rel="noopener">SLF-1027</a></td>
+            <td><span class="status bl">Blocked externally</span></td>
+            <td>Deutsche Bank · ownership portal</td>
+          </tr>
+          <tr>
+            <td><a href="https://pricehubble.atlassian.net/browse/SLF-838" target="_blank" rel="noopener">SLF-838</a></td>
+            <td><span class="status">Backlog</span></td>
+            <td>TopHypo Landingpage · make everything trackable</td>
+          </tr>
+          <tr>
+            <td><a href="https://pricehubble.atlassian.net/browse/SLF-1083" target="_blank" rel="noopener">SLF-1083</a></td>
+            <td><span class="status">Backlog</span></td>
+            <td>TopHypo · check templates · what is missing?</td>
+          </tr>
+          <tr>
+            <td><a href="https://pricehubble.atlassian.net/browse/SLF-1854" target="_blank" rel="noopener">SLF-1854</a></td>
+            <td><span class="status">Backlog</span></td>
+            <td>Strenger · visualize owner rent in market chart</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="grid equal">
+      <section class="panel">
+        <h2>Inbox · Fokus</h2>
+        <p class="sub">Gmail · letzte 7 Tage · keine Secrets eingebettet</p>
+        <div class="mail">
+          <article>
+            <h3>KO-Onboarding · Korrektur koop</h3>
+            <p>Lino Schmidt (Wüstenrot) fragt, ob Berater auch in Prod angelegt wurden (nicht nur Staging). · heute 16:51</p>
+            <p style="margin-top:6px"><a href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/thread-f:1877750344100945278" target="_blank" rel="noopener">In Gmail öffnen</a></p>
+          </article>
+          <article>
+            <h3>Atlassian team catch-up <span class="badge">Unread</span></h3>
+            <p>Jira digest · heute 19:14</p>
+            <p style="margin-top:6px"><a href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/thread-f:1877777814842920118" target="_blank" rel="noopener">In Gmail öffnen</a></p>
+          </article>
+          <article>
+            <h3>PS-5408 · backoffice parent hierarchy</h3>
+            <p>Jira · Mihail Russu commented · passt zum Strenger back-office Thema</p>
+            <p style="margin-top:6px"><a href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/thread-f:1877752037131280509" target="_blank" rel="noopener">In Gmail öffnen</a></p>
+          </article>
+          <article>
+            <h3>Weekly update · Sharon on SLF-1857</h3>
+            <p>Jira · Sharon Cluett hat dich getaggt</p>
+            <p style="margin-top:6px"><a href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/thread-f:1877753199011894170" target="_blank" rel="noopener">In Gmail öffnen</a></p>
+          </article>
+          <article>
+            <h3>PR #4 merged · W&amp;W Bauzins chart</h3>
+            <p>GitHub · solution-factory-ai-assets</p>
+            <p style="margin-top:6px"><a href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/thread-f:1877755051105252133" target="_blank" rel="noopener">In Gmail öffnen</a></p>
+          </article>
+        </div>
+      </section>
+
+      <div style="display:grid; gap:16px">
+        <section class="panel">
+          <h2>Granola Notes</h2>
+          <p class="sub">Diese Woche · von dir erfasst / mit dir</p>
+          <table>
+            <thead><tr><th>Wann</th><th>Meeting</th></tr></thead>
+            <tbody>
+              <tr><td class="when">Heute · 16:00</td><td><a href="https://notes.granola.ai/d/0ab88975-0ba7-41e9-a559-1833454c1b9d" target="_blank" rel="noopener">Chaimae goodbye</a></td></tr>
+              <tr><td class="when">Heute · 11:00</td><td><a href="https://notes.granola.ai/d/29d226a9-2ad5-444d-93b9-4b930036d81f" target="_blank" rel="noopener">Marcel x Charles weekly sync</a></td></tr>
+              <tr><td class="when">Mo 29 · 16:30</td><td><a href="https://notes.granola.ai/d/27bf6e9c-0d80-4cbf-a7ac-98fd863a5760" target="_blank" rel="noopener">SLF x SmartApps PM</a></td></tr>
+              <tr><td class="when">Mo 29 · 14:00</td><td><a href="https://notes.granola.ai/d/350eea33-16b3-41a9-a4a7-a8637cd70861" target="_blank" rel="noopener">Weekly Sync SC DACH</a></td></tr>
+              <tr><td class="when">Mo 29 · 11:30</td><td><a href="https://notes.granola.ai/d/358a2dc0-2864-42ec-a227-0a74d9ae8c4a" target="_blank" rel="noopener">PH x Wüstenrot</a></td></tr>
+              <tr><td class="when">Mo 29 · 10:30</td><td><a href="https://notes.granola.ai/d/a50c8712-2776-4730-90cf-d0fb7b63b4af" target="_blank" rel="noopener">Strenger Standup</a></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="panel">
+          <h2>Confluence · frisch</h2>
+          <p class="sub">lastModified ≥ 7 Tage</p>
+          <table>
+            <thead><tr><th>Space</th><th>Seite</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="when">R&amp;D</td>
+                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/RD/pages/2728755201/AVM+accuracy+experiments+results+and+recommendations+September+2026" target="_blank" rel="noopener">AVM accuracy experiments</a></td>
+                <td class="when">~1h</td>
+              </tr>
+              <tr>
+                <td class="when">PROD</td>
+                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/2743468044/Listings+Signal+DE" target="_blank" rel="noopener">Listings Signal DE</a></td>
+                <td class="when">~2h</td>
+              </tr>
+              <tr>
+                <td class="when">PROD</td>
+                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/2732392510/n8n+Workflows" target="_blank" rel="noopener">n8n Workflows</a></td>
+                <td class="when">~3h</td>
+              </tr>
+              <tr>
+                <td class="when">PROD</td>
+                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/2744188929/W+W+-+Enhance+refinance+and+energy-renovation+signals" target="_blank" rel="noopener">W&amp;W refinance / energy signals</a></td>
+                <td class="when">~4h</td>
+              </tr>
+              <tr>
+                <td class="when">PROD</td>
+                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/2619342850/Custom+Record+Schemas" target="_blank" rel="noopener">Custom Record Schemas</a></td>
+                <td class="when">~6h</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+
+    <section class="panel" style="margin-top:16px">
+      <h2>Quick Links</h2>
+      <p class="sub">Direkt in die Tools</p>
+      <div class="quick">
+        <a href="https://pricehubble.atlassian.net/jira/software/projects/SLF/boards/203" target="_blank" rel="noopener">Jira SLF board</a>
+        <a href="https://pricehubble.atlassian.net/issues/?jql=assignee%20%3D%20currentUser()%20AND%20resolution%20%3D%20Unresolved%20ORDER%20BY%20updated%20DESC" target="_blank" rel="noopener">My open Jira</a>
+        <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" rel="noopener">Gmail inbox</a>
+        <a href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener">Google Calendar</a>
+        <a href="https://notes.granola.ai/" target="_blank" rel="noopener">Granola</a>
+        <a href="https://pricehubble.atlassian.net/wiki" target="_blank" rel="noopener">Confluence</a>
+        <a href="https://cursor.com/agents/bc-01a0f3e3-b731-7398-a6ea-d8b761565610" target="_blank" rel="noopener">Dieser Cursor Agent</a>
+      </div>
+    </section>
+
+    <footer class="note">
+      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel.
+      Für ein Refresh: im Chat „Command Center refresh“ schreiben.
+      Live: <a href="https://marcelkraemerriedesel-pixel.github.io/ai-command-center/" target="_blank" rel="noopener">marcelkraemerriedesel-pixel.github.io/ai-command-center</a>
+    </footer>
+  </div>
+</body>
+</html>
