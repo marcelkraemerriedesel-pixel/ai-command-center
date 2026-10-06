@@ -175,10 +175,10 @@
     height: 100%;
     border-radius: 99px;
   }
-  .bar .ip { background: var(--info); width: 33.3%; }
-  .bar .pr { background: #9db7d4; width: 6.7%; }
-  .bar .bl { background: var(--danger); width: 20%; }
-  .bar .bk { background: #3f3f46; width: 40%; }
+  .bar .ip { background: var(--info); width: 28.6%; }
+  .bar .pr { background: #9db7d4; width: 23.8%; }
+  .bar .bl { background: var(--danger); width: 14.3%; }
+  .bar .bk { background: #3f3f46; width: 33.3%; }
   .legend {
     display: flex;
     flex-wrap: wrap;
@@ -344,74 +344,84 @@
         <span class="chip"><i></i>Jira</span>
         <span class="chip"><i></i>Confluence</span>
         <span class="chip"><i></i>Granola</span>
+        <span class="chip"><i></i>Slack</span>
         <span class="chip"><i></i>Cursor</span>
-        <span class="chip warn"><i></i>Slack · Auth nötig</span>
       </nav>
-      <time class="stamp">30 Sep 2026 · 22:00 Berlin</time>
+      <time class="stamp">6 Okt 2026 · 17:10 Berlin</time>
     </header>
 
-    <p class="notice">Slack ist in dieser Session noch nicht authentifiziert. Alle anderen Quellen sind live verbunden.</p>
+    <p class="notice">Die Cursor-Automation bekommt zur Laufzeit keine MCP-Server. Dieses Snapshot kommt aus dem Cloud-Agent-Chat, nicht aus dem Test-Run.</p>
 
     <section class="kpis" aria-label="Kennzahlen">
-      <div class="kpi info"><b>17</b><span>Offene Jira-Issues</span></div>
-      <div class="kpi"><b>5</b><span>In Progress</span></div>
+      <div class="kpi info"><b>21</b><span>Offene Jira-Issues</span></div>
+      <div class="kpi"><b>6</b><span>In Progress</span></div>
       <div class="kpi danger"><b>3</b><span>Blocked</span></div>
       <div class="kpi warn"><b>5</b><span>Action Items</span></div>
     </section>
 
     <section class="panel stack">
       <h2>Jira workload</h2>
-      <p class="sub">assignee = currentUser(), unresolved · 15 von 17 geladen</p>
+      <p class="sub">assignee = currentUser(), unresolved · 21 von 21 geladen</p>
       <div class="bar" aria-hidden="true"><i class="ip"></i><i class="pr"></i><i class="bl"></i><i class="bk"></i></div>
       <div class="legend">
-        <span><i class="l-ip"></i>In Progress 5</span>
-        <span><i class="l-pr"></i>Prioritised 1</span>
+        <span><i class="l-ip"></i>In Progress 6</span>
+        <span><i class="l-pr"></i>Review 5</span>
         <span><i class="l-bl"></i>Blocked 3</span>
-        <span><i class="l-bk"></i>Backlog 6</span>
+        <span><i class="l-bk"></i>Backlog 7</span>
       </div>
     </section>
 
     <div class="split">
       <section class="panel">
         <h2>Nächste Termine</h2>
-        <p class="sub">Google Calendar · 30 Sep – 5 Okt · Mittagsblöcke ausgeblendet</p>
+        <p class="sub">Google Calendar · 6–12 Okt · Mittagsblöcke ausgeblendet</p>
         <table>
           <thead><tr><th>Wann</th><th>Termin</th><th></th></tr></thead>
           <tbody>
             <tr>
-              <td class="when">Heute · 16:00</td>
-              <td>Chaimae goodbye</td>
-              <td><a class="join" href="https://meet.google.com/rxp-wtdq-arj" target="_blank" rel="noopener">Join</a></td>
+              <td class="when">Heute · 16:30</td>
+              <td>Weekly SLF x SmartApps PM</td>
+              <td><a class="join" href="https://meet.google.com/qht-ztrp-fvr" target="_blank" rel="noopener">Join</a></td>
             </tr>
             <tr>
-              <td class="when">Do 1 Okt · 10:00</td>
+              <td class="when">Mi 7 Okt · 09:00</td>
+              <td>Daily Testing Release 4.0</td>
+              <td><a class="join" href="https://teams.microsoft.com/meet/3713060795677439?p=ZWWpej7UpJ40a7KM4E" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+            <tr>
+              <td class="when">Mi 7 Okt · 11:00</td>
+              <td>Marcel x Charles weekly sync</td>
+              <td><a class="join" href="https://meet.google.com/epa-xdws-ieg" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+            <tr>
+              <td class="when">Do 8 Okt · 09:00</td>
+              <td>Daily Testing Release 4.0</td>
+              <td><a class="join" href="https://teams.microsoft.com/meet/3713060795677439?p=ZWWpej7UpJ40a7KM4E" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+            <tr>
+              <td class="when">Do 8 Okt · 10:00</td>
               <td>Enterprise Planning</td>
               <td><a class="join" href="https://meet.google.com/tde-sqzy-tyd" target="_blank" rel="noopener">Join</a></td>
             </tr>
             <tr>
-              <td class="when">Do 1 Okt · 16:30</td>
+              <td class="when">Do 8 Okt · 15:00</td>
+              <td>Sync BTL / Strenger</td>
+              <td><a class="join" href="https://meet.google.com/jzw-qsyg-zrq" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+            <tr>
+              <td class="when">Do 8 Okt · 16:30</td>
               <td>Solution Factory · Planning + Show your work</td>
               <td><a class="join" href="https://meet.google.com/fjs-tfeg-ppb" target="_blank" rel="noopener">Join</a></td>
             </tr>
             <tr>
-              <td class="when">Fr 2 Okt · 09:30</td>
-              <td>PH Kapitalanlegerportal · Review</td>
-              <td><a class="join" href="https://meet.google.com/zyo-imca-gpo" target="_blank" rel="noopener">Join</a></td>
+              <td class="when">Fr 9 Okt · 09:00</td>
+              <td>Daily Testing Release 4.0</td>
+              <td><a class="join" href="https://teams.microsoft.com/meet/3713060795677439?p=ZWWpej7UpJ40a7KM4E" target="_blank" rel="noopener">Join</a></td>
             </tr>
             <tr>
-              <td class="when">Fr 2 Okt · 10:30</td>
-              <td>Anbindung Leads Engine (Allianz Webex)</td>
-              <td><a class="join" href="https://allianz-agn.webex.com/allianz-agn-de/j.php?MTID=m6040391ab1fb063ec5d530f2863f6733" target="_blank" rel="noopener">Join</a></td>
-            </tr>
-            <tr>
-              <td class="when">Mo 5 Okt · 09:00</td>
+              <td class="when">Mo 12 Okt · 09:00</td>
               <td>Wüstenrot Standup/Daily</td>
               <td><a class="join" href="https://meet.google.com/ezt-wwqu-usb" target="_blank" rel="noopener">Join</a></td>
-            </tr>
-            <tr>
-              <td class="when">Mo 5 Okt · 10:00</td>
-              <td>Weekly Sync Barbara / Jasser / Marcel</td>
-              <td><a class="join" href="https://meet.google.com/vac-nhhj-sst" target="_blank" rel="noopener">Join</a></td>
             </tr>
           </tbody>
         </table>
@@ -419,13 +429,13 @@
 
       <section class="panel">
         <h2>Action Items</h2>
-        <p class="sub">Granola Notes 28–30 Sep · Abschlussstatus nicht bestätigt</p>
+        <p class="sub">Granola Notes 5–6 Okt · Abschlussstatus nicht bestätigt</p>
         <ul class="actions">
-          <li><i></i><span>Wüstenrot: CSV-export hotfix mail (missing contact fields + field names) · fällig 29/30 Sep</span></li>
-          <li><i></i><span>Strenger-Ordner in Solution Factory AI Assets aktualisieren (Progress, Assets, Context)</span></li>
-          <li><i></i><span>Nächstes Prototype: Template QA testen; nächstes Brief: Solution Kickoff versuchen (für Charles)</span></li>
-          <li><i></i><span>Strenger: Back-office save error → PS ticket; Transfer Lead Role mit Barbara/Ovidiu klären</span></li>
-          <li><i></i><span>Wüstenrot testing: Uppercase-column CSV vor nächster Testwoche senden</span></li>
+          <li><i></i><span>KO-Mailing 2. Welle: bei Barbara nachfragen, wie sie umgehängt hat; Upload-Link von Lino. Versand morgen ab ca. 15:00, Jasser-Lieferungen ab Do 8 Okt 08:00</span></li>
+          <li><i></i><span>Kunden vs. Prospects ohne MEBA-ID: mit Ovidiu klären (UTM / Lead-Dashboard), sonst landet es bei Stefanie Koller</span></li>
+          <li><i></i><span>Release 4.0: Dagmar-Feedback in Templates, Consent-Layer prüfen (Anja retestet). Abnahme 9 Okt, Go-live spätestens 14 Okt</span></li>
+          <li><i></i><span>Ticket Auslöser → Signal im SSS-Dashboard (PS-5420). Lino-Datei ~72 User ohne Partnerzuordnung an Ovi weiterleiten</span></li>
+          <li><i></i><span>Strenger: Datenimport diese Woche. Nick: Market-Trends-Fehlermeldung kommt aus der API, Ovi für spätere Releases ansprechen</span></li>
         </ul>
       </section>
     </div>
@@ -437,14 +447,9 @@
         <thead><tr><th>Key</th><th>Status</th><th>Summary</th></tr></thead>
         <tbody>
           <tr>
-            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-716" target="_blank" rel="noopener">SLF-716</a></td>
-            <td><span class="status ip">In Progress</span></td>
-            <td>TopHypo · Kickoff and Planning</td>
-          </tr>
-          <tr>
-            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1888" target="_blank" rel="noopener">SLF-1888</a></td>
-            <td><span class="status ip">In Progress</span></td>
-            <td>Release of Wuestenrot V4</td>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1897" target="_blank" rel="noopener">SLF-1897</a></td>
+            <td><span class="status pr">Internal QA</span></td>
+            <td>W&amp;W v4 · error/empty states for market trends</td>
           </tr>
           <tr>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1691" target="_blank" rel="noopener">SLF-1691</a></td>
@@ -452,34 +457,29 @@
             <td>Strenger · investor portal activation</td>
           </tr>
           <tr>
-            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1291" target="_blank" rel="noopener">SLF-1291</a></td>
-            <td><span class="status ip">In Progress</span></td>
-            <td>Bavaria Direkt · Application workflow</td>
-          </tr>
-          <tr>
-            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-585" target="_blank" rel="noopener">SLF-585</a></td>
-            <td><span class="status ip">In Progress</span></td>
-            <td>Allianz · Insurance ownership portal</td>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1886" target="_blank" rel="noopener">SLF-1886</a></td>
+            <td><span class="status pr">Internal QA</span></td>
+            <td>W&amp;W v4 · consent and onboard flow</td>
           </tr>
           <tr>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1891" target="_blank" rel="noopener">SLF-1891</a></td>
-            <td><span class="status pr">Prioritised</span></td>
+            <td><span class="status pr">Stakeholders review</span></td>
             <td>W&amp;W v4 · Interest rates API → mortgage rates</td>
           </tr>
           <tr>
-            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-778" target="_blank" rel="noopener">SLF-778</a></td>
-            <td><span class="status bl">Blocked internally</span></td>
-            <td>TopHypo · Input Flow creation</td>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1884" target="_blank" rel="noopener">SLF-1884</a></td>
+            <td><span class="status pr">Stakeholders review</span></td>
+            <td>W&amp;W v4 · Laura banner on overview and finance</td>
           </tr>
           <tr>
-            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-710" target="_blank" rel="noopener">SLF-710</a></td>
-            <td><span class="status bl">Blocked externally</span></td>
-            <td>TopHypo · Ownership Portal V1</td>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1885" target="_blank" rel="noopener">SLF-1885</a></td>
+            <td><span class="status pr">Stakeholders review</span></td>
+            <td>W&amp;W v4 · property switcher in headers</td>
           </tr>
           <tr>
-            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1027" target="_blank" rel="noopener">SLF-1027</a></td>
-            <td><span class="status bl">Blocked externally</span></td>
-            <td>Deutsche Bank · ownership portal</td>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-716" target="_blank" rel="noopener">SLF-716</a></td>
+            <td><span class="status ip">In Progress</span></td>
+            <td>TopHypo · Kickoff and Planning</td>
           </tr>
           <tr>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-838" target="_blank" rel="noopener">SLF-838</a></td>
@@ -492,9 +492,19 @@
             <td>TopHypo · check templates · what is missing?</td>
           </tr>
           <tr>
-            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1854" target="_blank" rel="noopener">SLF-1854</a></td>
-            <td><span class="status">Backlog</span></td>
-            <td>Strenger · visualize owner rent in market chart</td>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-778" target="_blank" rel="noopener">SLF-778</a></td>
+            <td><span class="status bl">Blocked internally</span></td>
+            <td>TopHypo · Input Flow creation</td>
+          </tr>
+          <tr>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-710" target="_blank" rel="noopener">SLF-710</a></td>
+            <td><span class="status bl">Blocked externally</span></td>
+            <td>TopHypo · Ownership Portal V1</td>
+          </tr>
+          <tr>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1888" target="_blank" rel="noopener">SLF-1888</a></td>
+            <td><span class="status ip">In Progress</span></td>
+            <td>Release of Wuestenrot V4</td>
           </tr>
         </tbody>
       </table>
@@ -503,32 +513,32 @@
     <div class="split even">
       <section class="panel">
         <h2>Inbox · Fokus</h2>
-        <p class="sub">Gmail · letzte 7 Tage · keine Secrets eingebettet</p>
+        <p class="sub">Gmail · letzte 10 Tage · keine Secrets eingebettet</p>
         <div class="mail">
           <article>
-            <h3>KO-Onboarding · Korrektur koop</h3>
-            <p>Lino Schmidt (Wüstenrot) fragt, ob Berater auch in Prod angelegt wurden (nicht nur Staging). · heute 16:51</p>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/thread-f:1877750344100945278" target="_blank" rel="noopener">In Gmail öffnen</a>
+            <h3>PS-5413 · Wuestenrot Hierarchy change <span class="badge">Unread</span></h3>
+            <p>Jira · Mihail Russu hat dich erwähnt · heute 15:25</p>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/thread-f:1878306996210832341" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
           <article>
-            <h3>Atlassian team catch-up <span class="badge">Unread</span></h3>
-            <p>Jira digest · heute 19:14</p>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/thread-f:1877777814842920118" target="_blank" rel="noopener">In Gmail öffnen</a>
+            <h3>Testing Portaloberfläche Anja</h3>
+            <p>Anja Paech (Wüstenrot) · erste Findings Testuser Tara Tonne · heute 09:23</p>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/thread-f:1878284249116391389" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
           <article>
-            <h3>PS-5408 · backoffice parent hierarchy</h3>
-            <p>Jira · Mihail Russu commented · passt zum Strenger back-office Thema</p>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/thread-f:1877752037131280509" target="_blank" rel="noopener">In Gmail öffnen</a>
+            <h3>Portal Feature Comparison</h3>
+            <p>Jake Sales hat ein Spreadsheet geteilt · heute 09:56</p>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/thread-f:1878286263306191541" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
           <article>
-            <h3>Weekly update · Sharon on SLF-1857</h3>
-            <p>Jira · Sharon Cluett hat dich getaggt</p>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/thread-f:1877753199011894170" target="_blank" rel="noopener">In Gmail öffnen</a>
+            <h3>Meine Wohnwelt · Nutzer mit Partner:koop</h3>
+            <p>Dagmar / Ovi / Jasser: MEWA-ID fehlt, 2. Welle KO morgen gleiche Situation · heute 09:19</p>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/thread-f:1878223833016803855" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
           <article>
-            <h3>PR #4 merged · W&amp;W Bauzins chart</h3>
-            <p>GitHub · solution-factory-ai-assets</p>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/thread-f:1877755051105252133" target="_blank" rel="noopener">In Gmail öffnen</a>
+            <h3>PS-5420 · Auslöser → Signal</h3>
+            <p>CSO hat das Translation-Ticket bestätigt · Mo 5 Okt 15:57</p>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/thread-f:1878218407460025028" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
         </div>
       </section>
@@ -540,46 +550,41 @@
           <table>
             <thead><tr><th>Wann</th><th>Meeting</th></tr></thead>
             <tbody>
-              <tr><td class="when">Heute · 16:00</td><td><a href="https://notes.granola.ai/d/0ab88975-0ba7-41e9-a559-1833454c1b9d" target="_blank" rel="noopener">Chaimae goodbye</a></td></tr>
-              <tr><td class="when">Heute · 11:00</td><td><a href="https://notes.granola.ai/d/29d226a9-2ad5-444d-93b9-4b930036d81f" target="_blank" rel="noopener">Marcel x Charles weekly sync</a></td></tr>
-              <tr><td class="when">Mo 29 · 16:30</td><td><a href="https://notes.granola.ai/d/27bf6e9c-0d80-4cbf-a7ac-98fd863a5760" target="_blank" rel="noopener">SLF x SmartApps PM</a></td></tr>
-              <tr><td class="when">Mo 29 · 14:00</td><td><a href="https://notes.granola.ai/d/350eea33-16b3-41a9-a4a7-a8637cd70861" target="_blank" rel="noopener">Weekly Sync SC DACH</a></td></tr>
-              <tr><td class="when">Mo 29 · 11:30</td><td><a href="https://notes.granola.ai/d/358a2dc0-2864-42ec-a227-0a74d9ae8c4a" target="_blank" rel="noopener">PH x Wüstenrot</a></td></tr>
-              <tr><td class="when">Mo 29 · 10:30</td><td><a href="https://notes.granola.ai/d/a50c8712-2776-4730-90cf-d0fb7b63b4af" target="_blank" rel="noopener">Strenger Standup</a></td></tr>
+              <tr><td class="when">Heute · 16:30</td><td><a href="https://notes.granola.ai/d/77c788cc-4e06-4445-9e8b-9a6bcd06b673" target="_blank" rel="noopener">Weekly SLF x SmartApps PM</a></td></tr>
+              <tr><td class="when">Heute · 11:30</td><td><a href="https://notes.granola.ai/d/4fc09f0a-f4a7-4e6f-96b4-e6d5155def79" target="_blank" rel="noopener">PH x Wüstenrot</a></td></tr>
+              <tr><td class="when">Heute · 10:30</td><td><a href="https://notes.granola.ai/d/fcc5fa3e-cd46-493d-882f-f777286b7ee0" target="_blank" rel="noopener">Strenger Standup</a></td></tr>
+              <tr><td class="when">Heute · 09:00</td><td><a href="https://notes.granola.ai/d/e98ce06c-1d53-4c31-95a2-0ac62b38ed6e" target="_blank" rel="noopener">Daily Testing Release 4.0</a></td></tr>
+              <tr><td class="when">Mo 5 · 16:00</td><td><a href="https://notes.granola.ai/d/4c4e6057-500b-4bbe-bb3c-a250d2f946cd" target="_blank" rel="noopener">Product Weekly</a></td></tr>
+              <tr><td class="when">Mo 5 · 15:30</td><td><a href="https://notes.granola.ai/d/337c993d-cd78-40a2-86ee-4ab880db68ee" target="_blank" rel="noopener">BI Weekly PH Wüstenrot</a></td></tr>
             </tbody>
           </table>
         </section>
 
         <section class="panel">
           <h2>Confluence · frisch</h2>
-          <p class="sub">lastModified ≥ 7 Tage</p>
+          <p class="sub">von dir mitbearbeitet · letzte 14 Tage</p>
           <table>
             <thead><tr><th>Space</th><th>Seite</th><th></th></tr></thead>
             <tbody>
               <tr>
-                <td class="when">R&amp;D</td>
-                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/RD/pages/2728755201/AVM+accuracy+experiments+results+and+recommendations+September+2026" target="_blank" rel="noopener">AVM accuracy experiments</a></td>
-                <td class="when">~1h</td>
+                <td class="when">PROD</td>
+                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/2757754883/Alianz+Lead+Engine+V4" target="_blank" rel="noopener">Alianz Lead Engine V4</a></td>
+                <td class="when">heute</td>
               </tr>
               <tr>
                 <td class="when">PROD</td>
-                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/2743468044/Listings+Signal+DE" target="_blank" rel="noopener">Listings Signal DE</a></td>
-                <td class="when">~2h</td>
+                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/42598459/PRODUCT+Internal+-+Weekly+meeting" target="_blank" rel="noopener">PRODUCT Internal Weekly</a></td>
+                <td class="when">Mo 5</td>
               </tr>
               <tr>
                 <td class="when">PROD</td>
-                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/2732392510/n8n+Workflows" target="_blank" rel="noopener">n8n Workflows</a></td>
-                <td class="when">~3h</td>
+                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/2711257089/Strenger+-+Companion+Architecture+Prompt+Capabilities" target="_blank" rel="noopener">Strenger Companion</a></td>
+                <td class="when">Mo 5</td>
               </tr>
               <tr>
                 <td class="when">PROD</td>
-                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/2744188929/W+W+-+Enhance+refinance+and+energy-renovation+signals" target="_blank" rel="noopener">W&amp;W refinance / energy signals</a></td>
-                <td class="when">~4h</td>
-              </tr>
-              <tr>
-                <td class="when">PROD</td>
-                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/2619342850/Custom+Record+Schemas" target="_blank" rel="noopener">Custom Record Schemas</a></td>
-                <td class="when">~6h</td>
+                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/568000542/Solution+Factory+-+Weekly" target="_blank" rel="noopener">Solution Factory Weekly</a></td>
+                <td class="when">29 Sep</td>
               </tr>
             </tbody>
           </table>
@@ -597,13 +602,14 @@
         <a href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener">Google Calendar</a>
         <a href="https://notes.granola.ai/" target="_blank" rel="noopener">Granola</a>
         <a href="https://pricehubble.atlassian.net/wiki" target="_blank" rel="noopener">Confluence</a>
+        <a href="https://app.slack.com/client" target="_blank" rel="noopener">Slack</a>
         <a href="https://cursor.com/agents/bc-01a0f3e3-b731-7398-a6ea-d8b761565610" target="_blank" rel="noopener">Dieser Cursor Agent</a>
       </div>
     </section>
 
     <footer class="note">
       Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel.
-      Für ein Refresh: im Chat „Command Center refresh“ schreiben.
+      Die Automation-Runs können Calendar/Gmail/Jira nicht lesen. Für ein Refresh: in diesem Chat „Command Center refresh“ schreiben.
       Live: <a href="https://marcelkraemerriedesel-pixel.github.io/ai-command-center/" target="_blank" rel="noopener">marcelkraemerriedesel-pixel.github.io/ai-command-center</a>
     </footer>
   </div>
