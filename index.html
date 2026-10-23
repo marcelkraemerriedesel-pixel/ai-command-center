@@ -175,10 +175,10 @@
     height: 100%;
     border-radius: 99px;
   }
-  .bar .ip { background: var(--info); width: 47.4%; }
-  .bar .pr { background: #9db7d4; width: 5.3%; }
-  .bar .bl { background: var(--danger); width: 15.8%; }
-  .bar .bk { background: #3f3f46; width: 31.6%; }
+  .bar .ip { background: var(--info); width: 50%; }
+  .bar .pr { background: #9db7d4; width: 0%; }
+  .bar .bl { background: var(--danger); width: 16.7%; }
+  .bar .bk { background: #3f3f46; width: 33.3%; }
   .legend {
     display: flex;
     flex-wrap: wrap;
@@ -341,19 +341,19 @@
       <nav class="sources" aria-label="Quellen">
         <span class="chip"><i></i>Calendar</span>
         <span class="chip"><i></i>Gmail</span>
-        <span class="chip warn"><i></i>Jira</span>
-        <span class="chip warn"><i></i>Confluence</span>
+        <span class="chip"><i></i>Jira</span>
+        <span class="chip"><i></i>Confluence</span>
         <span class="chip"><i></i>Granola</span>
         <span class="chip"><i></i>Slack</span>
         <span class="chip"><i></i>Cursor</span>
       </nav>
-      <time class="stamp">23 Okt 2026 · 10:09 Berlin</time>
+      <time class="stamp">23 Okt 2026 · 15:40 Berlin</time>
     </header>
 
-    <p class="notice">Live-Snapshot. Öffentliche Seite: keine Mailtexte, keine Secrets, keine Meeting-Passwörter. Jira und Confluence: Atlassian ohne Tools, Stand 09:05.</p>
+    <p class="notice">Live-Snapshot. Öffentliche Seite: keine Mailtexte, keine Secrets, keine Meeting-Passwörter.</p>
 
     <section class="kpis" aria-label="Kennzahlen">
-      <div class="kpi info"><b>19</b><span>Offene Jira-Issues</span></div>
+      <div class="kpi info"><b>18</b><span>Offene Jira-Issues</span></div>
       <div class="kpi"><b>9</b><span>In Progress</span></div>
       <div class="kpi danger"><b>3</b><span>Blocked</span></div>
       <div class="kpi warn"><b>6</b><span>Action Items</span></div>
@@ -361,11 +361,11 @@
 
     <section class="panel stack">
       <h2>Jira workload</h2>
-      <p class="sub">assignee = currentUser(), unresolved · nicht neu geladen · Stand 09:05</p>
+      <p class="sub">assignee = currentUser(), unresolved · SLF · nach updated</p>
       <div class="bar" aria-hidden="true"><i class="ip"></i><i class="pr"></i><i class="bl"></i><i class="bk"></i></div>
       <div class="legend">
         <span><i class="l-ip"></i>In Progress 9</span>
-        <span><i class="l-pr"></i>Review 1</span>
+        <span><i class="l-pr"></i>Review 0</span>
         <span><i class="l-bl"></i>Blocked 3</span>
         <span><i class="l-bk"></i>Backlog 6</span>
       </div>
@@ -378,21 +378,6 @@
         <table>
           <thead><tr><th>Wann</th><th>Termin</th><th></th></tr></thead>
           <tbody>
-            <tr>
-              <td class="when">Heute · 10:00</td>
-              <td>Allianz · roadmap and planning</td>
-              <td><a class="join" href="https://meet.google.com/vpb-mssg-csd" target="_blank" rel="noopener">Join</a></td>
-            </tr>
-            <tr>
-              <td class="when">Heute · 10:00</td>
-              <td>Solution Factory · Planning</td>
-              <td><a class="join" href="https://meet.google.com/fjs-tfeg-ppb" target="_blank" rel="noopener">Join</a></td>
-            </tr>
-            <tr>
-              <td class="when">Heute · 14:05</td>
-              <td>Austausch PriceHubble &amp; Akuma</td>
-              <td><a class="join" href="https://allianz-agn.webex.com/allianz-agn-de/j.php?MTID=mbb79eb7fa1c1159df7396e6a72c4678b" target="_blank" rel="noopener">Join</a></td>
-            </tr>
             <tr>
               <td class="when">Heute · 15:00</td>
               <td>Strenger Building Time</td>
@@ -484,6 +469,11 @@
               <td><a class="join" href="https://meet.google.com/tde-sqzy-tyd" target="_blank" rel="noopener">Join</a></td>
             </tr>
             <tr>
+              <td class="when">Do 29 Okt · 11:00</td>
+              <td>Workshop Meine Wohnwelt</td>
+              <td></td>
+            </tr>
+            <tr>
               <td class="when">Do 29 Okt · 16:30</td>
               <td>Solution Factory · Planning</td>
               <td><a class="join" href="https://meet.google.com/fjs-tfeg-ppb" target="_blank" rel="noopener">Join</a></td>
@@ -497,11 +487,11 @@
         <p class="sub">Granola Notes 19–23 Okt · Abschlussstatus nicht bestätigt</p>
         <ul class="actions">
           <li><i></i><span>Allianz: Lieferplan rückwärts mit Barbara aufsetzen</span></li>
-          <li><i></i><span>Allianz: Robert zu kleineren Folgeterminen einladen</span></li>
-          <li><i></i><span>Strenger: Regel für stille Reserve und Managed-Property-Flag umsetzen</span></li>
-          <li><i></i><span>Strenger: PIN-/Code-Login auf Machbarkeit prüfen</span></li>
-          <li><i></i><span>Strenger: Companion Input-Limit als Risiko festhalten und abstimmen</span></li>
-          <li><i></i><span>Wüstenrot: Zusage für den Mini-Workshop am 29 Okt bestätigen</span></li>
+          <li><i></i><span>Allianz: Lead-Machine-Zugang nachfassen</span></li>
+          <li><i></i><span>Allianz: Feiertags-Verfügbarkeit eintragen</span></li>
+          <li><i></i><span>Allianz: Signalbeispiele für die rechtliche Abstimmung vorbereiten</span></li>
+          <li><i></i><span>Strenger: Contentful-Anbindung für die Listings klären</span></li>
+          <li><i></i><span>Strenger: Eval-Gate vor automatischen Prompt-Updates festlegen</span></li>
         </ul>
       </section>
     </div>
@@ -513,6 +503,11 @@
         <thead><tr><th>Key</th><th>Status</th><th>Summary</th></tr></thead>
         <tbody>
           <tr>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1932" target="_blank" rel="noopener">SLF-1932</a></td>
+            <td><span class="status ip">In Progress</span></td>
+            <td>Strenger · scatter charts etc</td>
+          </tr>
+          <tr>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1291" target="_blank" rel="noopener">SLF-1291</a></td>
             <td><span class="status ip">In Progress</span></td>
             <td>Bavaria Direkt · application workflow</td>
@@ -521,11 +516,6 @@
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-585" target="_blank" rel="noopener">SLF-585</a></td>
             <td><span class="status ip">In Progress</span></td>
             <td>Allianz · insurance ownership portal</td>
-          </tr>
-          <tr>
-            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1932" target="_blank" rel="noopener">SLF-1932</a></td>
-            <td><span class="status ip">In Progress</span></td>
-            <td>Strenger · scatter charts etc</td>
           </tr>
           <tr>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1584" target="_blank" rel="noopener">SLF-1584</a></td>
@@ -553,14 +543,19 @@
             <td>Strenger · investor portal activation</td>
           </tr>
           <tr>
-            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1891" target="_blank" rel="noopener">SLF-1891</a></td>
-            <td><span class="status pr">Stakeholders review</span></td>
-            <td>W&amp;W v4 · Interest rates API → mortgage rates</td>
-          </tr>
-          <tr>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-716" target="_blank" rel="noopener">SLF-716</a></td>
             <td><span class="status ip">In Progress</span></td>
             <td>TopHypo · Kickoff and Planning</td>
+          </tr>
+          <tr>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-838" target="_blank" rel="noopener">SLF-838</a></td>
+            <td><span class="status">Backlog</span></td>
+            <td>TopHypo Landingpage · make everything trackable</td>
+          </tr>
+          <tr>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1083" target="_blank" rel="noopener">SLF-1083</a></td>
+            <td><span class="status">Backlog</span></td>
+            <td>TopHypo · check templates · what is missing?</td>
           </tr>
           <tr>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-778" target="_blank" rel="noopener">SLF-778</a></td>
@@ -573,19 +568,29 @@
             <td>TopHypo · Ownership Portal V1</td>
           </tr>
           <tr>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1710" target="_blank" rel="noopener">SLF-1710</a></td>
+            <td><span class="status">Backlog</span></td>
+            <td>CTA-to-agent · opening message pre-fill</td>
+          </tr>
+          <tr>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1709" target="_blank" rel="noopener">SLF-1709</a></td>
+            <td><span class="status">Backlog</span></td>
+            <td>CRM handoff for agent-sourced leads</td>
+          </tr>
+          <tr>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1027" target="_blank" rel="noopener">SLF-1027</a></td>
             <td><span class="status bl">Blocked externally</span></td>
             <td>Deutsche Bank · ownership portal</td>
           </tr>
           <tr>
-            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-838" target="_blank" rel="noopener">SLF-838</a></td>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1828" target="_blank" rel="noopener">SLF-1828</a></td>
             <td><span class="status">Backlog</span></td>
-            <td>TopHypo Landingpage · make everything trackable</td>
+            <td>Apobank</td>
           </tr>
           <tr>
-            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1083" target="_blank" rel="noopener">SLF-1083</a></td>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1766" target="_blank" rel="noopener">SLF-1766</a></td>
             <td><span class="status">Backlog</span></td>
-            <td>TopHypo · check templates · what is missing?</td>
+            <td>Wuestenrot V2 · break down from SAT-2961</td>
           </tr>
         </tbody>
       </table>
@@ -597,12 +602,22 @@
         <p class="sub">Gmail · letzte 7 Tage · keine Secrets eingebettet</p>
         <div class="mail">
           <article>
-            <h3>Allianz-Planung · Verspätung <span class="badge">Unread</span></h3>
-            <p>Alessandro · Ovi und er kommen voraussichtlich später · heute 10:00</p>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a167c664f85560a" target="_blank" rel="noopener">In Gmail öffnen</a>
+            <h3>Kontaktanfragen · Routing prüfen</h3>
+            <p>Barbara bittet dich um Prüfung · heute 12:10</p>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1683dd57871e71" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
           <article>
-            <h3>Empfehlungslink · Termine heute <span class="badge">Unread</span></h3>
+            <h3>Dashboard · Startseite</h3>
+            <p>Anja möchte den Einstieg auf die Leads-Seite · heute 11:11</p>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a168082492fe38e" target="_blank" rel="noopener">In Gmail öffnen</a>
+          </article>
+          <article>
+            <h3>SAT-3243 · Erwähnung</h3>
+            <p>Mihail erwähnt dich auf SAT-3243 · heute 10:12</p>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a167d19091f9c46" target="_blank" rel="noopener">In Gmail öffnen</a>
+          </article>
+          <article>
+            <h3>Empfehlungslink · Termine heute</h3>
             <p>Sandra bittet um Terminvorschläge noch heute · 09:57</p>
             <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a167c3d998b3b96" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
@@ -610,16 +625,6 @@
             <h3>Kapitalanlegerportal · Dokumente</h3>
             <p>Matthias fragt nach Unterlagen zu den Einheiten · heute 09:45</p>
             <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a167b8b023c63ca" target="_blank" rel="noopener">In Gmail öffnen</a>
-          </article>
-          <article>
-            <h3>Signalkommunikation · Templates</h3>
-            <p>Anja gibt das Design zur Umsetzung frei · heute 09:11</p>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a16799892bb228d" target="_blank" rel="noopener">In Gmail öffnen</a>
-          </article>
-          <article>
-            <h3>SLF-1932 überfällig</h3>
-            <p>Jira · Strenger scatter charts etc · fällig 19 Okt · heute 04:51</p>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a166abd0b61c5b5" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
         </div>
       </section>
@@ -631,19 +636,19 @@
           <table>
             <thead><tr><th>Wann</th><th>Meeting</th></tr></thead>
             <tbody>
+              <tr><td class="when">Fr 23 · 14:05</td><td><a href="https://notes.granola.ai/d/d9b11ce6-dbf8-49ff-a6c6-7e845746ebf3" target="_blank" rel="noopener">Austausch PriceHubble &amp; Akuma</a></td></tr>
               <tr><td class="when">Fr 23 · 10:00</td><td><a href="https://notes.granola.ai/d/92a35935-0129-4c22-abc9-6a4b8d82f883" target="_blank" rel="noopener">Allianz · roadmap and planning</a></td></tr>
               <tr><td class="when">Do 22 · 15:30</td><td><a href="https://notes.granola.ai/d/2e545f97-3e9b-4b9a-b0d3-534b75fc930f" target="_blank" rel="noopener">PriceHubble Company Update</a></td></tr>
               <tr><td class="when">Do 22 · 11:30</td><td><a href="https://notes.granola.ai/d/93679099-1d54-46ad-b0a3-f71c610d2fad" target="_blank" rel="noopener">Wüstenrot KPI brainstorming</a></td></tr>
               <tr><td class="when">Do 22 · 10:30</td><td><a href="https://notes.granola.ai/d/f12b4d0b-5186-4d66-a600-149521d2a530" target="_blank" rel="noopener">Strenger · chat companion</a></td></tr>
               <tr><td class="when">Mi 21 · 15:30</td><td><a href="https://notes.granola.ai/d/aab38887-7cc4-4ffa-8f46-91abab630353" target="_blank" rel="noopener">Allianz Workshop</a></td></tr>
-              <tr><td class="when">Mi 21 · 13:30</td><td><a href="https://notes.granola.ai/d/f108da23-3c31-4a47-808f-17af5d99b867" target="_blank" rel="noopener">Bi weekly PH:Wüstenrot</a></td></tr>
             </tbody>
           </table>
         </section>
 
         <section class="panel">
           <h2>Confluence · frisch</h2>
-          <p class="sub">nicht neu geladen · letzter Stand 15–20 Okt</p>
+          <p class="sub">letzte 7 Tage · von dir bearbeitet</p>
           <table>
             <thead><tr><th>Space</th><th>Seite</th><th></th></tr></thead>
             <tbody>
@@ -656,16 +661,6 @@
                 <td class="when">PROD</td>
                 <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/42598459/PRODUCT+Internal+-+Weekly+meeting" target="_blank" rel="noopener">PRODUCT Internal Weekly</a></td>
                 <td class="when">19 Okt</td>
-              </tr>
-              <tr>
-                <td class="when">PROD</td>
-                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/2711257089/Strenger+-+Companion+Architecture+Prompt+Capabilities" target="_blank" rel="noopener">Strenger Companion · Architecture</a></td>
-                <td class="when">15 Okt</td>
-              </tr>
-              <tr>
-                <td class="when">PROD</td>
-                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/2778333187/Strenger+Companion+Prompt+changelog+v1+v2.3" target="_blank" rel="noopener">Prompt changelog v2.3</a></td>
-                <td class="when">15 Okt</td>
               </tr>
             </tbody>
           </table>
