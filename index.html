@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
-<meta name="mcc-build" content="2026-10-27T17:57+01:00" />
+<meta name="mcc-build" content="2026-10-27T18:37+01:00" />
 <title>Marcel · AI Command Center</title>
 <style>
   :root {
@@ -537,6 +537,89 @@
     color: var(--faint); font-size: 12px; cursor: pointer;
   }
   .logout-btn:hover { color: #fff; border-color: var(--line-strong); }
+
+  .today {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 0.9fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .today .panel h2 { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .today .panel h2 em {
+    font-style: normal; color: var(--faint); font-size: 12px; font-weight: 500;
+  }
+  .today-list { list-style: none; margin: 0; padding: 0 0 6px; }
+  .today-list li {
+    display: grid; grid-template-columns: 64px 1fr auto; gap: 10px;
+    padding: 10px 0; border-top: 1px solid var(--line);
+    font-size: 13.5px; align-items: center;
+  }
+  .today-list li:first-child { border-top: 0; }
+  .today-list .when { font-size: 12px; }
+  .today-list a.join { height: 24px; padding: 0 8px; }
+  .today-stack { display: grid; gap: 8px; padding-bottom: 8px; }
+  .today-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 10px 12px; border-radius: 10px;
+    background: var(--bg-raise); border: 1px solid var(--line);
+    font-size: 13px; line-height: 1.4;
+  }
+  .today-item.wichtig { border-color: rgba(255,90,110,0.35); }
+  .today-item .tag {
+    flex: 0 0 auto; font-size: 10px; font-weight: 700; letter-spacing: 0.04em;
+    color: #ff7a90; text-transform: uppercase; margin-top: 2px;
+  }
+  .focus-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding-bottom: 8px; }
+  .focus-stat {
+    padding: 12px; border-radius: 10px; background: var(--bg-raise); border: 1px solid var(--line);
+  }
+  .focus-stat b { display: block; font-size: 22px; letter-spacing: -0.03em; margin-bottom: 4px; }
+  .focus-stat span { color: var(--muted); font-size: 12px; }
+  .focus-stat.danger b { color: var(--danger); }
+  .focus-stat.warn b { color: var(--warn); }
+  .focus-stat.info b { color: var(--info); }
+  @media (max-width: 860px) { .today { grid-template-columns: 1fr; } }
+
+  table.jira-table td:first-child { width: 28px; }
+  tr.jira-row.done { opacity: 0.4; }
+  tr.jira-row.done td { text-decoration: line-through; color: var(--faint); }
+  tr.jira-row.done td a { text-decoration: line-through; }
+  body.hide-jira-done tr.jira-row.done { display: none; }
+  .jira-check { width: 14px; height: 14px; accent-color: var(--live); cursor: pointer; }
+  .jira-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 10px; }
+
+  .todo-add { grid-template-columns: 120px 100px 1fr auto; }
+  .due-pill {
+    display: inline-flex; align-items: center; height: 18px; padding: 0 7px;
+    border-radius: 5px; margin-right: 6px; font-size: 10.5px; font-weight: 650;
+    background: rgba(255,255,255,0.06); color: var(--muted);
+  }
+  .due-pill.heute { background: rgba(255,90,110,0.16); color: #ff7a90; }
+  .due-pill.woche { background: rgba(245,193,108,0.14); color: var(--warn); }
+  .src-pill {
+    display: inline-flex; align-items: center; height: 18px; padding: 0 7px;
+    border-radius: 5px; margin-right: 6px; font-size: 10px; font-weight: 650;
+    background: rgba(142,200,255,0.12); color: var(--info);
+  }
+  .pin-btn {
+    border: 0; background: transparent; color: var(--faint); cursor: pointer;
+    font-size: 14px; padding: 0 4px; line-height: 1;
+  }
+  .pin-btn.on { color: var(--warn); }
+  li.todo.pinned { border-left: 2px solid var(--warn); padding-left: 8px; }
+  .todo-search {
+    width: 100%; margin: 8px 0 4px; height: 34px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--bg-raise); color: var(--text);
+    font: inherit; padding: 0 12px; font-size: 13px;
+  }
+  .note-pads { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; }
+  .note-pads button {
+    height: 28px; padding: 0 10px; border-radius: 7px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--bg-raise); color: var(--muted); font-size: 12px;
+  }
+  .note-pads button.active { color: #fff; border-color: var(--line-strong); background: #1c1c22; }
+  .note-pads .add-pad { border-style: dashed; color: var(--faint); }
+
 </style>
 </head>
 <body class="locked">
@@ -567,11 +650,11 @@
         <span class="chip"><i></i>Miro</span>
         <span class="chip"><i></i>Cursor</span>
       </nav>
-      <time class="stamp">27 Okt 2026 · 17:57 Berlin</time>
+      <time class="stamp">27 Okt 2026 · 18:37 Berlin</time>
       <button type="button" class="logout-btn" id="btn-logout" title="Sitzung beenden">Abmelden</button>
     </header>
 
-    <p class="notice">Todos, Fokus-Mails und Notizen bleiben in <strong>diesem Browser</strong> gespeichert (localStorage), auch nach dem nächsten Snapshot-Refresh. Offene Mails bleiben stehen, bis du sie abhakst. Kategorie <strong style="color:#ff5a6e">WICHTIG</strong> = rot.</p>
+    <p class="notice">Tagesfokus oben. Todos aus Meetings werden automatisch übernommen. Jira/Mails bleiben bis abgehakt. Notiz-Pads + Fälligkeit (Heute/Woche) lokal gespeichert.</p>
 
     <section class="kpis" aria-label="Kennzahlen">
       <div class="kpi info"><b>18</b><span>Offene Jira-Issues</span></div>
@@ -590,6 +673,31 @@
         <span><i class="l-bl"></i>Blocked 3</span>
         <span><i class="l-bk"></i>Backlog 6</span>
       </div>
+    </section>
+
+    <section class="today" aria-label="Tagesfokus">
+      <section class="panel">
+        <h2>Heute <em>Nächste Termine</em></h2>
+        <ul class="today-list" id="today-cal">
+          <li><span class="when">Mi 28 Okt · 10:30</span><span>PH Kapitalanlegerportal · Review</span><a class="join" href="https://meet.google.com/kwu-pujy-dcy" target="_blank" rel="noopener">Join</a></li>
+          <li><span class="when">Mi 28 Okt · 11:00</span><span>Marcel x Charles weekly sync</span><a class="join" href="https://meet.google.com/epa-xdws-ieg" target="_blank" rel="noopener">Join</a></li>
+          <li><span class="when">Mi 28 Okt · 13:30</span><span>Bi-weekly PH:Wüstenrot</span></li>
+        </ul>
+      </section>
+      <section class="panel">
+        <h2>Fokus <em>WICHTIG + Heute</em></h2>
+        <div class="today-stack" id="today-focus"><p class="sub">Lädt…</p></div>
+      </section>
+      <section class="panel">
+        <h2>Lage <em>offen</em></h2>
+        <div class="focus-stats">
+          <div class="focus-stat warn"><b id="stat-todos">–</b><span>Offene Todos</span></div>
+          <div class="focus-stat info"><b id="stat-mails">–</b><span>Offene Mails</span></div>
+          <div class="focus-stat danger"><b id="stat-jira-bl">–</b><span>Blocked Jira</span></div>
+          <div class="focus-stat"><b id="stat-jira-open">–</b><span>Offene Jira</span></div>
+        </div>
+        <p class="sub" id="today-hint">Meeting-Todos und Pins erscheinen im Fokus.</p>
+      </section>
     </section>
 
     <div class="split">
@@ -672,7 +780,7 @@
         </div>
         <div class="cat-filters" id="cat-filters" role="tablist" aria-label="Kategoriefilter"></div>
         <ul class="actions" id="snap-todos">
-          <li class="todo" data-id="s:6963f36539f3" data-cat="wuestenrot"><label><input type="checkbox" /><span>Hierarchiedatei prüfen und Daniel Rückmeldung geben</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:6963f36539f3"><option value="wichtig">WICHTIG</option>
+          <li class="todo" data-id="s:6963f36539f3" data-cat="wuestenrot" data-due="heute" data-src="meeting"><label><input type="checkbox" /><span>Hierarchiedatei prüfen und Daniel Rückmeldung geben</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:6963f36539f3"><option value="wichtig">WICHTIG</option>
 <option value="wuestenrot" selected>Wüstenrot</option>
 <option value="allianz">Allianz</option>
 <option value="strenger">Strenger</option>
@@ -681,7 +789,7 @@
 <option value="slf">SLF / Intern</option>
 <option value="nachfassen">Nachfassen</option>
 <option value="sonstiges">Sonstiges</option></select></div></li>
-          <li class="todo" data-id="s:aedc0c7c923c" data-cat="strenger"><label><input type="checkbox" /><span>Strenger Datenlücken (Must/Can/Should) zusammenfassen und intern teilen</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:aedc0c7c923c"><option value="wichtig">WICHTIG</option>
+          <li class="todo" data-id="s:aedc0c7c923c" data-cat="strenger" data-due="heute" data-src="meeting"><label><input type="checkbox" /><span>Strenger Datenlücken (Must/Can/Should) zusammenfassen und intern teilen</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:aedc0c7c923c"><option value="wichtig">WICHTIG</option>
 <option value="wuestenrot">Wüstenrot</option>
 <option value="allianz">Allianz</option>
 <option value="strenger" selected>Strenger</option>
@@ -690,7 +798,7 @@
 <option value="slf">SLF / Intern</option>
 <option value="nachfassen">Nachfassen</option>
 <option value="sonstiges">Sonstiges</option></select></div></li>
-          <li class="todo" data-id="s:10fbe7a6fc5c" data-cat="wuestenrot"><label><input type="checkbox" /><span>Wüstenrot Sandbox Owner-Template-URL neu erzeugen und an Charles für das SSS Handbook schicken</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:10fbe7a6fc5c"><option value="wichtig">WICHTIG</option>
+          <li class="todo" data-id="s:10fbe7a6fc5c" data-cat="wuestenrot" data-due="woche" data-src="meeting"><label><input type="checkbox" /><span>Wüstenrot Sandbox Owner-Template-URL neu erzeugen und an Charles für das SSS Handbook schicken</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:10fbe7a6fc5c"><option value="wichtig">WICHTIG</option>
 <option value="wuestenrot" selected>Wüstenrot</option>
 <option value="allianz">Allianz</option>
 <option value="strenger">Strenger</option>
@@ -699,7 +807,7 @@
 <option value="slf">SLF / Intern</option>
 <option value="nachfassen">Nachfassen</option>
 <option value="sonstiges">Sonstiges</option></select></div></li>
-          <li class="todo" data-id="s:66630b171558" data-cat="allianz"><label><input type="checkbox" /><span>Allianz Miro Planning Board in Slack teilen</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:66630b171558"><option value="wichtig">WICHTIG</option>
+          <li class="todo" data-id="s:66630b171558" data-cat="allianz" data-due="heute" data-src="meeting"><label><input type="checkbox" /><span>Allianz Miro Planning Board in Slack teilen</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:66630b171558"><option value="wichtig">WICHTIG</option>
 <option value="wuestenrot">Wüstenrot</option>
 <option value="allianz" selected>Allianz</option>
 <option value="strenger">Strenger</option>
@@ -708,7 +816,7 @@
 <option value="slf">SLF / Intern</option>
 <option value="nachfassen">Nachfassen</option>
 <option value="sonstiges">Sonstiges</option></select></div></li>
-          <li class="todo" data-id="s:5b8efb691866" data-cat="bavaria"><label><input type="checkbox" /><span>Bavaria Direkt Planning mit Barbara: realistisches Q2-Timeline und Prioritätskonflikte</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:5b8efb691866"><option value="wichtig">WICHTIG</option>
+          <li class="todo" data-id="s:5b8efb691866" data-cat="bavaria" data-due="woche" data-src="meeting"><label><input type="checkbox" /><span>Bavaria Direkt Planning mit Barbara: realistisches Q2-Timeline und Prioritätskonflikte</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:5b8efb691866"><option value="wichtig">WICHTIG</option>
 <option value="wuestenrot">Wüstenrot</option>
 <option value="allianz">Allianz</option>
 <option value="strenger">Strenger</option>
@@ -717,7 +825,7 @@
 <option value="slf">SLF / Intern</option>
 <option value="nachfassen">Nachfassen</option>
 <option value="sonstiges">Sonstiges</option></select></div></li>
-          <li class="todo" data-id="s:e568c6354055" data-cat="wuestenrot"><label><input type="checkbox" /><span>ADP / Kunden je Vertriebsdirektion im Dashboard nachfassen; sonst manuelle Verteilung bis Di 3 Nov</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:e568c6354055"><option value="wichtig">WICHTIG</option>
+          <li class="todo" data-id="s:e568c6354055" data-cat="wuestenrot" data-due="woche"><label><input type="checkbox" /><span>ADP / Kunden je Vertriebsdirektion im Dashboard nachfassen; sonst manuelle Verteilung bis Di 3 Nov</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:e568c6354055"><option value="wichtig">WICHTIG</option>
 <option value="wuestenrot" selected>Wüstenrot</option>
 <option value="allianz">Allianz</option>
 <option value="strenger">Strenger</option>
@@ -727,8 +835,9 @@
 <option value="nachfassen">Nachfassen</option>
 <option value="sonstiges">Sonstiges</option></select></div></li>
         </ul>
+        <input type="search" class="todo-search" id="todo-search" placeholder="Todos filtern…" autocomplete="off" />
         <h2 style="margin-top:14px">Meine Todos</h2>
-        <p class="sub">Nur bei dir · Kategorie wählen, dann hinzufügen</p>
+        <p class="sub">Kategorie · Fälligkeit · Meeting-Todos kommen automatisch</p>
         <form class="todo-add" id="mine-form">
           <select id="mine-cat" aria-label="Kategorie">
 <option value="wichtig">WICHTIG</option>
@@ -741,6 +850,11 @@
 <option value="nachfassen" selected>Nachfassen</option>
 <option value="sonstiges">Sonstiges</option>
           </select>
+          <select id="mine-due" aria-label="Fälligkeit">
+<option value="heute">Heute</option>
+<option value="woche" selected>Diese Woche</option>
+<option value="spaeter">Später</option>
+          </select>
           <input type="text" id="mine-input" placeholder="Neues Todo…" autocomplete="off" maxlength="280" />
           <button type="submit">Hinzufügen</button>
         </form>
@@ -748,98 +862,121 @@
       </section>
     </div>
 
-    <section class="panel stack">
+    <section class="panel stack" id="jira-panel">
       <h2>Offene Jira-Arbeit</h2>
-      <p class="sub">pricehubble.atlassian.net · SLF · top by updated</p>
-      <table>
-        <thead><tr><th>Key</th><th>Status</th><th>Summary</th></tr></thead>
+      <p class="sub">Abhaken hält sie weg, auch nach Refresh · pricehubble.atlassian.net</p>
+      <div class="jira-tools">
+        <span class="persist-chip">Jira lokal</span>
+        <button type="button" id="btn-jira-hide-done">Erledigte ausblenden</button>
+        <button type="button" id="btn-jira-clear-done">Erledigte löschen</button>
+      </div>
+      <table class="jira-table">
+        <thead><tr><th></th><th>Key</th><th>Status</th><th>Summary</th></tr></thead>
         <tbody>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-1932" data-key="SLF-1932" data-summary="Strenger · scatter charts etc" data-status-class="ip">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-1932 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1932" target="_blank" rel="noopener">SLF-1932</a></td>
             <td><span class="status ip">In Progress</span></td>
             <td>Strenger · scatter charts etc</td>
           </tr>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-1291" data-key="SLF-1291" data-summary="Bavaria Direkt · application workflow" data-status-class="ip">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-1291 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1291" target="_blank" rel="noopener">SLF-1291</a></td>
             <td><span class="status ip">In Progress</span></td>
             <td>Bavaria Direkt · application workflow</td>
           </tr>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-585" data-key="SLF-585" data-summary="Allianz · insurance ownership portal" data-status-class="ip">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-585 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-585" target="_blank" rel="noopener">SLF-585</a></td>
             <td><span class="status ip">In Progress</span></td>
             <td>Allianz · insurance ownership portal</td>
           </tr>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-1584" data-key="SLF-1584" data-summary="W&amp;W · follow up" data-status-class="ip">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-1584 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1584" target="_blank" rel="noopener">SLF-1584</a></td>
             <td><span class="status ip">In Progress</span></td>
             <td>W&amp;W · follow up</td>
           </tr>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-1888" data-key="SLF-1888" data-summary="Release of Wuestenrot V4" data-status-class="ip">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-1888 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1888" target="_blank" rel="noopener">SLF-1888</a></td>
             <td><span class="status ip">In Progress</span></td>
             <td>Release of Wuestenrot V4</td>
           </tr>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-1944" data-key="SLF-1944" data-summary="Release of Wuestenrot V5" data-status-class="ip">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-1944 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1944" target="_blank" rel="noopener">SLF-1944</a></td>
             <td><span class="status ip">In Progress</span></td>
             <td>Release of Wuestenrot V5</td>
           </tr>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-1943" data-key="SLF-1943" data-summary="Release of Wuestenrot V4.1 Signal Communication" data-status-class="ip">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-1943 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1943" target="_blank" rel="noopener">SLF-1943</a></td>
             <td><span class="status ip">In Progress</span></td>
             <td>Release of Wuestenrot V4.1 Signal Communication</td>
           </tr>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-1691" data-key="SLF-1691" data-summary="Strenger · investor portal activation" data-status-class="ip">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-1691 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1691" target="_blank" rel="noopener">SLF-1691</a></td>
             <td><span class="status ip">In Progress</span></td>
             <td>Strenger · investor portal activation</td>
           </tr>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-716" data-key="SLF-716" data-summary="TopHypo · Kickoff and Planning" data-status-class="ip">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-716 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-716" target="_blank" rel="noopener">SLF-716</a></td>
             <td><span class="status ip">In Progress</span></td>
             <td>TopHypo · Kickoff and Planning</td>
           </tr>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-838" data-key="SLF-838" data-summary="TopHypo Landingpage · make everything trackable" data-status-class="">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-838 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-838" target="_blank" rel="noopener">SLF-838</a></td>
             <td><span class="status">Backlog</span></td>
             <td>TopHypo Landingpage · make everything trackable</td>
           </tr>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-1083" data-key="SLF-1083" data-summary="TopHypo · check templates · what is missing?" data-status-class="">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-1083 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1083" target="_blank" rel="noopener">SLF-1083</a></td>
             <td><span class="status">Backlog</span></td>
             <td>TopHypo · check templates · what is missing?</td>
           </tr>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-778" data-key="SLF-778" data-summary="TopHypo · Input Flow creation" data-status-class="bl">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-778 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-778" target="_blank" rel="noopener">SLF-778</a></td>
             <td><span class="status bl">Blocked internally</span></td>
             <td>TopHypo · Input Flow creation</td>
           </tr>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-710" data-key="SLF-710" data-summary="TopHypo · Ownership Portal V1" data-status-class="bl">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-710 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-710" target="_blank" rel="noopener">SLF-710</a></td>
             <td><span class="status bl">Blocked externally</span></td>
             <td>TopHypo · Ownership Portal V1</td>
           </tr>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-1027" data-key="SLF-1027" data-summary="Deutsche Bank · ownership portal" data-status-class="bl">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-1027 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1027" target="_blank" rel="noopener">SLF-1027</a></td>
             <td><span class="status bl">Blocked externally</span></td>
             <td>Deutsche Bank · ownership portal</td>
           </tr>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-1710" data-key="SLF-1710" data-summary="CTA-to-agent · opening message pre-fill" data-status-class="">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-1710 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1710" target="_blank" rel="noopener">SLF-1710</a></td>
             <td><span class="status">Backlog</span></td>
             <td>CTA-to-agent · opening message pre-fill</td>
           </tr>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-1709" data-key="SLF-1709" data-summary="CRM handoff for agent-sourced leads" data-status-class="">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-1709 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1709" target="_blank" rel="noopener">SLF-1709</a></td>
             <td><span class="status">Backlog</span></td>
             <td>CRM handoff for agent-sourced leads</td>
           </tr>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-1828" data-key="SLF-1828" data-summary="Apobank" data-status-class="">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-1828 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1828" target="_blank" rel="noopener">SLF-1828</a></td>
             <td><span class="status">Backlog</span></td>
             <td>Apobank</td>
           </tr>
-          <tr>
+                    <tr class="jira-row" data-id="j:SLF-1766" data-key="SLF-1766" data-summary="Wuestenrot V2 · break down from SAT-2961" data-status-class="">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-1766 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1766" target="_blank" rel="noopener">SLF-1766</a></td>
             <td><span class="status">Backlog</span></td>
             <td>Wuestenrot V2 · break down from SAT-2961</td>
@@ -941,12 +1078,16 @@
     </div>
 
     <section class="panel stack">
-      <h2>Schnellnotizen</h2>
-      <p class="sub">Nur in diesem Browser · nicht öffentlich im Repo</p>
-      <textarea class="notes-area" id="scratch" placeholder="Parkplatz für Gedanken, Follow-ups, Links…"></textarea>
+      <h2>Notiz-Pads</h2>
+      <p class="sub">Mehrere Blöcke · Autosave · Timestamp-Schnellnotiz</p>
+      <div class="note-pads" id="note-pads"></div>
+      <textarea class="notes-area" id="scratch" placeholder="Parkplatz, Follow-ups, Links…"></textarea>
       <div class="notes-bar">
         <span class="hint" id="notes-status">Autosave</span>
-        <button type="button" id="btn-clear-notes">Notizen leeren</button>
+        <div style="display:flex;gap:8px">
+          <button type="button" id="btn-note-stamp">+ Zeitstempel</button>
+          <button type="button" id="btn-clear-notes">Pad leeren</button>
+        </div>
       </div>
     </section>
 
@@ -1007,7 +1148,7 @@
     </section>
 
     <footer class="note">
-      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 27 Okt 2026 · 17:57 Berlin.
+      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 27 Okt 2026 · 18:37 Berlin.
       Todos/Notizen/Mails: localStorage. Zugang: Passwort-Gate (Client-seitig, Sitzung pro Tab).
       Live: <a href="https://marcelkraemerriedesel-pixel.github.io/ai-command-center/" target="_blank" rel="noopener">marcelkraemerriedesel-pixel.github.io/ai-command-center</a>
     </footer>
@@ -1081,7 +1222,13 @@
   var KEY_MAIL_OPEN = 'mcc:v1:mailOpen';
   var KEY_MAIL_DONE = 'mcc:v1:mailDone';
   var KEY_MAIL_HIDE = 'mcc:v1:mailHideDone';
+  var KEY_JIRA_DONE = 'mcc:v1:jiraDone';
+  var KEY_JIRA_HIDE = 'mcc:v1:jiraHideDone';
+  var KEY_PADS = 'mcc:v1:notePads';
+  var KEY_PAD_ACTIVE = 'mcc:v1:notePadActive';
+  var KEY_MEETING_INGEST = 'mcc:v1:meetingIngest';
 
+  var MEETING_SEED = [{"id": "g:allianz-sia-logout", "text": "Allianz SIA Freitag: Logout/Keep-alive + SSO vs API-Prefill klären (vor Sprint 4 Nov)", "cat": "allianz", "due": "heute", "meeting": "Sync · Allianz planning", "url": "https://notes.granola.ai/d/7e0641bd-0ce3-4a22-a981-c378101fa6c8"}, {"id": "g:allianz-lead-machine", "text": "Lead Machine: Test-Credentials nachfassen, Double-Opt-in + Duplicate-Leads klären", "cat": "allianz", "due": "woche", "meeting": "Sync · Allianz planning", "url": "https://notes.granola.ai/d/7e0641bd-0ce3-4a22-a981-c378101fa6c8"}, {"id": "g:allianz-miro-plan", "text": "Allianz Miro mit Barbara zum owner-basierten Delivery-Plan erweitern", "cat": "allianz", "due": "woche", "meeting": "Sync · Allianz planning", "url": "https://notes.granola.ai/d/7e0641bd-0ce3-4a22-a981-c378101fa6c8"}, {"id": "g:allianz-specs", "text": "Allianz Integrations-Specs topic-by-topic schriftlich starten", "cat": "allianz", "due": "woche", "meeting": "Sync · Allianz planning", "url": "https://notes.granola.ai/d/7e0641bd-0ce3-4a22-a981-c378101fa6c8"}, {"id": "g:allianz-barbara-charles", "text": "Mit Barbara Charles' Allianz-Kollaborationsvorschlag abstimmen (vor Do)", "cat": "allianz", "due": "heute", "meeting": "Allianz workshop II", "url": "https://notes.granola.ai/d/5f5dd838-d909-441f-aaed-e36335d06699"}, {"id": "g:strenger-babak-agenda", "text": "Barbara 3 Prep-Punkte für Babak-Mail: Login, Data Prefill, Consent", "cat": "strenger", "due": "heute", "meeting": "Strenger Standup", "url": "https://notes.granola.ai/d/89cedcf7-b1f7-4ace-a301-810a82e439ab"}, {"id": "g:strenger-daniel-data", "text": "Strenger Dashboard: Daniels Sample-Daten auf Plausibilität prüfen", "cat": "strenger", "due": "woche", "meeting": "Weekly Sync Barbara/Jasser/Marcel", "url": "https://notes.granola.ai/d/bf3bb618-fe99-4e34-a884-5c1c8e4b6d15"}, {"id": "g:strenger-citadel-2fa", "text": "Prüfen ob Citadel Paid-Plan 2FA enthält", "cat": "strenger", "due": "woche", "meeting": "Weekly Sync Barbara/Jasser/Marcel", "url": "https://notes.granola.ai/d/bf3bb618-fe99-4e34-a884-5c1c8e4b6d15"}, {"id": "g:smartapps-miro-chat", "text": "Allianz Miro-Board Link im SmartApps-Meeting-Chat teilen", "cat": "allianz", "due": "heute", "meeting": "SF x SmartApps PM", "url": "https://notes.granola.ai/d/1a906eae-cd0e-4ab4-8f9f-693f2cfa4dda"}];
   var CATS = [
     { id: 'wichtig', label: 'WICHTIG' },
     { id: 'wuestenrot', label: 'Wüstenrot' },
@@ -1121,12 +1268,48 @@
   var mailHideDone = !!load(KEY_MAIL_HIDE, true);
   if (!Array.isArray(mailOpen)) mailOpen = [];
   if (!mailDone || typeof mailDone !== 'object') mailDone = {};
+  var jiraDone = load(KEY_JIRA_DONE, {});
+  var jiraHideDone = load(KEY_JIRA_HIDE, true);
+  if (jiraHideDone !== false) jiraHideDone = true;
+  var notePads = load(KEY_PADS, null);
+  var padActive = load(KEY_PAD_ACTIVE, 'parkplatz') || 'parkplatz';
+  var meetingIngested = load(KEY_MEETING_INGEST, {});
+  if (!meetingIngested || typeof meetingIngested !== 'object') meetingIngested = {};
+  if (!notePads || typeof notePads !== 'object') {
+    var legacy = '';
+    try { var ln = localStorage.getItem(KEY_NOTES); legacy = ln == null ? '' : JSON.parse(ln); if (typeof legacy !== 'string') legacy = String(legacy||''); } catch(e) { legacy = ''; }
+    notePads = { parkplatz: legacy || '', kunden: '', ideen: '' };
+    save(KEY_PADS, notePads);
+  }
   if (!Array.isArray(mine)) mine = [];
   // migrate old mine items without cat
   mine = mine.map(function (item) {
     if (!item.cat) item.cat = 'sonstiges';
+    if (!item.due) item.due = 'woche';
+    if (typeof item.pinned !== 'boolean') item.pinned = false;
     return item;
   });
+
+  function ingestMeetingTodos() {
+    MEETING_SEED.forEach(function (t) {
+      if (meetingIngested[t.id]) return;
+      if (mine.some(function (x) { return x.id === t.id; })) {
+        meetingIngested[t.id] = 1; return;
+      }
+      var low = (t.text || '').toLowerCase();
+      if (mine.some(function (x) { return (x.text || '').toLowerCase() === low; })) {
+        meetingIngested[t.id] = 1; return;
+      }
+      mine.unshift({
+        id: t.id, text: t.text, cat: t.cat || 'nachfassen',
+        due: t.due || 'woche', pinned: false, src: 'meeting',
+        meeting: t.meeting || '', url: t.url || '', created: Date.now()
+      });
+      meetingIngested[t.id] = 1;
+    });
+    save(KEY_MINE, mine);
+    save(KEY_MEETING_INGEST, meetingIngested);
+  }
 
   function catLabel(id) { return CAT_MAP[id] || id || 'Sonstiges'; }
 
@@ -1138,6 +1321,7 @@
     });
     var el = document.getElementById('kpi-open');
     if (el) el.textContent = String(open);
+    if (typeof renderToday === 'function') renderToday();
   }
 
   function applyDone(li) {
@@ -1223,15 +1407,35 @@
     var ul = document.getElementById('mine-todos');
     if (!ul) return;
     ul.innerHTML = '';
-    mine.forEach(function (item) {
+    var q = ((document.getElementById('todo-search') || {}).value || '').trim().toLowerCase();
+    var sorted = mine.slice().sort(function (a, b) {
+      var pa = a.pinned ? 0 : 1, pb = b.pinned ? 0 : 1;
+      if (pa !== pb) return pa - pb;
+      var order = { heute: 0, woche: 1, spaeter: 2 };
+      return (order[a.due] || 9) - (order[b.due] || 9);
+    });
+    sorted.forEach(function (item) {
+      if (q && (item.text || '').toLowerCase().indexOf(q) === -1 && (item.cat || '').indexOf(q) === -1) return;
       var li = document.createElement('li');
-      li.className = 'todo';
+      li.className = 'todo' + (item.pinned ? ' pinned' : '');
       li.setAttribute('data-id', item.id);
       li.setAttribute('data-cat', item.cat || 'sonstiges');
+      li.setAttribute('data-due', item.due || 'woche');
       var label = document.createElement('label');
       var box = document.createElement('input');
       box.type = 'checkbox';
       var span = document.createElement('span');
+      var pin = document.createElement('button');
+      pin.type = 'button'; pin.className = 'pin-btn' + (item.pinned ? ' on' : '');
+      pin.textContent = item.pinned ? '★' : '☆'; pin.title = 'Pin';
+      span.appendChild(pin);
+      if (item.src === 'meeting') {
+        var src = document.createElement('span'); src.className = 'src-pill'; src.textContent = 'Meeting'; span.appendChild(src);
+      }
+      var due = document.createElement('span');
+      due.className = 'due-pill ' + (item.due || '');
+      due.textContent = item.due === 'heute' ? 'Heute' : (item.due === 'woche' ? 'Woche' : 'Später');
+      span.appendChild(due);
       var pill = document.createElement('span');
       pill.className = 'cat-pill c-' + (item.cat || 'sonstiges');
       pill.textContent = catLabel(item.cat);
@@ -1277,6 +1481,28 @@
         renderFilters();
         applyFilter();
       });
+
+      pin.addEventListener('click', function (e) {
+        e.preventDefault(); e.stopPropagation();
+        item.pinned = !item.pinned;
+        save(KEY_MINE, mine);
+        renderMine(); renderFilters(); applyFilter(); renderToday();
+      });
+      var dueSel = document.createElement('select');
+      dueSel.className = 'todo-row-cat';
+      dueSel.setAttribute('aria-label', 'Fälligkeit');
+      [['heute','Heute'],['woche','Diese Woche'],['spaeter','Später']].forEach(function (p) {
+        var o = document.createElement('option'); o.value = p[0]; o.textContent = p[1];
+        if (p[0] === (item.due || 'woche')) o.selected = true;
+        dueSel.appendChild(o);
+      });
+      meta.appendChild(dueSel);
+      dueSel.addEventListener('change', function () {
+        item.due = dueSel.value; li.setAttribute('data-due', dueSel.value);
+        due.className = 'due-pill ' + dueSel.value;
+        due.textContent = dueSel.value === 'heute' ? 'Heute' : (dueSel.value === 'woche' ? 'Woche' : 'Später');
+        save(KEY_MINE, mine); renderToday();
+      });
       del.addEventListener('click', function (e) {
         e.preventDefault();
         mine = mine.filter(function (x) { return x.id !== item.id; });
@@ -1298,10 +1524,14 @@
       var catEl = document.getElementById('mine-cat');
       var text = (input.value || '').trim();
       if (!text) return;
+      var dueEl = document.getElementById('mine-due');
       mine.unshift({
         id: uid(),
         text: text,
         cat: (catEl && catEl.value) || 'sonstiges',
+        due: (dueEl && dueEl.value) || 'woche',
+        pinned: false,
+        src: 'mine',
         created: Date.now()
       });
       save(KEY_MINE, mine);
@@ -1309,8 +1539,13 @@
       renderMine();
       renderFilters();
       applyFilter();
+      renderToday();
     });
   }
+
+  var searchEl = document.getElementById('todo-search');
+  if (searchEl) searchEl.addEventListener('input', function () { renderMine(); applyFilter(); });
+
 
   var btnHide = document.getElementById('btn-toggle-done');
   function syncHideBtn() {
@@ -1401,16 +1636,14 @@
   var scratch = document.getElementById('scratch');
   var notesStatus = document.getElementById('notes-status');
   var notesTimer;
+  renderPads();
   if (scratch) {
-    try {
-      var n = localStorage.getItem(KEY_NOTES);
-      scratch.value = n == null ? '' : JSON.parse(n);
-      if (typeof scratch.value !== 'string') scratch.value = String(scratch.value || '');
-    } catch (e) { scratch.value = ''; }
     scratch.addEventListener('input', function () {
       clearTimeout(notesTimer);
       if (notesStatus) notesStatus.textContent = 'Speichern…';
       notesTimer = setTimeout(function () {
+        notePads[padActive] = scratch.value;
+        save(KEY_PADS, notePads);
         save(KEY_NOTES, scratch.value);
         if (notesStatus) notesStatus.textContent = 'Gespeichert · ' + new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
       }, 250);
@@ -1421,8 +1654,20 @@
     btnClearNotes.addEventListener('click', function () {
       if (!scratch) return;
       scratch.value = '';
-      save(KEY_NOTES, '');
-      if (notesStatus) notesStatus.textContent = 'Geleert';
+      notePads[padActive] = '';
+      save(KEY_PADS, notePads);
+      if (notesStatus) notesStatus.textContent = 'Pad geleert';
+    });
+  }
+  var btnStamp = document.getElementById('btn-note-stamp');
+  if (btnStamp) {
+    btnStamp.addEventListener('click', function () {
+      if (!scratch) return;
+      var ts = new Date().toLocaleString('de-DE', { weekday: 'short', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+      var line = '— ' + ts + ' —\n';
+      scratch.value = (scratch.value ? scratch.value.replace(/\s*$/, '') + '\n\n' : '') + line;
+      scratch.dispatchEvent(new Event('input'));
+      scratch.focus();
     });
   }
 
@@ -1431,6 +1676,144 @@
     return String(s || '').replace(/[&<>"']/g, function (c) {
       return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
     });
+  }
+
+
+  function wireJira() {
+    document.querySelectorAll('tr.jira-row').forEach(function (tr) {
+      var id = tr.getAttribute('data-id');
+      var box = tr.querySelector('input.jira-check');
+      var isDone = !!jiraDone[id];
+      tr.classList.toggle('done', isDone);
+      if (box) {
+        box.checked = isDone;
+        if (!box._wired) {
+          box._wired = true;
+          box.addEventListener('change', function () {
+            if (box.checked) {
+              jiraDone[id] = { key: tr.getAttribute('data-key'), summary: tr.getAttribute('data-summary'), at: Date.now() };
+            } else delete jiraDone[id];
+            save(KEY_JIRA_DONE, jiraDone);
+            tr.classList.toggle('done', box.checked);
+            renderToday();
+          });
+        }
+      }
+    });
+    document.body.classList.toggle('hide-jira-done', !!jiraHideDone);
+    var bh = document.getElementById('btn-jira-hide-done');
+    if (bh && !bh._wired) {
+      bh._wired = true;
+      bh.textContent = jiraHideDone ? 'Erledigte einblenden' : 'Erledigte ausblenden';
+      bh.addEventListener('click', function () {
+        jiraHideDone = !jiraHideDone;
+        save(KEY_JIRA_HIDE, jiraHideDone);
+        document.body.classList.toggle('hide-jira-done', !!jiraHideDone);
+        bh.textContent = jiraHideDone ? 'Erledigte einblenden' : 'Erledigte ausblenden';
+      });
+    }
+    var bc = document.getElementById('btn-jira-clear-done');
+    if (bc && !bc._wired) {
+      bc._wired = true;
+      bc.addEventListener('click', function () {
+        jiraDone = {};
+        save(KEY_JIRA_DONE, jiraDone);
+        wireJira();
+        renderToday();
+      });
+    }
+  }
+
+  function renderToday() {
+    var host = document.getElementById('today-focus');
+    if (host) {
+      var items = [];
+      document.querySelectorAll('#snap-todos li.todo').forEach(function (li) {
+        if (li.classList.contains('done')) return;
+        var cat = li.getAttribute('data-cat') || '';
+        var due = li.getAttribute('data-due') || '';
+        if (cat === 'wichtig' || due === 'heute') {
+          var tnode = li.querySelector('label span');
+          var t = tnode ? tnode.textContent.trim() : li.textContent.trim();
+          items.push({ text: t, wichtig: cat === 'wichtig' });
+        }
+      });
+      mine.forEach(function (item) {
+        if (done[item.id]) return;
+        if (item.cat === 'wichtig' || item.due === 'heute' || item.pinned) {
+          items.push({ text: item.text, wichtig: item.cat === 'wichtig' || item.pinned });
+        }
+      });
+      var seen = {};
+      items = items.filter(function (it) {
+        var k = (it.text || '').slice(0, 80);
+        if (seen[k]) return false; seen[k] = 1; return true;
+      }).slice(0, 8);
+      if (!items.length) {
+        host.innerHTML = '<p class="sub">Nichts mit WICHTIG / Heute / Pin. Setze Fälligkeit oder Pin.</p>';
+      } else {
+        host.innerHTML = items.map(function (it) {
+          return '<div class="today-item' + (it.wichtig ? ' wichtig' : '') + '">' +
+            (it.wichtig ? '<span class="tag">Wichtig</span>' : '<span class="tag" style="color:var(--warn)">Heute</span>') +
+            '<span></span></div>';
+        }).join('');
+        Array.prototype.forEach.call(host.querySelectorAll('.today-item'), function (el, i) {
+          el.querySelector('span:last-child').textContent = items[i].text;
+        });
+      }
+    }
+    var openTodos = 0;
+    document.querySelectorAll('#snap-todos li.todo').forEach(function (li) { if (!li.classList.contains('done')) openTodos++; });
+    mine.forEach(function (item) { if (!done[item.id]) openTodos++; });
+    var st = document.getElementById('stat-todos'); if (st) st.textContent = String(openTodos);
+    var sm = document.getElementById('stat-mails'); if (sm) sm.textContent = String((mailOpen && mailOpen.length) || 0);
+    var jOpen = 0, jBl = 0;
+    document.querySelectorAll('tr.jira-row').forEach(function (tr) {
+      if (tr.classList.contains('done')) return;
+      jOpen++;
+      if (tr.getAttribute('data-status-class') === 'bl') jBl++;
+    });
+    var sj = document.getElementById('stat-jira-open'); if (sj) sj.textContent = String(jOpen);
+    var sb = document.getElementById('stat-jira-bl'); if (sb) sb.textContent = String(jBl);
+    var kpi = document.getElementById('kpi-open'); if (kpi) kpi.textContent = String(openTodos);
+  }
+
+  var PAD_LABELS = { parkplatz: 'Parkplatz', kunden: 'Kunden', ideen: 'Ideen' };
+  function renderPads() {
+    var host = document.getElementById('note-pads');
+    var scratch = document.getElementById('scratch');
+    if (!host || !scratch) return;
+    host.innerHTML = '';
+    Object.keys(notePads).forEach(function (id) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = PAD_LABELS[id] || id;
+      if (id === padActive) b.className = 'active';
+      b.addEventListener('click', function () {
+        notePads[padActive] = scratch.value;
+        save(KEY_PADS, notePads);
+        padActive = id; save(KEY_PAD_ACTIVE, padActive);
+        scratch.value = notePads[padActive] || '';
+        renderPads();
+      });
+      host.appendChild(b);
+    });
+    var add = document.createElement('button');
+    add.type = 'button'; add.className = 'add-pad'; add.textContent = '+ Pad';
+    add.addEventListener('click', function () {
+      var name = prompt('Name für neues Pad');
+      if (!name) return;
+      var id = name.toLowerCase().replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '') || ('pad-' + Date.now().toString(36));
+      if (!notePads[id]) notePads[id] = '';
+      PAD_LABELS[id] = name;
+      notePads[padActive] = scratch.value;
+      padActive = id;
+      save(KEY_PADS, notePads); save(KEY_PAD_ACTIVE, padActive);
+      scratch.value = '';
+      renderPads();
+    });
+    host.appendChild(add);
+    scratch.value = notePads[padActive] || '';
   }
 
   function ingestSnapshotMails() {
@@ -1535,15 +1918,18 @@
     });
   }
 
+  ingestMeetingTodos();
   ingestSnapshotMails();
   renderMails();
   syncMailHideBtn();
   wireSnap();
   renderMine();
   renderMiroPins();
+  wireJira();
   syncHideBtn();
   renderFilters();
   applyFilter();
+  renderToday();
 })();
 </script>
 
