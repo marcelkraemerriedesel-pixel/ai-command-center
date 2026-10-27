@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
-<meta name="mcc-build" content="2026-10-27T17:36+01:00" />
+<meta name="mcc-build" content="2026-10-27T17:45+01:00" />
 <title>Marcel · AI Command Center</title>
 <style>
   :root {
@@ -384,6 +384,7 @@
     background: rgba(61,214,140,0.1); color: var(--live); border: 1px solid rgba(61,214,140,0.25);
   }
   body.hide-done li.todo.done { display: none; }
+  body.hide-mail-done article.mail-item.done { display: none; }
 
   .cat-filters {
     display: flex; flex-wrap: wrap; gap: 6px;
@@ -444,6 +445,38 @@
     display: grid; grid-template-columns: 1fr 1.4fr auto; gap: 8px;
     margin-top: 10px; padding-bottom: 8px;
   }
+
+  .cat-pill.c-wichtig { background: rgba(255,70,90,0.18); color: #ff5a6e; border: 1px solid rgba(255,90,110,0.35); }
+  .cat-filters button[data-cat="wichtig"] { color: #ff7a90; border-color: rgba(255,122,144,0.35); }
+  .cat-filters button[data-cat="wichtig"].active {
+    color: #fff; background: rgba(255,70,90,0.22); border-color: rgba(255,122,144,0.55);
+  }
+  .todo-row-cat option[value="wichtig"], #mine-cat option[value="wichtig"] { color: #ff5a6e; font-weight: 700; }
+  body.hide-done article.mail-item.done { display: none; }
+  .mail article.mail-item {
+    display: grid;
+    grid-template-columns: 18px 1fr auto;
+    gap: 10px 12px;
+    align-items: start;
+  }
+  .mail article.mail-item.done { opacity: 0.45; }
+  .mail article.mail-item.done h3 { text-decoration: line-through; color: var(--faint); }
+  .mail article.mail-item > label.check {
+    margin-top: 3px; cursor: pointer;
+  }
+  .mail article.mail-item > label.check input { width: 14px; height: 14px; accent-color: var(--live); }
+  .mail article.mail-item .mail-body { min-width: 0; }
+  .mail article.mail-item .open { margin-top: 0; align-self: center; }
+  .mail-tools {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    margin: 0 0 10px;
+  }
+  .mail-tools button {
+    height: 26px; padding: 0 10px; border-radius: 7px;
+    border: 1px solid var(--line); background: var(--bg-raise);
+    color: var(--muted); font-size: 12px; cursor: pointer;
+  }
+  .mail-tools button:hover { color: #fff; }
   .miro-add input {
     width: 100%; border-radius: 8px; border: 1px solid var(--line);
     background: var(--bg-raise); color: var(--text); font: inherit;
@@ -465,10 +498,10 @@
         <span class="chip"><i></i>Miro</span>
         <span class="chip"><i></i>Cursor</span>
       </nav>
-      <time class="stamp">27 Okt 2026 · 17:36 Berlin</time>
+      <time class="stamp">27 Okt 2026 · 17:45 Berlin</time>
     </header>
 
-    <p class="notice">Todos und Notizen bleiben in <strong>diesem Browser</strong> gespeichert (localStorage), auch nach dem nächsten Snapshot-Refresh. Abgehakte Items verschwinden erst, wenn du sie erledigt markierst.</p>
+    <p class="notice">Todos, Fokus-Mails und Notizen bleiben in <strong>diesem Browser</strong> gespeichert (localStorage), auch nach dem nächsten Snapshot-Refresh. Offene Mails bleiben stehen, bis du sie abhakst. Kategorie <strong style="color:#ff5a6e">WICHTIG</strong> = rot.</p>
 
     <section class="kpis" aria-label="Kennzahlen">
       <div class="kpi info"><b>18</b><span>Offene Jira-Issues</span></div>
@@ -569,7 +602,8 @@
         </div>
         <div class="cat-filters" id="cat-filters" role="tablist" aria-label="Kategoriefilter"></div>
         <ul class="actions" id="snap-todos">
-          <li class="todo" data-id="s:6963f36539f3" data-cat="wuestenrot"><label><input type="checkbox" /><span>Hierarchiedatei prüfen und Daniel Rückmeldung geben</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:6963f36539f3"><option value="wuestenrot" selected>Wüstenrot</option>
+          <li class="todo" data-id="s:6963f36539f3" data-cat="wuestenrot"><label><input type="checkbox" /><span>Hierarchiedatei prüfen und Daniel Rückmeldung geben</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:6963f36539f3"><option value="wichtig">WICHTIG</option>
+<option value="wuestenrot" selected>Wüstenrot</option>
 <option value="allianz">Allianz</option>
 <option value="strenger">Strenger</option>
 <option value="bavaria">Bavaria Direkt</option>
@@ -577,7 +611,8 @@
 <option value="slf">SLF / Intern</option>
 <option value="nachfassen">Nachfassen</option>
 <option value="sonstiges">Sonstiges</option></select></div></li>
-          <li class="todo" data-id="s:aedc0c7c923c" data-cat="strenger"><label><input type="checkbox" /><span>Strenger Datenlücken (Must/Can/Should) zusammenfassen und intern teilen</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:aedc0c7c923c"><option value="wuestenrot">Wüstenrot</option>
+          <li class="todo" data-id="s:aedc0c7c923c" data-cat="strenger"><label><input type="checkbox" /><span>Strenger Datenlücken (Must/Can/Should) zusammenfassen und intern teilen</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:aedc0c7c923c"><option value="wichtig">WICHTIG</option>
+<option value="wuestenrot">Wüstenrot</option>
 <option value="allianz">Allianz</option>
 <option value="strenger" selected>Strenger</option>
 <option value="bavaria">Bavaria Direkt</option>
@@ -585,7 +620,8 @@
 <option value="slf">SLF / Intern</option>
 <option value="nachfassen">Nachfassen</option>
 <option value="sonstiges">Sonstiges</option></select></div></li>
-          <li class="todo" data-id="s:10fbe7a6fc5c" data-cat="wuestenrot"><label><input type="checkbox" /><span>Wüstenrot Sandbox Owner-Template-URL neu erzeugen und an Charles für das SSS Handbook schicken</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:10fbe7a6fc5c"><option value="wuestenrot" selected>Wüstenrot</option>
+          <li class="todo" data-id="s:10fbe7a6fc5c" data-cat="wuestenrot"><label><input type="checkbox" /><span>Wüstenrot Sandbox Owner-Template-URL neu erzeugen und an Charles für das SSS Handbook schicken</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:10fbe7a6fc5c"><option value="wichtig">WICHTIG</option>
+<option value="wuestenrot" selected>Wüstenrot</option>
 <option value="allianz">Allianz</option>
 <option value="strenger">Strenger</option>
 <option value="bavaria">Bavaria Direkt</option>
@@ -593,7 +629,8 @@
 <option value="slf">SLF / Intern</option>
 <option value="nachfassen">Nachfassen</option>
 <option value="sonstiges">Sonstiges</option></select></div></li>
-          <li class="todo" data-id="s:66630b171558" data-cat="allianz"><label><input type="checkbox" /><span>Allianz Miro Planning Board in Slack teilen</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:66630b171558"><option value="wuestenrot">Wüstenrot</option>
+          <li class="todo" data-id="s:66630b171558" data-cat="allianz"><label><input type="checkbox" /><span>Allianz Miro Planning Board in Slack teilen</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:66630b171558"><option value="wichtig">WICHTIG</option>
+<option value="wuestenrot">Wüstenrot</option>
 <option value="allianz" selected>Allianz</option>
 <option value="strenger">Strenger</option>
 <option value="bavaria">Bavaria Direkt</option>
@@ -601,7 +638,8 @@
 <option value="slf">SLF / Intern</option>
 <option value="nachfassen">Nachfassen</option>
 <option value="sonstiges">Sonstiges</option></select></div></li>
-          <li class="todo" data-id="s:5b8efb691866" data-cat="bavaria"><label><input type="checkbox" /><span>Bavaria Direkt Planning mit Barbara: realistisches Q2-Timeline und Prioritätskonflikte</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:5b8efb691866"><option value="wuestenrot">Wüstenrot</option>
+          <li class="todo" data-id="s:5b8efb691866" data-cat="bavaria"><label><input type="checkbox" /><span>Bavaria Direkt Planning mit Barbara: realistisches Q2-Timeline und Prioritätskonflikte</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:5b8efb691866"><option value="wichtig">WICHTIG</option>
+<option value="wuestenrot">Wüstenrot</option>
 <option value="allianz">Allianz</option>
 <option value="strenger">Strenger</option>
 <option value="bavaria" selected>Bavaria Direkt</option>
@@ -609,7 +647,8 @@
 <option value="slf">SLF / Intern</option>
 <option value="nachfassen">Nachfassen</option>
 <option value="sonstiges">Sonstiges</option></select></div></li>
-          <li class="todo" data-id="s:e568c6354055" data-cat="wuestenrot"><label><input type="checkbox" /><span>ADP / Kunden je Vertriebsdirektion im Dashboard nachfassen; sonst manuelle Verteilung bis Di 3 Nov</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:e568c6354055"><option value="wuestenrot" selected>Wüstenrot</option>
+          <li class="todo" data-id="s:e568c6354055" data-cat="wuestenrot"><label><input type="checkbox" /><span>ADP / Kunden je Vertriebsdirektion im Dashboard nachfassen; sonst manuelle Verteilung bis Di 3 Nov</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:e568c6354055"><option value="wichtig">WICHTIG</option>
+<option value="wuestenrot" selected>Wüstenrot</option>
 <option value="allianz">Allianz</option>
 <option value="strenger">Strenger</option>
 <option value="bavaria">Bavaria Direkt</option>
@@ -622,6 +661,7 @@
         <p class="sub">Nur bei dir · Kategorie wählen, dann hinzufügen</p>
         <form class="todo-add" id="mine-form">
           <select id="mine-cat" aria-label="Kategorie">
+<option value="wichtig">WICHTIG</option>
 <option value="wuestenrot">Wüstenrot</option>
 <option value="allianz">Allianz</option>
 <option value="strenger">Strenger</option>
@@ -740,32 +780,52 @@
 
     <div class="split even">
       <section class="panel">
-        <h2>Inbox · Fokus</h2>
-        <p class="sub">Gmail · letzte 7 Tage · keine Secrets eingebettet</p>
-        <div class="mail">
-          <article>
-            <h3>ITSM-7331 · Miro</h3>
-            <p>Satham · heute 09:08</p>
+                <h2>Inbox · Fokus</h2>
+        <p class="sub">Offen ohne deine Rückmeldung · bleibt bis abgehakt (lokal)</p>
+        <div class="mail-tools">
+          <span class="persist-chip">Mails lokal gehalten</span>
+          <button type="button" id="btn-mail-hide-done" aria-pressed="false">Erledigte Mails ausblenden</button>
+          <button type="button" id="btn-mail-clear-done">Erledigte Mails löschen</button>
+        </div>
+        <div class="mail" id="mail-list">
+          <article class="mail-item" data-id="e:1a17c6797b0a14b0" data-title="ITSM-7331 · Miro" data-meta="Satham · heute 09:08" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a17c6797b0a14b0">
+            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
+            <div class="mail-body">
+              <h3>ITSM-7331 · Miro</h3>
+              <p>Satham · heute 09:08</p>
+            </div>
             <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a17c6797b0a14b0" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
-          <article>
-            <h3>Miro-Lizenz auf Full</h3>
-            <p>Miro · heute 09:07</p>
+          <article class="mail-item" data-id="e:1a17c6620ab30410" data-title="Miro-Lizenz auf Full" data-meta="Miro · heute 09:07" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a17c6620ab30410">
+            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
+            <div class="mail-body">
+              <h3>Miro-Lizenz auf Full</h3>
+              <p>Miro · heute 09:07</p>
+            </div>
             <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a17c6620ab30410" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
-          <article>
-            <h3>Leads Engine</h3>
-            <p>Jasser · heute 09:01</p>
+          <article class="mail-item" data-id="e:1a17c6189de1ed75" data-title="Leads Engine" data-meta="Jasser · heute 09:01" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a17c6189de1ed75">
+            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
+            <div class="mail-body">
+              <h3>Leads Engine</h3>
+              <p>Jasser · heute 09:01</p>
+            </div>
             <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a17c6189de1ed75" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
-          <article>
-            <h3>Dashboard als PDF</h3>
-            <p>Anja · heute 07:36</p>
+          <article class="mail-item" data-id="e:1a17c13637cb97c9" data-title="Dashboard als PDF" data-meta="Anja · heute 07:36" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a17c13637cb97c9">
+            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
+            <div class="mail-body">
+              <h3>Dashboard als PDF</h3>
+              <p>Anja · heute 07:36</p>
+            </div>
             <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a17c13637cb97c9" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
-          <article>
-            <h3>KO-Hierarchie für Oktober</h3>
-            <p>Daniel · Mo 26 · 15:47</p>
+          <article class="mail-item" data-id="e:1a178ae301321ea9" data-title="KO-Hierarchie für Oktober" data-meta="Daniel · Mo 26 · 15:47" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a178ae301321ea9">
+            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
+            <div class="mail-body">
+              <h3>KO-Hierarchie für Oktober</h3>
+              <p>Daniel · Mo 26 · 15:47</p>
+            </div>
             <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a178ae301321ea9" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
         </div>
@@ -877,7 +937,7 @@
     </section>
 
     <footer class="note">
-      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 27 Okt 2026 · 17:36 Berlin.
+      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 27 Okt 2026 · 17:45 Berlin.
       Todos/Notizen: localStorage dieses Browsers (Mac Safari/Chrome getrennt). Für Sync über Geräte später erweiterbar.
       Live: <a href="https://marcelkraemerriedesel-pixel.github.io/ai-command-center/" target="_blank" rel="noopener">marcelkraemerriedesel-pixel.github.io/ai-command-center</a>
     </footer>
@@ -893,8 +953,12 @@
   var KEY_CATS = 'mcc:v1:cats';
   var KEY_FILTER = 'mcc:v1:filter';
   var KEY_MIRO = 'mcc:v1:miro';
+  var KEY_MAIL_OPEN = 'mcc:v1:mailOpen';
+  var KEY_MAIL_DONE = 'mcc:v1:mailDone';
+  var KEY_MAIL_HIDE = 'mcc:v1:mailHideDone';
 
   var CATS = [
+    { id: 'wichtig', label: 'WICHTIG' },
     { id: 'wuestenrot', label: 'Wüstenrot' },
     { id: 'allianz', label: 'Allianz' },
     { id: 'strenger', label: 'Strenger' },
@@ -927,6 +991,11 @@
   var filter = load(KEY_FILTER, 'all') || 'all';
   var miroPins = load(KEY_MIRO, []);
   if (!Array.isArray(miroPins)) miroPins = [];
+  var mailOpen = load(KEY_MAIL_OPEN, []);
+  var mailDone = load(KEY_MAIL_DONE, {});
+  var mailHideDone = !!load(KEY_MAIL_HIDE, true);
+  if (!Array.isArray(mailOpen)) mailOpen = [];
+  if (!mailDone || typeof mailDone !== 'object') mailDone = {};
   if (!Array.isArray(mine)) mine = [];
   // migrate old mine items without cat
   mine = mine.map(function (item) {
@@ -1232,6 +1301,118 @@
     });
   }
 
+
+  function esc(s) {
+    return String(s || '').replace(/[&<>"']/g, function (c) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+    });
+  }
+
+  function ingestSnapshotMails() {
+    var map = {};
+    mailOpen.forEach(function (m) { if (m && m.id) map[m.id] = m; });
+    document.querySelectorAll('#mail-list article.mail-item[data-seed], #mail-list article.mail-item').forEach(function (art) {
+      var id = art.getAttribute('data-id');
+      if (!id) return;
+      var item = {
+        id: id,
+        title: art.getAttribute('data-title') || (art.querySelector('h3') && art.querySelector('h3').textContent) || 'Mail',
+        meta: art.getAttribute('data-meta') || (art.querySelector('p') && art.querySelector('p').textContent) || '',
+        url: art.getAttribute('data-url') || (art.querySelector('a.open') && art.querySelector('a.open').href) || '#',
+        seen: Date.now()
+      };
+      if (!map[id]) map[id] = item;
+      else {
+        map[id].title = item.title;
+        map[id].meta = item.meta;
+        map[id].url = item.url;
+        map[id].seen = Date.now();
+      }
+    });
+    // drop done permanently from open list
+    mailOpen = Object.keys(map).map(function (k) { return map[k]; })
+      .filter(function (m) { return !mailDone[m.id]; });
+    // keep chronological: newest first by seen
+    mailOpen.sort(function (a, b) { return (b.seen || 0) - (a.seen || 0); });
+    save(KEY_MAIL_OPEN, mailOpen);
+  }
+
+  function renderMails() {
+    var host = document.getElementById('mail-list');
+    if (!host) return;
+    host.innerHTML = '';
+    var show = mailOpen.slice();
+    // also show done if not hidden
+    if (!mailHideDone) {
+      Object.keys(mailDone).forEach(function (id) {
+        var d = mailDone[id];
+        if (d && d.title) show.push({ id: id, title: d.title, meta: d.meta || 'erledigt', url: d.url || '#', _done: true });
+      });
+    }
+    if (!show.length) {
+      host.innerHTML = '<p class="sub" style="padding-bottom:8px">Keine offenen Fokus-Mails. Neue erscheinen nach dem nächsten Refresh und bleiben, bis du sie abhakst.</p>';
+      return;
+    }
+    show.forEach(function (m) {
+      var isDone = !!m._done || !!mailDone[m.id];
+      if (isDone && mailHideDone) return;
+      var art = document.createElement('article');
+      art.className = 'mail-item' + (isDone ? ' done' : '');
+      art.setAttribute('data-id', m.id);
+      art.innerHTML =
+        '<label class="check"><input type="checkbox" aria-label="Erledigt" /></label>' +
+        '<div class="mail-body"><h3></h3><p></p></div>' +
+        '<a class="open" target="_blank" rel="noopener">In Gmail öffnen</a>';
+      art.querySelector('h3').textContent = m.title;
+      art.querySelector('p').textContent = m.meta || '';
+      var a = art.querySelector('a.open');
+      a.href = m.url || '#';
+      var box = art.querySelector('input');
+      box.checked = isDone;
+      box.addEventListener('change', function () {
+        if (box.checked) {
+          mailDone[m.id] = { title: m.title, meta: m.meta, url: m.url, at: Date.now() };
+          mailOpen = mailOpen.filter(function (x) { return x.id !== m.id; });
+        } else {
+          delete mailDone[m.id];
+          mailOpen.unshift({ id: m.id, title: m.title, meta: m.meta, url: m.url, seen: Date.now() });
+        }
+        save(KEY_MAIL_DONE, mailDone);
+        save(KEY_MAIL_OPEN, mailOpen);
+        renderMails();
+      });
+      host.appendChild(art);
+    });
+  }
+
+  var btnMailHide = document.getElementById('btn-mail-hide-done');
+  function syncMailHideBtn() {
+    document.body.classList.toggle('hide-mail-done', mailHideDone);
+    if (btnMailHide) {
+      btnMailHide.setAttribute('aria-pressed', mailHideDone ? 'true' : 'false');
+      btnMailHide.textContent = mailHideDone ? 'Erledigte Mails einblenden' : 'Erledigte Mails ausblenden';
+    }
+  }
+  if (btnMailHide) {
+    btnMailHide.addEventListener('click', function () {
+      mailHideDone = !mailHideDone;
+      save(KEY_MAIL_HIDE, mailHideDone);
+      syncMailHideBtn();
+      renderMails();
+    });
+  }
+  var btnMailClear = document.getElementById('btn-mail-clear-done');
+  if (btnMailClear) {
+    btnMailClear.addEventListener('click', function () {
+      mailDone = {};
+      save(KEY_MAIL_DONE, mailDone);
+      renderMails();
+    });
+  }
+
+  ingestSnapshotMails();
+  renderMails();
+  syncMailHideBtn();
   wireSnap();
   renderMine();
   renderMiroPins();
