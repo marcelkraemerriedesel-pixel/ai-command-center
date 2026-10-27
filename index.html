@@ -363,10 +363,7 @@
     cursor: pointer; font-size: 14px; padding: 0 4px; line-height: 1;
   }
   ul.actions.mine li .del:hover { color: var(--danger); }
-  .todo-add {
-    display: grid; grid-template-columns: 1fr auto; gap: 8px;
-    margin: 0 0 10px; padding-bottom: 4px;
-  }
+  /* todo-add layout overridden below */
   .todo-add input, .notes-area {
     width: 100%; border-radius: 8px; border: 1px solid var(--line);
     background: var(--bg-raise); color: var(--text); font: inherit;
@@ -384,6 +381,71 @@
     background: rgba(61,214,140,0.1); color: var(--live); border: 1px solid rgba(61,214,140,0.25);
   }
   body.hide-done li.todo.done { display: none; }
+
+  .cat-filters {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin: 10px 0 4px;
+  }
+  .cat-filters button {
+    height: 26px; padding: 0 10px; border-radius: 7px;
+    border: 1px solid var(--line); background: var(--bg-raise);
+    color: var(--muted); font-size: 12px; cursor: pointer;
+  }
+  .cat-filters button.active {
+    color: #fff; border-color: var(--line-strong); background: #1c1c22;
+  }
+  .cat-filters button:hover { color: #fff; }
+  .cat-pill {
+    display: inline-flex; align-items: center; height: 18px;
+    padding: 0 7px; border-radius: 5px; margin-right: 8px;
+    font-size: 10.5px; font-weight: 650; letter-spacing: 0.02em;
+    background: rgba(142,200,255,0.12); color: var(--info);
+    vertical-align: 1px; white-space: nowrap;
+  }
+  .cat-pill.c-wuestenrot { background: rgba(61,214,140,0.12); color: var(--live); }
+  .cat-pill.c-allianz { background: rgba(255,122,144,0.12); color: var(--danger); }
+  .cat-pill.c-strenger { background: rgba(245,193,108,0.14); color: var(--warn); }
+  .cat-pill.c-bavaria { background: rgba(142,200,255,0.14); color: var(--info); }
+  .cat-pill.c-tophypho { background: rgba(157,183,212,0.16); color: #9db7d4; }
+  .cat-pill.c-slf { background: rgba(255,255,255,0.06); color: var(--muted); }
+  .cat-pill.c-nachfassen { background: rgba(245,193,108,0.14); color: var(--warn); }
+  .todo-add {
+    display: grid; grid-template-columns: 140px 1fr auto; gap: 8px;
+    margin: 0 0 10px; padding-bottom: 4px;
+  }
+  .todo-add select, .todo-row-cat {
+    height: 38px; border-radius: 8px; border: 1px solid var(--line);
+    background: var(--bg-raise); color: var(--text); font: inherit;
+    padding: 0 10px; font-size: 12.5px;
+  }
+  .todo-meta {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  ul.actions li.todo[hidden] { display: none !important; }
+  .miro-list { display: grid; gap: 8px; padding-bottom: 8px; }
+  .miro-card {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 12px 14px; border-radius: 10px;
+    background: var(--bg-raise); border: 1px solid var(--line);
+  }
+  .miro-card h3 { margin: 0 0 3px; font-size: 13.5px; font-weight: 600; }
+  .miro-card p { margin: 0; color: var(--muted); font-size: 12.5px; }
+  .miro-card .open {
+    flex: 0 0 auto; height: 28px; display: inline-flex; align-items: center;
+    padding: 0 12px; border-radius: 7px; border: 1px solid var(--line-strong);
+    font-size: 12px; font-weight: 550;
+  }
+  .miro-card .open:hover { background: #fff; color: #111; border-color: #fff; }
+  .miro-add {
+    display: grid; grid-template-columns: 1fr 1.4fr auto; gap: 8px;
+    margin-top: 10px; padding-bottom: 8px;
+  }
+  .miro-add input {
+    width: 100%; border-radius: 8px; border: 1px solid var(--line);
+    background: var(--bg-raise); color: var(--text); font: inherit;
+    padding: 10px 12px;
+  }
 </style>
 </head>
 <body>
@@ -397,9 +459,10 @@
         <span class="chip"><i></i>Confluence</span>
         <span class="chip"><i></i>Granola</span>
         <span class="chip"><i></i>Slack</span>
+        <span class="chip"><i></i>Miro</span>
         <span class="chip"><i></i>Cursor</span>
       </nav>
-      <time class="stamp">27 Okt 2026 · 17:22 Berlin</time>
+      <time class="stamp">27 Okt 2026 · 17:29 Berlin</time>
     </header>
 
     <p class="notice">Todos und Notizen bleiben in <strong>diesem Browser</strong> gespeichert (localStorage), auch nach dem nächsten Snapshot-Refresh. Abgehakte Items verschwinden erst, wenn du sie erledigt markierst.</p>
@@ -493,7 +556,7 @@
         <div class="todo-head">
           <div>
             <h2>Todos</h2>
-            <p class="sub" style="margin-bottom:0">Snapshot + eigene · bleiben lokal, bis abgehakt</p>
+            <p class="sub" style="margin-bottom:0">Kategorien · bleiben lokal, bis abgehakt</p>
           </div>
           <div class="tools">
             <span class="persist-chip">lokal gespeichert</span>
@@ -501,17 +564,70 @@
             <button type="button" id="btn-clear-done">Erledigte löschen</button>
           </div>
         </div>
+        <div class="cat-filters" id="cat-filters" role="tablist" aria-label="Kategoriefilter"></div>
         <ul class="actions" id="snap-todos">
-          <li class="todo" data-id="s:6963f36539f3"><label><input type="checkbox" /><span>Hierarchiedatei prüfen und Daniel Rückmeldung geben</span></label></li>
-          <li class="todo" data-id="s:aedc0c7c923c"><label><input type="checkbox" /><span>Strenger Datenlücken (Must/Can/Should) zusammenfassen und intern teilen</span></label></li>
-          <li class="todo" data-id="s:10fbe7a6fc5c"><label><input type="checkbox" /><span>Wüstenrot Sandbox Owner-Template-URL neu erzeugen und an Charles für das SSS Handbook schicken</span></label></li>
-          <li class="todo" data-id="s:66630b171558"><label><input type="checkbox" /><span>Allianz Miro Planning Board in Slack teilen</span></label></li>
-          <li class="todo" data-id="s:5b8efb691866"><label><input type="checkbox" /><span>Bavaria Direkt Planning mit Barbara: realistisches Q2-Timeline und Prioritätskonflikte</span></label></li>
-          <li class="todo" data-id="s:e568c6354055"><label><input type="checkbox" /><span>ADP / Kunden je Vertriebsdirektion im Dashboard nachfassen; sonst manuelle Verteilung bis Di 3 Nov</span></label></li>
+          <li class="todo" data-id="s:6963f36539f3" data-cat="wuestenrot"><label><input type="checkbox" /><span>Hierarchiedatei prüfen und Daniel Rückmeldung geben</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:6963f36539f3"><option value="wuestenrot" selected>Wüstenrot</option>
+<option value="allianz">Allianz</option>
+<option value="strenger">Strenger</option>
+<option value="bavaria">Bavaria Direkt</option>
+<option value="tophypho">TopHypo</option>
+<option value="slf">SLF / Intern</option>
+<option value="nachfassen">Nachfassen</option>
+<option value="sonstiges">Sonstiges</option></select></div></li>
+          <li class="todo" data-id="s:aedc0c7c923c" data-cat="strenger"><label><input type="checkbox" /><span>Strenger Datenlücken (Must/Can/Should) zusammenfassen und intern teilen</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:aedc0c7c923c"><option value="wuestenrot">Wüstenrot</option>
+<option value="allianz">Allianz</option>
+<option value="strenger" selected>Strenger</option>
+<option value="bavaria">Bavaria Direkt</option>
+<option value="tophypho">TopHypo</option>
+<option value="slf">SLF / Intern</option>
+<option value="nachfassen">Nachfassen</option>
+<option value="sonstiges">Sonstiges</option></select></div></li>
+          <li class="todo" data-id="s:10fbe7a6fc5c" data-cat="wuestenrot"><label><input type="checkbox" /><span>Wüstenrot Sandbox Owner-Template-URL neu erzeugen und an Charles für das SSS Handbook schicken</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:10fbe7a6fc5c"><option value="wuestenrot" selected>Wüstenrot</option>
+<option value="allianz">Allianz</option>
+<option value="strenger">Strenger</option>
+<option value="bavaria">Bavaria Direkt</option>
+<option value="tophypho">TopHypo</option>
+<option value="slf">SLF / Intern</option>
+<option value="nachfassen">Nachfassen</option>
+<option value="sonstiges">Sonstiges</option></select></div></li>
+          <li class="todo" data-id="s:66630b171558" data-cat="allianz"><label><input type="checkbox" /><span>Allianz Miro Planning Board in Slack teilen</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:66630b171558"><option value="wuestenrot">Wüstenrot</option>
+<option value="allianz" selected>Allianz</option>
+<option value="strenger">Strenger</option>
+<option value="bavaria">Bavaria Direkt</option>
+<option value="tophypho">TopHypo</option>
+<option value="slf">SLF / Intern</option>
+<option value="nachfassen">Nachfassen</option>
+<option value="sonstiges">Sonstiges</option></select></div></li>
+          <li class="todo" data-id="s:5b8efb691866" data-cat="bavaria"><label><input type="checkbox" /><span>Bavaria Direkt Planning mit Barbara: realistisches Q2-Timeline und Prioritätskonflikte</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:5b8efb691866"><option value="wuestenrot">Wüstenrot</option>
+<option value="allianz">Allianz</option>
+<option value="strenger">Strenger</option>
+<option value="bavaria" selected>Bavaria Direkt</option>
+<option value="tophypho">TopHypo</option>
+<option value="slf">SLF / Intern</option>
+<option value="nachfassen">Nachfassen</option>
+<option value="sonstiges">Sonstiges</option></select></div></li>
+          <li class="todo" data-id="s:e568c6354055" data-cat="wuestenrot"><label><input type="checkbox" /><span>ADP / Kunden je Vertriebsdirektion im Dashboard nachfassen; sonst manuelle Verteilung bis Di 3 Nov</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:e568c6354055"><option value="wuestenrot" selected>Wüstenrot</option>
+<option value="allianz">Allianz</option>
+<option value="strenger">Strenger</option>
+<option value="bavaria">Bavaria Direkt</option>
+<option value="tophypho">TopHypo</option>
+<option value="slf">SLF / Intern</option>
+<option value="nachfassen">Nachfassen</option>
+<option value="sonstiges">Sonstiges</option></select></div></li>
         </ul>
         <h2 style="margin-top:14px">Meine Todos</h2>
-        <p class="sub">Nur bei dir · nicht im öffentlichen Snapshot-Text</p>
+        <p class="sub">Nur bei dir · Kategorie wählen, dann hinzufügen</p>
         <form class="todo-add" id="mine-form">
+          <select id="mine-cat" aria-label="Kategorie">
+<option value="wuestenrot">Wüstenrot</option>
+<option value="allianz">Allianz</option>
+<option value="strenger">Strenger</option>
+<option value="bavaria">Bavaria Direkt</option>
+<option value="tophypho">TopHypo</option>
+<option value="slf">SLF / Intern</option>
+<option value="nachfassen" selected>Nachfassen</option>
+<option value="sonstiges">Sonstiges</option>
+          </select>
           <input type="text" id="mine-input" placeholder="Neues Todo…" autocomplete="off" maxlength="280" />
           <button type="submit">Hinzufügen</button>
         </form>
@@ -701,6 +817,46 @@
       </div>
     </section>
 
+    <section class="panel stack" id="miro-panel">
+      <h2>Miro Boards</h2>
+      <p class="sub">Verbundene Boards · Pin eigene Links (lokal gespeichert)</p>
+      <div class="miro-list" id="miro-pinned">
+        <article class="miro-card" data-builtin="1">
+          <div>
+            <h3>Allianz <> PriceHubble Integration</h3>
+            <p>Planning · Timeline · Assigned items</p>
+          </div>
+          <a class="open" href="https://miro.com/app/board/uXjVEWuo6EM=/" target="_blank" rel="noopener">Board öffnen</a>
+        </article>
+        <article class="miro-card" data-builtin="1">
+          <div>
+            <h3>Allianz · PriceHubble Roadmap</h3>
+            <p>Roadmap Allianz</p>
+          </div>
+          <a class="open" href="https://miro.com/app/board/uXjVHsxRTYw=/" target="_blank" rel="noopener">Board öffnen</a>
+        </article>
+        <article class="miro-card" data-builtin="1">
+          <div>
+            <h3>Enterprise projects</h3>
+            <p>Barbara · Enterprise Übersicht</p>
+          </div>
+          <a class="open" href="https://miro.com/app/board/uXjVHpqLLgc=/" target="_blank" rel="noopener">Board öffnen</a>
+        </article>
+        <article class="miro-card" data-builtin="1">
+          <div>
+            <h3>PriceHubble Roadmap &amp; Priorization</h3>
+            <p>Produkt · Priorisierung</p>
+          </div>
+          <a class="open" href="https://miro.com/app/board/uXjVI083qPs=/" target="_blank" rel="noopener">Board öffnen</a>
+        </article>
+      </div>
+      <form class="miro-add" id="miro-form">
+        <input type="text" id="miro-name" placeholder="Name (z.B. Wüstenrot Workshop)" maxlength="80" />
+        <input type="url" id="miro-url" placeholder="https://miro.com/app/board/…" required />
+        <button type="submit">Pin</button>
+      </form>
+    </section>
+
     <section class="panel">
       <h2>Quick Links</h2>
       <p class="sub">Direkt in die Tools</p>
@@ -712,16 +868,18 @@
         <a href="https://notes.granola.ai/" target="_blank" rel="noopener">Granola</a>
         <a href="https://pricehubble.atlassian.net/wiki" target="_blank" rel="noopener">Confluence</a>
         <a href="https://app.slack.com/client" target="_blank" rel="noopener">Slack</a>
+        <a href="https://miro.com/app/board/uXjVEWuo6EM=/" target="_blank" rel="noopener">Miro · Allianz</a>
         <a href="https://cursor.com/agents/bc-01a0f3e3-b731-7398-a6ea-d8b761565610" target="_blank" rel="noopener">Dieser Cursor Agent</a>
       </div>
     </section>
 
     <footer class="note">
-      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 27 Okt 2026 · 17:22 Berlin.
+      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 27 Okt 2026 · 17:29 Berlin.
       Todos/Notizen: localStorage dieses Browsers (Mac Safari/Chrome getrennt). Für Sync über Geräte später erweiterbar.
       Live: <a href="https://marcelkraemerriedesel-pixel.github.io/ai-command-center/" target="_blank" rel="noopener">marcelkraemerriedesel-pixel.github.io/ai-command-center</a>
     </footer>
   </div>
+
 
 <script>
 (function () {
@@ -729,6 +887,22 @@
   var KEY_MINE = 'mcc:v1:mine';
   var KEY_NOTES = 'mcc:v1:notes';
   var KEY_HIDE = 'mcc:v1:hideDone';
+  var KEY_CATS = 'mcc:v1:cats';
+  var KEY_FILTER = 'mcc:v1:filter';
+  var KEY_MIRO = 'mcc:v1:miro';
+
+  var CATS = [
+    { id: 'wuestenrot', label: 'Wüstenrot' },
+    { id: 'allianz', label: 'Allianz' },
+    { id: 'strenger', label: 'Strenger' },
+    { id: 'bavaria', label: 'Bavaria Direkt' },
+    { id: 'tophypho', label: 'TopHypo' },
+    { id: 'slf', label: 'SLF / Intern' },
+    { id: 'nachfassen', label: 'Nachfassen' },
+    { id: 'sonstiges', label: 'Sonstiges' }
+  ];
+  var CAT_MAP = {};
+  CATS.forEach(function (c) { CAT_MAP[c.id] = c.label; });
 
   function load(key, fallback) {
     try {
@@ -745,11 +919,24 @@
 
   var done = load(KEY_DONE, {});
   var mine = load(KEY_MINE, []);
+  var catOverride = load(KEY_CATS, {});
   var hideDone = !!load(KEY_HIDE, false);
+  var filter = load(KEY_FILTER, 'all') || 'all';
+  var miroPins = load(KEY_MIRO, []);
+  if (!Array.isArray(miroPins)) miroPins = [];
+  if (!Array.isArray(mine)) mine = [];
+  // migrate old mine items without cat
+  mine = mine.map(function (item) {
+    if (!item.cat) item.cat = 'sonstiges';
+    return item;
+  });
+
+  function catLabel(id) { return CAT_MAP[id] || id || 'Sonstiges'; }
 
   function updateKpi() {
     var open = 0;
     document.querySelectorAll('#snap-todos li.todo, #mine-todos li.todo').forEach(function (li) {
+      if (li.hidden) return;
       if (!li.classList.contains('done')) open++;
     });
     var el = document.getElementById('kpi-open');
@@ -764,20 +951,74 @@
     if (box) box.checked = isDone;
   }
 
+  function applyFilter() {
+    document.querySelectorAll('#snap-todos li.todo, #mine-todos li.todo').forEach(function (li) {
+      var cat = li.getAttribute('data-cat') || 'sonstiges';
+      li.hidden = !(filter === 'all' || cat === filter);
+    });
+    document.querySelectorAll('#cat-filters button').forEach(function (btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-cat') === filter);
+    });
+    updateKpi();
+  }
+
+  function renderFilters() {
+    var host = document.getElementById('cat-filters');
+    if (!host) return;
+    var counts = { all: 0 };
+    CATS.forEach(function (c) { counts[c.id] = 0; });
+    document.querySelectorAll('#snap-todos li.todo, #mine-todos li.todo').forEach(function (li) {
+      if (li.classList.contains('done') && hideDone) return;
+      var cat = li.getAttribute('data-cat') || 'sonstiges';
+      counts.all++;
+      counts[cat] = (counts[cat] || 0) + 1;
+    });
+    var html = '<button type="button" data-cat="all"' + (filter === 'all' ? ' class="active"' : '') + '>Alle (' + counts.all + ')</button>';
+    CATS.forEach(function (c) {
+      var n = counts[c.id] || 0;
+      if (!n && filter !== c.id) return;
+      html += '<button type="button" data-cat="' + c.id + '"' + (filter === c.id ? ' class="active"' : '') + '>' + c.label + ' (' + n + ')</button>';
+    });
+    host.innerHTML = html;
+    host.querySelectorAll('button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        filter = btn.getAttribute('data-cat');
+        save(KEY_FILTER, filter);
+        applyFilter();
+        renderFilters();
+      });
+    });
+  }
+
   function wireSnap() {
     document.querySelectorAll('#snap-todos li.todo').forEach(function (li) {
+      var id = li.getAttribute('data-id');
+      if (catOverride[id]) li.setAttribute('data-cat', catOverride[id]);
       applyDone(li);
       var box = li.querySelector('input[type=checkbox]');
-      if (!box || box._wired) return;
-      box._wired = true;
-      box.addEventListener('change', function () {
-        var id = li.getAttribute('data-id');
-        if (box.checked) done[id] = Date.now();
-        else delete done[id];
-        save(KEY_DONE, done);
-        applyDone(li);
-        updateKpi();
-      });
+      if (box && !box._wired) {
+        box._wired = true;
+        box.addEventListener('change', function () {
+          if (box.checked) done[id] = Date.now();
+          else delete done[id];
+          save(KEY_DONE, done);
+          applyDone(li);
+          renderFilters();
+          applyFilter();
+        });
+      }
+      var sel = li.querySelector('select.todo-row-cat');
+      if (sel && !sel._wired) {
+        sel._wired = true;
+        sel.value = li.getAttribute('data-cat') || 'sonstiges';
+        sel.addEventListener('change', function () {
+          li.setAttribute('data-cat', sel.value);
+          catOverride[id] = sel.value;
+          save(KEY_CATS, catOverride);
+          renderFilters();
+          applyFilter();
+        });
+      }
     });
   }
 
@@ -789,19 +1030,36 @@
       var li = document.createElement('li');
       li.className = 'todo';
       li.setAttribute('data-id', item.id);
+      li.setAttribute('data-cat', item.cat || 'sonstiges');
       var label = document.createElement('label');
       var box = document.createElement('input');
       box.type = 'checkbox';
       var span = document.createElement('span');
-      span.textContent = item.text;
+      var pill = document.createElement('span');
+      pill.className = 'cat-pill c-' + (item.cat || 'sonstiges');
+      pill.textContent = catLabel(item.cat);
+      span.appendChild(pill);
+      span.appendChild(document.createTextNode(item.text));
+      label.appendChild(box);
+      label.appendChild(span);
       var del = document.createElement('button');
       del.type = 'button';
       del.className = 'del';
       del.setAttribute('aria-label', 'Löschen');
       del.textContent = '×';
-      label.appendChild(box);
-      label.appendChild(span);
+      var meta = document.createElement('div');
+      meta.className = 'todo-meta';
+      var sel = document.createElement('select');
+      sel.className = 'todo-row-cat';
+      CATS.forEach(function (c) {
+        var o = document.createElement('option');
+        o.value = c.id; o.textContent = c.label;
+        if (c.id === (item.cat || 'sonstiges')) o.selected = true;
+        sel.appendChild(o);
+      });
+      meta.appendChild(sel);
       li.appendChild(label);
+      li.appendChild(meta);
       li.appendChild(del);
       ul.appendChild(li);
       applyDone(li);
@@ -810,7 +1068,17 @@
         else delete done[item.id];
         save(KEY_DONE, done);
         applyDone(li);
-        updateKpi();
+        renderFilters();
+        applyFilter();
+      });
+      sel.addEventListener('change', function () {
+        item.cat = sel.value;
+        li.setAttribute('data-cat', sel.value);
+        save(KEY_MINE, mine);
+        pill.className = 'cat-pill c-' + sel.value;
+        pill.textContent = catLabel(sel.value);
+        renderFilters();
+        applyFilter();
       });
       del.addEventListener('click', function (e) {
         e.preventDefault();
@@ -819,7 +1087,8 @@
         save(KEY_MINE, mine);
         save(KEY_DONE, done);
         renderMine();
-        updateKpi();
+        renderFilters();
+        applyFilter();
       });
     });
   }
@@ -829,13 +1098,20 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var input = document.getElementById('mine-input');
+      var catEl = document.getElementById('mine-cat');
       var text = (input.value || '').trim();
       if (!text) return;
-      mine.unshift({ id: uid(), text: text, created: Date.now() });
+      mine.unshift({
+        id: uid(),
+        text: text,
+        cat: (catEl && catEl.value) || 'sonstiges',
+        created: Date.now()
+      });
       save(KEY_MINE, mine);
       input.value = '';
       renderMine();
-      updateKpi();
+      renderFilters();
+      applyFilter();
     });
   }
 
@@ -852,18 +1128,17 @@
       hideDone = !hideDone;
       save(KEY_HIDE, hideDone);
       syncHideBtn();
+      renderFilters();
+      applyFilter();
     });
   }
 
   var btnClear = document.getElementById('btn-clear-done');
   if (btnClear) {
     btnClear.addEventListener('click', function () {
-      var keep = {};
-      // only remove done flags for items currently on page; leave others
       document.querySelectorAll('li.todo.done').forEach(function (li) {
         var id = li.getAttribute('data-id');
         delete done[id];
-        // remove custom done items entirely
         if (id && id.indexOf('m:') === 0) {
           mine = mine.filter(function (x) { return x.id !== id; });
         }
@@ -872,7 +1147,57 @@
       save(KEY_MINE, mine);
       wireSnap();
       renderMine();
-      updateKpi();
+      renderFilters();
+      applyFilter();
+    });
+  }
+
+  function renderMiroPins() {
+    var host = document.getElementById('miro-pinned');
+    if (!host) return;
+    host.querySelectorAll('[data-pin="1"]').forEach(function (n) { n.remove(); });
+    miroPins.forEach(function (pin) {
+      var art = document.createElement('article');
+      art.className = 'miro-card';
+      art.setAttribute('data-pin', '1');
+      art.innerHTML = '<div><h3></h3><p>Eigenes Pin · lokal</p></div>';
+      art.querySelector('h3').textContent = pin.name || 'Miro Board';
+      var a = document.createElement('a');
+      a.className = 'open';
+      a.href = pin.url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = 'Board öffnen';
+      var del = document.createElement('button');
+      del.type = 'button';
+      del.textContent = '×';
+      del.style.cssText = 'height:28px;width:28px;border-radius:7px;border:1px solid var(--line-strong);background:transparent;color:var(--faint);cursor:pointer;';
+      del.addEventListener('click', function () {
+        miroPins = miroPins.filter(function (p) { return p.id !== pin.id; });
+        save(KEY_MIRO, miroPins);
+        renderMiroPins();
+      });
+      var wrap = document.createElement('div');
+      wrap.style.cssText = 'display:flex;gap:8px;align-items:center;';
+      wrap.appendChild(a);
+      wrap.appendChild(del);
+      art.appendChild(wrap);
+      host.appendChild(art);
+    });
+  }
+
+  var miroForm = document.getElementById('miro-form');
+  if (miroForm) {
+    miroForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = (document.getElementById('miro-name').value || '').trim();
+      var url = (document.getElementById('miro-url').value || '').trim();
+      if (!url || url.indexOf('miro.com') === -1) return;
+      miroPins.unshift({ id: uid(), name: name || 'Miro Board', url: url });
+      save(KEY_MIRO, miroPins);
+      document.getElementById('miro-name').value = '';
+      document.getElementById('miro-url').value = '';
+      renderMiroPins();
     });
   }
 
@@ -880,9 +1205,6 @@
   var notesStatus = document.getElementById('notes-status');
   var notesTimer;
   if (scratch) {
-    scratch.value = load(KEY_NOTES, '') || '';
-    if (typeof scratch.value !== 'string') scratch.value = '';
-    // load returns parsed JSON - notes stored as string JSON
     try {
       var n = localStorage.getItem(KEY_NOTES);
       scratch.value = n == null ? '' : JSON.parse(n);
@@ -909,9 +1231,12 @@
 
   wireSnap();
   renderMine();
+  renderMiroPins();
   syncHideBtn();
-  updateKpi();
+  renderFilters();
+  applyFilter();
 })();
 </script>
+
 </body>
 </html>
