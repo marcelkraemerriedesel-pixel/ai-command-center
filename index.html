@@ -332,6 +332,58 @@
     .stamp { margin-left: 0; }
     .kpis, .split, .split.even { grid-template-columns: 1fr; }
   }
+
+  .todo-head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+  }
+  .todo-head .tools { display: flex; gap: 8px; flex-wrap: wrap; }
+  .todo-head button, .todo-add button, .notes-bar button {
+    height: 26px; padding: 0 10px; border-radius: 7px;
+    border: 1px solid var(--line-strong); background: var(--bg-raise);
+    color: var(--muted); font-size: 12px; cursor: pointer;
+  }
+  .todo-head button:hover, .todo-add button:hover, .notes-bar button:hover {
+    color: #fff; border-color: #fff;
+  }
+  ul.actions li.todo {
+    display: block; padding: 0; border-top: 1px solid var(--line);
+  }
+  ul.actions li.todo label {
+    display: grid; grid-template-columns: 18px 1fr; gap: 10px;
+    padding: 11px 0; cursor: pointer; align-items: start;
+  }
+  ul.actions li.todo input[type=checkbox] {
+    width: 16px; height: 16px; margin-top: 2px; accent-color: var(--live);
+    cursor: pointer;
+  }
+  ul.actions li.todo.done span { color: var(--faint); text-decoration: line-through; }
+  ul.actions li.todo.done { opacity: 0.55; }
+  ul.actions.mine li .del {
+    float: right; border: 0; background: transparent; color: var(--faint);
+    cursor: pointer; font-size: 14px; padding: 0 4px; line-height: 1;
+  }
+  ul.actions.mine li .del:hover { color: var(--danger); }
+  .todo-add {
+    display: grid; grid-template-columns: 1fr auto; gap: 8px;
+    margin: 0 0 10px; padding-bottom: 4px;
+  }
+  .todo-add input, .notes-area {
+    width: 100%; border-radius: 8px; border: 1px solid var(--line);
+    background: var(--bg-raise); color: var(--text); font: inherit;
+    padding: 10px 12px;
+  }
+  .todo-add input:focus, .notes-area:focus {
+    outline: none; border-color: var(--line-strong);
+  }
+  .notes-area { min-height: 110px; resize: vertical; line-height: 1.45; }
+  .notes-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-bottom: 8px; }
+  .notes-bar .hint { color: var(--faint); font-size: 11px; }
+  .persist-chip {
+    display: inline-flex; align-items: center; gap: 6px; height: 22px;
+    padding: 0 8px; border-radius: 6px; font-size: 11px;
+    background: rgba(61,214,140,0.1); color: var(--live); border: 1px solid rgba(61,214,140,0.25);
+  }
+  body.hide-done li.todo.done { display: none; }
 </style>
 </head>
 <body>
@@ -347,16 +399,16 @@
         <span class="chip"><i></i>Slack</span>
         <span class="chip"><i></i>Cursor</span>
       </nav>
-      <time class="stamp">27 Okt 2026 · 14:37 Berlin</time>
+      <time class="stamp">27 Okt 2026 · 17:22 Berlin</time>
     </header>
 
-    <p class="notice">Live-Snapshot aus Calendar, Gmail, Jira, Confluence und Granola. Slack ist verbunden, ohne eigenen Block.</p>
+    <p class="notice">Todos und Notizen bleiben in <strong>diesem Browser</strong> gespeichert (localStorage), auch nach dem nächsten Snapshot-Refresh. Abgehakte Items verschwinden erst, wenn du sie erledigt markierst.</p>
 
     <section class="kpis" aria-label="Kennzahlen">
       <div class="kpi info"><b>18</b><span>Offene Jira-Issues</span></div>
       <div class="kpi"><b>9</b><span>In Progress</span></div>
       <div class="kpi danger"><b>3</b><span>Blocked</span></div>
-      <div class="kpi warn"><b>6</b><span>Action Items</span></div>
+      <div class="kpi warn"><b id="kpi-open">6</b><span>Offene Todos</span></div>
     </section>
 
     <section class="panel stack">
@@ -374,20 +426,10 @@
     <div class="split">
       <section class="panel">
         <h2>Nächste Termine</h2>
-        <p class="sub">Google Calendar · 27–30 Okt · Mittagsblöcke ausgeblendet</p>
+        <p class="sub">Google Calendar · 28–30 Okt · Mittagsblöcke ausgeblendet</p>
         <table>
           <thead><tr><th>Wann</th><th>Termin</th><th></th></tr></thead>
           <tbody>
-            <tr>
-              <td class="when">Heute · 14:00</td>
-              <td>Weekly Sync SC DACH</td>
-              <td><a class="join" href="https://meet.google.com/dxj-ynte-fhy" target="_blank" rel="noopener">Join</a></td>
-            </tr>
-            <tr>
-              <td class="when">Heute · 16:30</td>
-              <td>Weekly SLF × SmartApps PM</td>
-              <td><a class="join" href="https://meet.google.com/qht-ztrp-fvr" target="_blank" rel="noopener">Join</a></td>
-            </tr>
             <tr>
               <td class="when">Mi 28 Okt · 10:30</td>
               <td>PH Kapitalanlegerportal · Review</td>
@@ -447,17 +489,33 @@
         </table>
       </section>
 
-      <section class="panel">
-        <h2>Action Items</h2>
-        <p class="sub">Granola Notes 26–27 Okt · Abschlussstatus nicht bestätigt</p>
-        <ul class="actions">
-          <li><i></i><span>Hierarchiedatei prüfen und Daniel Rückmeldung geben</span></li>
-          <li><i></i><span>Strenger Datenlücken (Must/Can/Should) zusammenfassen und intern teilen</span></li>
-          <li><i></i><span>Wüstenrot Sandbox Owner-Template-URL neu erzeugen und an Charles für das SSS Handbook schicken</span></li>
-          <li><i></i><span>Allianz Miro Planning Board in Slack teilen</span></li>
-          <li><i></i><span>Bavaria Direkt Planning mit Barbara: realistisches Q2-Timeline und Prioritätskonflikte</span></li>
-          <li><i></i><span>ADP / Kunden je Vertriebsdirektion im Dashboard nachfassen; sonst manuelle Verteilung bis Di 3 Nov</span></li>
+      <section class="panel" id="todos-panel">
+        <div class="todo-head">
+          <div>
+            <h2>Todos</h2>
+            <p class="sub" style="margin-bottom:0">Snapshot + eigene · bleiben lokal, bis abgehakt</p>
+          </div>
+          <div class="tools">
+            <span class="persist-chip">lokal gespeichert</span>
+            <button type="button" id="btn-toggle-done" aria-pressed="false">Erledigte ausblenden</button>
+            <button type="button" id="btn-clear-done">Erledigte löschen</button>
+          </div>
+        </div>
+        <ul class="actions" id="snap-todos">
+          <li class="todo" data-id="s:6963f36539f3"><label><input type="checkbox" /><span>Hierarchiedatei prüfen und Daniel Rückmeldung geben</span></label></li>
+          <li class="todo" data-id="s:aedc0c7c923c"><label><input type="checkbox" /><span>Strenger Datenlücken (Must/Can/Should) zusammenfassen und intern teilen</span></label></li>
+          <li class="todo" data-id="s:10fbe7a6fc5c"><label><input type="checkbox" /><span>Wüstenrot Sandbox Owner-Template-URL neu erzeugen und an Charles für das SSS Handbook schicken</span></label></li>
+          <li class="todo" data-id="s:66630b171558"><label><input type="checkbox" /><span>Allianz Miro Planning Board in Slack teilen</span></label></li>
+          <li class="todo" data-id="s:5b8efb691866"><label><input type="checkbox" /><span>Bavaria Direkt Planning mit Barbara: realistisches Q2-Timeline und Prioritätskonflikte</span></label></li>
+          <li class="todo" data-id="s:e568c6354055"><label><input type="checkbox" /><span>ADP / Kunden je Vertriebsdirektion im Dashboard nachfassen; sonst manuelle Verteilung bis Di 3 Nov</span></label></li>
         </ul>
+        <h2 style="margin-top:14px">Meine Todos</h2>
+        <p class="sub">Nur bei dir · nicht im öffentlichen Snapshot-Text</p>
+        <form class="todo-add" id="mine-form">
+          <input type="text" id="mine-input" placeholder="Neues Todo…" autocomplete="off" maxlength="280" />
+          <button type="submit">Hinzufügen</button>
+        </form>
+        <ul class="actions mine" id="mine-todos"></ul>
       </section>
     </div>
 
@@ -633,6 +691,16 @@
       </div>
     </div>
 
+    <section class="panel stack">
+      <h2>Schnellnotizen</h2>
+      <p class="sub">Nur in diesem Browser · nicht öffentlich im Repo</p>
+      <textarea class="notes-area" id="scratch" placeholder="Parkplatz für Gedanken, Follow-ups, Links…"></textarea>
+      <div class="notes-bar">
+        <span class="hint" id="notes-status">Autosave</span>
+        <button type="button" id="btn-clear-notes">Notizen leeren</button>
+      </div>
+    </section>
+
     <section class="panel">
       <h2>Quick Links</h2>
       <p class="sub">Direkt in die Tools</p>
@@ -649,10 +717,201 @@
     </section>
 
     <footer class="note">
-      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel.
-      Stand 27 Okt 2026, 14:37 Berlin.
+      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 27 Okt 2026 · 17:22 Berlin.
+      Todos/Notizen: localStorage dieses Browsers (Mac Safari/Chrome getrennt). Für Sync über Geräte später erweiterbar.
       Live: <a href="https://marcelkraemerriedesel-pixel.github.io/ai-command-center/" target="_blank" rel="noopener">marcelkraemerriedesel-pixel.github.io/ai-command-center</a>
     </footer>
   </div>
+
+<script>
+(function () {
+  var KEY_DONE = 'mcc:v1:done';
+  var KEY_MINE = 'mcc:v1:mine';
+  var KEY_NOTES = 'mcc:v1:notes';
+  var KEY_HIDE = 'mcc:v1:hideDone';
+
+  function load(key, fallback) {
+    try {
+      var raw = localStorage.getItem(key);
+      return raw == null ? fallback : JSON.parse(raw);
+    } catch (e) { return fallback; }
+  }
+  function save(key, val) {
+    localStorage.setItem(key, JSON.stringify(val));
+  }
+  function uid() {
+    return 'm:' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+  }
+
+  var done = load(KEY_DONE, {});
+  var mine = load(KEY_MINE, []);
+  var hideDone = !!load(KEY_HIDE, false);
+
+  function updateKpi() {
+    var open = 0;
+    document.querySelectorAll('#snap-todos li.todo, #mine-todos li.todo').forEach(function (li) {
+      if (!li.classList.contains('done')) open++;
+    });
+    var el = document.getElementById('kpi-open');
+    if (el) el.textContent = String(open);
+  }
+
+  function applyDone(li) {
+    var id = li.getAttribute('data-id');
+    var box = li.querySelector('input[type=checkbox]');
+    var isDone = !!done[id];
+    li.classList.toggle('done', isDone);
+    if (box) box.checked = isDone;
+  }
+
+  function wireSnap() {
+    document.querySelectorAll('#snap-todos li.todo').forEach(function (li) {
+      applyDone(li);
+      var box = li.querySelector('input[type=checkbox]');
+      if (!box || box._wired) return;
+      box._wired = true;
+      box.addEventListener('change', function () {
+        var id = li.getAttribute('data-id');
+        if (box.checked) done[id] = Date.now();
+        else delete done[id];
+        save(KEY_DONE, done);
+        applyDone(li);
+        updateKpi();
+      });
+    });
+  }
+
+  function renderMine() {
+    var ul = document.getElementById('mine-todos');
+    if (!ul) return;
+    ul.innerHTML = '';
+    mine.forEach(function (item) {
+      var li = document.createElement('li');
+      li.className = 'todo';
+      li.setAttribute('data-id', item.id);
+      var label = document.createElement('label');
+      var box = document.createElement('input');
+      box.type = 'checkbox';
+      var span = document.createElement('span');
+      span.textContent = item.text;
+      var del = document.createElement('button');
+      del.type = 'button';
+      del.className = 'del';
+      del.setAttribute('aria-label', 'Löschen');
+      del.textContent = '×';
+      label.appendChild(box);
+      label.appendChild(span);
+      li.appendChild(label);
+      li.appendChild(del);
+      ul.appendChild(li);
+      applyDone(li);
+      box.addEventListener('change', function () {
+        if (box.checked) done[item.id] = Date.now();
+        else delete done[item.id];
+        save(KEY_DONE, done);
+        applyDone(li);
+        updateKpi();
+      });
+      del.addEventListener('click', function (e) {
+        e.preventDefault();
+        mine = mine.filter(function (x) { return x.id !== item.id; });
+        delete done[item.id];
+        save(KEY_MINE, mine);
+        save(KEY_DONE, done);
+        renderMine();
+        updateKpi();
+      });
+    });
+  }
+
+  var form = document.getElementById('mine-form');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var input = document.getElementById('mine-input');
+      var text = (input.value || '').trim();
+      if (!text) return;
+      mine.unshift({ id: uid(), text: text, created: Date.now() });
+      save(KEY_MINE, mine);
+      input.value = '';
+      renderMine();
+      updateKpi();
+    });
+  }
+
+  var btnHide = document.getElementById('btn-toggle-done');
+  function syncHideBtn() {
+    document.body.classList.toggle('hide-done', hideDone);
+    if (btnHide) {
+      btnHide.setAttribute('aria-pressed', hideDone ? 'true' : 'false');
+      btnHide.textContent = hideDone ? 'Erledigte einblenden' : 'Erledigte ausblenden';
+    }
+  }
+  if (btnHide) {
+    btnHide.addEventListener('click', function () {
+      hideDone = !hideDone;
+      save(KEY_HIDE, hideDone);
+      syncHideBtn();
+    });
+  }
+
+  var btnClear = document.getElementById('btn-clear-done');
+  if (btnClear) {
+    btnClear.addEventListener('click', function () {
+      var keep = {};
+      // only remove done flags for items currently on page; leave others
+      document.querySelectorAll('li.todo.done').forEach(function (li) {
+        var id = li.getAttribute('data-id');
+        delete done[id];
+        // remove custom done items entirely
+        if (id && id.indexOf('m:') === 0) {
+          mine = mine.filter(function (x) { return x.id !== id; });
+        }
+      });
+      save(KEY_DONE, done);
+      save(KEY_MINE, mine);
+      wireSnap();
+      renderMine();
+      updateKpi();
+    });
+  }
+
+  var scratch = document.getElementById('scratch');
+  var notesStatus = document.getElementById('notes-status');
+  var notesTimer;
+  if (scratch) {
+    scratch.value = load(KEY_NOTES, '') || '';
+    if (typeof scratch.value !== 'string') scratch.value = '';
+    // load returns parsed JSON - notes stored as string JSON
+    try {
+      var n = localStorage.getItem(KEY_NOTES);
+      scratch.value = n == null ? '' : JSON.parse(n);
+      if (typeof scratch.value !== 'string') scratch.value = String(scratch.value || '');
+    } catch (e) { scratch.value = ''; }
+    scratch.addEventListener('input', function () {
+      clearTimeout(notesTimer);
+      if (notesStatus) notesStatus.textContent = 'Speichern…';
+      notesTimer = setTimeout(function () {
+        save(KEY_NOTES, scratch.value);
+        if (notesStatus) notesStatus.textContent = 'Gespeichert · ' + new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+      }, 250);
+    });
+  }
+  var btnClearNotes = document.getElementById('btn-clear-notes');
+  if (btnClearNotes) {
+    btnClearNotes.addEventListener('click', function () {
+      if (!scratch) return;
+      scratch.value = '';
+      save(KEY_NOTES, '');
+      if (notesStatus) notesStatus.textContent = 'Geleert';
+    });
+  }
+
+  wireSnap();
+  renderMine();
+  syncHideBtn();
+  updateKpi();
+})();
+</script>
 </body>
 </html>
