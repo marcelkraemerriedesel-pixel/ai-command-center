@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
-<meta name="mcc-build" content="2026-10-27T17:45+01:00" />
+<meta name="mcc-build" content="2026-10-27T17:57+01:00" />
 <title>Marcel · AI Command Center</title>
 <style>
   :root {
@@ -482,9 +482,78 @@
     background: var(--bg-raise); color: var(--text); font: inherit;
     padding: 10px 12px;
   }
+
+  body.locked .app { visibility: hidden; }
+  #gate {
+    position: fixed; inset: 0; z-index: 1000;
+    display: none;
+    align-items: center; justify-content: center;
+    padding: 24px;
+    background:
+      radial-gradient(1200px 600px at 20% -10%, rgba(255,90,110,0.12), transparent 55%),
+      radial-gradient(900px 500px at 90% 110%, rgba(142,200,255,0.10), transparent 50%),
+      var(--bg);
+  }
+  body.locked #gate { display: flex; }
+  .gate-card {
+    width: min(400px, 100%);
+    padding: 28px 26px 22px;
+    border-radius: 16px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    box-shadow: 0 24px 80px rgba(0,0,0,0.45);
+  }
+  .gate-card .mark { margin-bottom: 18px; }
+  .gate-card h1 {
+    margin: 0 0 6px; font-size: 18px; font-weight: 620; letter-spacing: -0.03em;
+  }
+  .gate-card p {
+    margin: 0 0 18px; color: var(--muted); font-size: 13px; line-height: 1.45;
+  }
+  .gate-card form { display: grid; gap: 10px; }
+  .gate-card input[type=password] {
+    width: 100%; height: 44px; border-radius: 10px;
+    border: 1px solid var(--line-strong);
+    background: var(--bg-raise); color: var(--text);
+    font: inherit; padding: 0 14px; font-size: 15px;
+  }
+  .gate-card input[type=password]:focus {
+    outline: none; border-color: rgba(142,200,255,0.55);
+  }
+  .gate-card button[type=submit] {
+    height: 44px; border-radius: 10px; border: 0;
+    background: #fff; color: #111; font: inherit;
+    font-weight: 600; font-size: 14px; cursor: pointer;
+  }
+  .gate-card button[type=submit]:hover { background: #e8e8ea; }
+  .gate-err {
+    min-height: 18px; margin: 2px 0 0;
+    color: var(--danger); font-size: 12.5px;
+  }
+  .gate-note { margin-top: 14px; color: var(--faint); font-size: 11.5px; line-height: 1.4; }
+  .logout-btn {
+    margin-left: 8px; height: 26px; padding: 0 9px; border-radius: 7px;
+    border: 1px solid var(--line); background: transparent;
+    color: var(--faint); font-size: 12px; cursor: pointer;
+  }
+  .logout-btn:hover { color: #fff; border-color: var(--line-strong); }
 </style>
 </head>
-<body>
+<body class="locked">
+
+  <div id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+    <div class="gate-card">
+      <div class="mark"><strong>Command</strong><span>Marcel</span></div>
+      <h1 id="gate-title">Zugang</h1>
+      <p>Passwort eingeben, um das Command Center zu öffnen.</p>
+      <form id="gate-form" autocomplete="current-password">
+        <input type="password" id="gate-pass" name="password" placeholder="Passwort" required autofocus />
+        <button type="submit">Entsperren</button>
+        <div class="gate-err" id="gate-err" aria-live="polite"></div>
+      </form>
+      <p class="gate-note">Schutz gegen zufällige Besucher. Bei Verlust: in Cursor „Passwort reset“ sagen.</p>
+    </div>
+  </div>
   <div class="app">
     <header class="top">
       <div class="mark"><strong>Command</strong><span>Marcel</span></div>
@@ -498,7 +567,8 @@
         <span class="chip"><i></i>Miro</span>
         <span class="chip"><i></i>Cursor</span>
       </nav>
-      <time class="stamp">27 Okt 2026 · 17:45 Berlin</time>
+      <time class="stamp">27 Okt 2026 · 17:57 Berlin</time>
+      <button type="button" class="logout-btn" id="btn-logout" title="Sitzung beenden">Abmelden</button>
     </header>
 
     <p class="notice">Todos, Fokus-Mails und Notizen bleiben in <strong>diesem Browser</strong> gespeichert (localStorage), auch nach dem nächsten Snapshot-Refresh. Offene Mails bleiben stehen, bis du sie abhakst. Kategorie <strong style="color:#ff5a6e">WICHTIG</strong> = rot.</p>
@@ -937,12 +1007,67 @@
     </section>
 
     <footer class="note">
-      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 27 Okt 2026 · 17:45 Berlin.
-      Todos/Notizen: localStorage dieses Browsers (Mac Safari/Chrome getrennt). Für Sync über Geräte später erweiterbar.
+      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 27 Okt 2026 · 17:57 Berlin.
+      Todos/Notizen/Mails: localStorage. Zugang: Passwort-Gate (Client-seitig, Sitzung pro Tab).
       Live: <a href="https://marcelkraemerriedesel-pixel.github.io/ai-command-center/" target="_blank" rel="noopener">marcelkraemerriedesel-pixel.github.io/ai-command-center</a>
     </footer>
   </div>
 
+
+
+<script>
+(function () {
+  var KEY_AUTH = 'mcc:v1:auth';
+  var PASS_HASH = '5a0fc06b79909105160327f3e4413decea6322f448b568558dc4acba72258338';
+
+  function toHex(buf) {
+    return Array.from(new Uint8Array(buf)).map(function (b) {
+      return b.toString(16).padStart(2, '0');
+    }).join('');
+  }
+  function sha256(text) {
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)).then(toHex);
+  }
+  function unlock() {
+    document.body.classList.remove('locked');
+    var err = document.getElementById('gate-err');
+    if (err) err.textContent = '';
+    var input = document.getElementById('gate-pass');
+    if (input) input.value = '';
+  }
+  function lock() {
+    try { sessionStorage.removeItem(KEY_AUTH); } catch (e) {}
+    document.body.classList.add('locked');
+    var input = document.getElementById('gate-pass');
+    if (input) setTimeout(function () { input.focus(); }, 50);
+  }
+
+  try {
+    if (sessionStorage.getItem(KEY_AUTH) === PASS_HASH.slice(0, 16)) unlock();
+  } catch (e) {}
+
+  var form = document.getElementById('gate-form');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var pass = (document.getElementById('gate-pass').value || '');
+      var err = document.getElementById('gate-err');
+      sha256(pass).then(function (h) {
+        if (h === PASS_HASH) {
+          try { sessionStorage.setItem(KEY_AUTH, PASS_HASH.slice(0, 16)); } catch (e) {}
+          unlock();
+        } else if (err) {
+          err.textContent = 'Falsches Passwort.';
+        }
+      }).catch(function () {
+        if (err) err.textContent = 'Entsperren nicht möglich in diesem Browser.';
+      });
+    });
+  }
+  var btnOut = document.getElementById('btn-logout');
+  if (btnOut) btnOut.addEventListener('click', lock);
+})();
+</script>
 
 <script>
 (function () {
