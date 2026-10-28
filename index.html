@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
-<meta name="mcc-build" content="2026-10-28T09:32+01:00" />
+<meta name="mcc-build" content="2026-10-28T09:50+01:00" />
 <title>Marcel · AI Command Center</title>
 <style>
   :root {
@@ -550,13 +550,18 @@
   }
   .today-list { list-style: none; margin: 0; padding: 0 0 6px; }
   .today-list li {
-    display: grid; grid-template-columns: 64px 1fr auto; gap: 10px;
+    display: grid; grid-template-columns: minmax(9.5rem, max-content) minmax(0, 1fr) auto; gap: 10px 12px;
     padding: 10px 0; border-top: 1px solid var(--line);
     font-size: 13.5px; align-items: center;
   }
   .today-list li:first-child { border-top: 0; }
-  .today-list .when { font-size: 12px; }
-  .today-list a.join { height: 24px; padding: 0 8px; }
+  .today-list .when {
+    font-size: 12px; white-space: nowrap; color: var(--muted);
+  }
+  .today-list li > span:nth-child(2) {
+    min-width: 0; overflow-wrap: anywhere;
+  }
+  .today-list a.join { height: 24px; padding: 0 8px; justify-self: end; }
   .today-stack { display: grid; gap: 8px; padding-bottom: 8px; }
   .today-item {
     display: flex; gap: 10px; align-items: flex-start;
@@ -650,7 +655,7 @@
         <span class="chip"><i></i>Miro</span>
         <span class="chip"><i></i>Cursor</span>
       </nav>
-      <time class="stamp">28 Okt 2026 · 09:32 Berlin</time>
+      <time class="stamp">28 Okt 2026 · 09:50 Berlin</time>
       <button type="button" class="logout-btn" id="btn-logout" title="Sitzung beenden">Abmelden</button>
     </header>
 
@@ -1205,7 +1210,7 @@
     </section>
 
     <footer class="note">
-      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 28 Okt 2026 · 09:32 Berlin.
+      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 28 Okt 2026 · 09:50 Berlin.
       Todos/Notizen/Mails: localStorage. Zugang: Passwort-Gate (Client-seitig, Sitzung pro Tab).
       Live: <a href="https://marcelkraemerriedesel-pixel.github.io/ai-command-center/" target="_blank" rel="noopener">marcelkraemerriedesel-pixel.github.io/ai-command-center</a>
     </footer>
@@ -1307,7 +1312,7 @@
     } catch (e) { return fallback; }
   }
   function save(key, val) {
-    localStorage.setItem(key, JSON.stringify(val));
+    try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
   }
   function uid() {
     return 'm:' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
@@ -1378,7 +1383,6 @@
     });
     var el = document.getElementById('kpi-open');
     if (el) el.textContent = String(open);
-    if (typeof renderToday === 'function') renderToday();
   }
 
   function applyDone(li) {
@@ -1693,6 +1697,7 @@
   var scratch = document.getElementById('scratch');
   var notesStatus = document.getElementById('notes-status');
   var notesTimer;
+  var PAD_LABELS = { parkplatz: 'Parkplatz', kunden: 'Kunden', ideen: 'Ideen' };
   renderPads();
   if (scratch) {
     scratch.addEventListener('input', function () {
@@ -1835,16 +1840,17 @@
     var kpi = document.getElementById('kpi-open'); if (kpi) kpi.textContent = String(openTodos);
   }
 
-  var PAD_LABELS = { parkplatz: 'Parkplatz', kunden: 'Kunden', ideen: 'Ideen' };
   function renderPads() {
     var host = document.getElementById('note-pads');
     var scratch = document.getElementById('scratch');
     if (!host || !scratch) return;
+    if (!notePads || typeof notePads !== 'object') notePads = { parkplatz: '', kunden: '', ideen: '' };
+    if (!padActive) padActive = 'parkplatz';
     host.innerHTML = '';
     Object.keys(notePads).forEach(function (id) {
       var b = document.createElement('button');
       b.type = 'button';
-      b.textContent = PAD_LABELS[id] || id;
+      b.textContent = (PAD_LABELS && PAD_LABELS[id]) || id;
       if (id === padActive) b.className = 'active';
       b.addEventListener('click', function () {
         notePads[padActive] = scratch.value;
