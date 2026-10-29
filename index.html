@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
-<meta name="mcc-build" content="2026-10-29T10:05+01:00" />
+<meta name="mcc-build" content="2026-10-29T10:20+01:00" />
 <title>Marcel · AI Command Center</title>
 <style>
   :root {
@@ -731,6 +731,86 @@
     }
   }
 
+
+  /* board v2 */
+  #todos-panel { margin-bottom: 10px; }
+  #todos-panel .todo-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; margin-bottom: 12px;
+  }
+  #todos-panel .todo-head .tools { flex-wrap: nowrap; }
+  #todos-panel .todo-add {
+    grid-template-columns: 150px 130px minmax(0, 1fr) auto;
+    margin: 0 0 10px;
+  }
+  .todo-board {
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 12px;
+    align-items: stretch;
+  }
+  .todo-col { min-height: 240px; }
+  .todo-board ul.todo-col-list {
+    display: flex !important;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 640px;
+    overflow: auto;
+  }
+  .todo-board li.todo { position: relative; }
+  .todo-board ul.actions li.todo label {
+    display: grid;
+    grid-template-columns: 16px minmax(0, 1fr);
+    gap: 8px;
+    padding: 10px 10px 2px;
+    align-items: start;
+  }
+  .todo-board ul.actions li.todo label > span,
+  .todo-board .todo-text {
+    display: block !important;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--text);
+  }
+  .todo-board .todo-chips { display: none !important; }
+  .todo-board .todo-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 1 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 6px 8px 8px;
+    margin: 0;
+  }
+  .todo-board .todo-row-cat {
+    height: 28px;
+    flex: 1 1 0;
+    min-width: 0;
+    font-size: 11.5px;
+    padding: 0 6px;
+  }
+  .todo-board .pin-btn { flex: 0 0 auto; width: 28px; height: 28px; }
+  .todo-board li .del,
+  .todo-board ul.actions.mine li .del {
+    position: static !important;
+    float: none !important;
+    width: 28px; height: 28px;
+    border-radius: 7px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--faint);
+    flex: 0 0 auto;
+  }
+  .todo-board li .del:hover { color: var(--danger); border-color: var(--danger); }
+  @media (max-width: 1100px) {
+    .todo-board { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  }
+  @media (max-width: 720px) {
+    .todo-board { grid-template-columns: 1fr !important; }
+    #todos-panel .todo-head { flex-wrap: wrap; }
+    #todos-panel .todo-add { grid-template-columns: 1fr 1fr; }
+  }
 </style>
 </head>
 <body class="locked">
@@ -761,7 +841,7 @@
         <span class="chip"><i></i>Miro</span>
         <span class="chip"><i></i>Cursor</span>
       </nav>
-      <time class="stamp">29 Okt 2026 · 10:05 Berlin</time>
+      <time class="stamp">29 Okt 2026 · 10:20 Berlin</time>
       <button type="button" class="logout-btn" id="btn-logout" title="Sitzung beenden">Abmelden</button>
     </header>
 
@@ -776,7 +856,7 @@
 
     <section class="panel stack">
       <h2>Jira workload</h2>
-      <p class="sub">assignee = currentUser(), unresolved · 18 von 18 · letzter Abruf 29 Okt 2026 · 10:05 Berlin</p>
+      <p class="sub">assignee = currentUser(), unresolved · 18 von 18 · letzter Abruf 29 Okt 2026 · 10:20 Berlin</p>
       <div class="bar" aria-hidden="true"><i class="ip"></i><i class="pr"></i><i class="bl"></i><i class="bk"></i></div>
       <div class="legend">
         <span><i class="l-ip"></i>In Progress 9</span>
@@ -811,8 +891,7 @@
       </section>
     </section>
 
-    <div class="split">
-      <section class="panel">
+    <section class="panel">
                 <h2>Nächste Termine</h2>
         <p class="sub">Google Calendar · 29 Okt – 2 Nov · Mittagsblöcke ausgeblendet · SF Planning abgesagt</p>
         <table>
@@ -880,8 +959,8 @@
             <section class="panel" id="todos-panel">
         <div class="todo-head">
           <div>
-            <h2>Todos · nach Kunde</h2>
-            <p class="sub" style="margin-bottom:0">Eine Spalte pro Kunde · Snapshot + Meeting-Todos + eigene · lokal</p>
+            <h2>Todos</h2>
+            <p class="sub" style="margin-bottom:0">Eine Spalte pro Kunde · bleibt lokal, bis abgehakt</p>
           </div>
           <div class="tools">
             <span class="persist-chip">lokal gespeichert</span>
@@ -1055,8 +1134,6 @@
         </ul>
         <ul class="actions mine board-source" id="mine-todos"></ul>
       </section>
-
-    </div>
 
     <section class="panel stack" id="jira-panel">
       <h2>Offene Jira-Arbeit</h2>
@@ -1253,7 +1330,7 @@
 
         <section class="panel">
           <h2>Confluence · frisch</h2>
-                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 29 Okt 2026 · 10:05 Berlin</p>
+                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 29 Okt 2026 · 10:20 Berlin</p>
           <table>
             <thead><tr><th>Space</th><th>Seite</th><th></th></tr></thead>
             <tbody>
@@ -1344,7 +1421,7 @@
     </section>
 
     <footer class="note">
-      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 29 Okt 2026 · 10:05 Berlin.
+      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 29 Okt 2026 · 10:20 Berlin.
       Todos/Notizen/Mails: localStorage. Zugang: Passwort-Gate (Client-seitig, Sitzung pro Tab).
       Live: <a href="https://marcelkraemerriedesel-pixel.github.io/ai-command-center/" target="_blank" rel="noopener">marcelkraemerriedesel-pixel.github.io/ai-command-center</a>
     </footer>
@@ -1456,7 +1533,8 @@
   var mine = load(KEY_MINE, []);
   var catOverride = load(KEY_CATS, {});
   var hideDone = !!load(KEY_HIDE, false);
-  var filter = load(KEY_FILTER, 'all') || 'all';
+  var filter = 'all';
+  try { localStorage.setItem(KEY_FILTER, JSON.stringify('all')); } catch (e) {}
   var miroPins = load(KEY_MIRO, []);
   if (!Array.isArray(miroPins)) miroPins = [];
   var mailOpen = load(KEY_MAIL_OPEN, []);
@@ -1592,7 +1670,7 @@
   }
 
   function ensureDuePill(li) {
-    if (li.querySelector('.due-pill')) return;
+    if (li.querySelector('.todo-text') || li.querySelector('.due-pill')) return;
     var due = li.getAttribute('data-due') || '';
     if (!due) return;
     var chips = li.querySelector('.todo-chips');
@@ -1704,7 +1782,7 @@
   function updateKpi() {
     var open = 0;
     var seen = {};
-    document.querySelectorAll('#todo-board li.todo, #snap-todos li.todo, #mine-todos li.todo').forEach(function (li) {
+    document.querySelectorAll('#todo-board li.todo').forEach(function (li) {
       var id = li.getAttribute('data-id') || '';
       if (seen[id]) return;
       seen[id] = 1;
@@ -1727,12 +1805,10 @@
   }
 
   function applyFilter() {
+    // Columns are the categories. A saved chip filter must not hide whole customers.
+    filter = 'all';
     document.querySelectorAll('#todo-board li.todo, #snap-todos li.todo, #mine-todos li.todo').forEach(function (li) {
-      var cat = li.getAttribute('data-cat') || 'sonstiges';
-      li.hidden = !(filter === 'all' || cat === filter);
-    });
-    document.querySelectorAll('#cat-filters button').forEach(function (btn) {
-      btn.classList.toggle('active', btn.getAttribute('data-cat') === filter);
+      li.hidden = false;
     });
     layoutTodoBoard();
     updateKpi();
@@ -1826,32 +1902,17 @@
       var box = document.createElement('input');
       box.type = 'checkbox';
       var span = document.createElement('span');
+      span.className = 'todo-text';
+      span.textContent = item.text;
+      label.appendChild(box);
+      label.appendChild(span);
       var pin = document.createElement('button');
       pin.type = 'button'; pin.className = 'pin-btn' + (item.pinned ? ' on' : '');
       pin.textContent = item.pinned ? '★' : '☆'; pin.title = 'Pin';
-      var chips = document.createElement('span');
-      chips.className = 'todo-chips';
-      chips.appendChild(pin);
-      if (item.src === 'meeting' || item.src === 'snap' || item.src === 'mail' || item.src === 'slack' || item.src === 'jira') {
-        var src = document.createElement('span'); src.className = 'src-pill';
-        src.textContent = item.src === 'meeting' ? 'Meeting' : (item.src === 'mail' ? 'Mail' : (item.src === 'slack' ? 'Slack' : (item.src === 'jira' ? 'Jira' : 'Snap')));
-        chips.appendChild(src);
-      }
       var due = document.createElement('span');
       due.className = 'due-pill ' + (item.due || '');
-      due.textContent = item.due === 'heute' ? 'Heute' : (item.due === 'woche' ? 'Woche' : 'Später');
-      chips.appendChild(due);
       var pill = document.createElement('span');
       pill.className = 'cat-pill c-' + (item.cat || 'sonstiges');
-      pill.textContent = catLabel(item.cat);
-      chips.appendChild(pill);
-      span.appendChild(chips);
-      var txt = document.createElement('span');
-      txt.className = 'todo-text';
-      txt.textContent = item.text;
-      span.appendChild(txt);
-      label.appendChild(box);
-      label.appendChild(span);
       var del = document.createElement('button');
       del.type = 'button';
       del.className = 'del';
@@ -1867,10 +1928,11 @@
         if (c.id === (item.cat || 'sonstiges')) o.selected = true;
         sel.appendChild(o);
       });
+      meta.appendChild(pin);
       meta.appendChild(sel);
+      meta.appendChild(del);
       li.appendChild(label);
       li.appendChild(meta);
-      li.appendChild(del);
       ul.appendChild(li);
       applyDone(li);
       box.addEventListener('change', function () {
@@ -1905,12 +1967,12 @@
         if (p[0] === (item.due || 'woche')) o.selected = true;
         dueSel.appendChild(o);
       });
-      meta.appendChild(dueSel);
+      meta.insertBefore(dueSel, del);
       dueSel.addEventListener('change', function () {
         item.due = dueSel.value; li.setAttribute('data-due', dueSel.value);
         due.className = 'due-pill ' + dueSel.value;
         due.textContent = dueSel.value === 'heute' ? 'Heute' : (dueSel.value === 'woche' ? 'Woche' : 'Später');
-        save(KEY_MINE, mine); renderToday();
+        save(KEY_MINE, mine); applyDueFilter(); updateKpi(); renderToday();
       });
       del.addEventListener('click', function (e) {
         e.preventDefault();
