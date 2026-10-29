@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
-<meta name="mcc-build" content="2026-10-29T10:55+01:00" />
+<meta name="mcc-build" content="2026-10-29T14:34+01:00" />
 <title>Marcel · AI Command Center</title>
 <style>
   :root {
@@ -850,7 +850,7 @@
         <span class="chip"><i></i>Miro</span>
         <span class="chip"><i></i>Cursor</span>
       </nav>
-      <time class="stamp">29 Okt 2026 · 10:55 Berlin</time>
+      <time class="stamp">29 Okt 2026 · 14:34 Berlin</time>
       <button type="button" class="logout-btn" id="btn-logout" title="Sitzung beenden">Abmelden</button>
     </header>
 
@@ -865,7 +865,7 @@
 
     <section class="panel stack">
       <h2>Jira workload</h2>
-      <p class="sub">assignee = currentUser(), unresolved · 18 von 18 · letzter Abruf 29 Okt 2026 · 10:55 Berlin</p>
+      <p class="sub">assignee = currentUser(), unresolved · 18 von 18 · letzter Abruf 29 Okt 2026 · 14:34 Berlin</p>
       <div class="bar" aria-hidden="true"><i class="ip"></i><i class="pr"></i><i class="bl"></i><i class="bk"></i></div>
       <div class="legend">
         <span><i class="l-ip"></i>In Progress 9</span>
@@ -879,8 +879,7 @@
       <section class="panel">
         <h2>Heute <em>Nächste Termine</em></h2>
         <ul class="today-list" id="today-cal">
-          <li><span class="when">Do 29 Okt · ganztägig</span><span>Wüstenrot Onsite</span></li>
-          <li><span class="when">Do 29 Okt · 10:00</span><span>Enterprise Planning</span><a class="join" href="https://meet.google.com/tde-sqzy-tyd" target="_blank" rel="noopener">Join</a></li>
+          <li><span class="when">Do 29 Okt · 06:00</span><span>Wüstenrot Onsite</span></li>
           <li><span class="when">Do 29 Okt · 11:00</span><span>Workshop Meine Wohnwelt</span></li>
         </ul>
       </section>
@@ -896,13 +895,13 @@
           <div class="focus-stat danger"><b id="stat-jira-bl">–</b><span>Blocked Jira</span></div>
           <div class="focus-stat"><b id="stat-jira-open">–</b><span>Offene Jira</span></div>
         </div>
-        <p class="sub" id="today-hint">Onsite Wüstenrot · Enterprise Planning 10:00 · Workshop Wohnwelt 11–15 · Fr: AZ CIAM 11:05 · Mo: Wüstenrot Standup 09:00.</p>
+        <p class="sub" id="today-hint">Onsite Wüstenrot bis 18:30 · Workshop Wohnwelt bis 15:00 · Fr: AZ CIAM 11:05 · Mo: Wüstenrot Standup 09:00.</p>
       </section>
     </section>
 
     <section class="panel">
                 <h2>Nächste Termine</h2>
-        <p class="sub">Google Calendar · 29 Okt – 2 Nov · Mittagsblöcke ausgeblendet · SF Planning abgesagt</p>
+        <p class="sub">Google Calendar · 29 Okt – 3 Nov · Mittagsblöcke ausgeblendet · Enterprise Planning abgesagt · SF Planning abgesagt</p>
         <table>
           <thead><tr><th>Wann</th><th>Termin</th><th></th></tr></thead>
           <tbody>
@@ -910,11 +909,6 @@
               <td class="when">Do 29 Okt · 06:00</td>
               <td>Wüstenrot Onsite</td>
               <td></td>
-            </tr>
-            <tr>
-              <td class="when">Do 29 Okt · 10:00</td>
-              <td>Enterprise Planning</td>
-              <td><a class="join" href="https://meet.google.com/tde-sqzy-tyd" target="_blank" rel="noopener">Join</a></td>
             </tr>
             <tr>
               <td class="when">Do 29 Okt · 11:00</td>
@@ -960,6 +954,26 @@
               <td class="when">Mo 2 Nov · 16:00</td>
               <td>Product Weekly</td>
               <td><a class="join" href="https://meet.google.com/uca-sqgo-upb" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+            <tr>
+              <td class="when">Di 3 Nov · 10:30</td>
+              <td>Strenger Standup/Daily</td>
+              <td><a class="join" href="https://meet.google.com/hxh-viud-irh" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+            <tr>
+              <td class="when">Di 3 Nov · 11:30</td>
+              <td>PH × Wüstenrot</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="when">Di 3 Nov · 14:00</td>
+              <td>Weekly Sync SC DACH</td>
+              <td><a class="join" href="https://meet.google.com/dxj-ynte-fhy" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+            <tr>
+              <td class="when">Di 3 Nov · 16:30</td>
+              <td>SF × SmartApps PM</td>
+              <td><a class="join" href="https://meet.google.com/qht-ztrp-fvr" target="_blank" rel="noopener">Join</a></td>
             </tr>
           </tbody>
         </table>
@@ -1155,6 +1169,12 @@
       <table class="jira-table">
         <thead><tr><th></th><th>Key</th><th>Status</th><th>Summary</th></tr></thead>
         <tbody>
+                    <tr class="jira-row" data-id="j:SLF-1710" data-key="SLF-1710" data-summary="CTA-to-agent · opening message pre-fill" data-status-class="">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-1710 erledigt" /></td>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1710" target="_blank" rel="noopener">SLF-1710</a></td>
+            <td><span class="status">Backlog</span></td>
+            <td>CTA-to-agent · opening message pre-fill</td>
+          </tr>
                     <tr class="jira-row" data-id="j:SLF-1932" data-key="SLF-1932" data-summary="Strenger · scatter charts etc" data-status-class="ip">
             <td><input class="jira-check" type="checkbox" aria-label="SLF-1932 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1932" target="_blank" rel="noopener">SLF-1932</a></td>
@@ -1239,12 +1259,6 @@
             <td><span class="status bl">Blocked externally</span></td>
             <td>Deutsche Bank · ownership portal</td>
           </tr>
-                    <tr class="jira-row" data-id="j:SLF-1710" data-key="SLF-1710" data-summary="CTA-to-agent · opening message pre-fill" data-status-class="">
-            <td><input class="jira-check" type="checkbox" aria-label="SLF-1710 erledigt" /></td>
-            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1710" target="_blank" rel="noopener">SLF-1710</a></td>
-            <td><span class="status">Backlog</span></td>
-            <td>CTA-to-agent · opening message pre-fill</td>
-          </tr>
                     <tr class="jira-row" data-id="j:SLF-1709" data-key="SLF-1709" data-summary="CRM handoff for agent-sourced leads" data-status-class="">
             <td><input class="jira-check" type="checkbox" aria-label="SLF-1709 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1709" target="_blank" rel="noopener">SLF-1709</a></td>
@@ -1277,13 +1291,21 @@
           <button type="button" id="btn-mail-clear-done">Erledigte Mails löschen</button>
         </div>
         <div class="mail" id="mail-list">
-          <article class="mail-item" data-id="e:1a1868684508307a" data-title="Mittagessen Onsite" data-meta="Anja · heute 08:18" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1868684508307a">
+          <article class="mail-item" data-id="e:1a18749cc08ef0bd" data-title="Immo-Dealfinder · Input" data-meta="Sandra · heute 11:51" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a18749cc08ef0bd">
             <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
             <div class="mail-body">
-              <h3>Mittagessen Onsite</h3>
-              <p>Anja · heute 08:18</p>
+              <h3>Immo-Dealfinder · Input</h3>
+              <p>Sandra · heute 11:51</p>
             </div>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1868684508307a" target="_blank" rel="noopener">In Gmail öffnen</a>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a18749cc08ef0bd" target="_blank" rel="noopener">In Gmail öffnen</a>
+          </article>
+          <article class="mail-item" data-id="e:1a18726b3ddd1a86" data-title="Unsubscribe · Meine Wohnwelt" data-meta="Ruth · heute 11:13" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a18726b3ddd1a86">
+            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
+            <div class="mail-body">
+              <h3>Unsubscribe · Meine Wohnwelt</h3>
+              <p>Ruth · heute 11:13</p>
+            </div>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a18726b3ddd1a86" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
           <article class="mail-item" data-id="e:1a1858f08ede0659" data-title="Jira fällig · SLF-1932 + SLF-716" data-meta="Jira · heute 03:48" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1858f08ede0659">
             <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
@@ -1309,14 +1331,6 @@
             </div>
             <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a181b6f82199b87" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
-          <article class="mail-item" data-id="e:1a1811ad50a1d5b6" data-title="BambooHR Self-Assessment fällig" data-meta="BambooHR · Mi 28 · 07:03" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1811ad50a1d5b6">
-            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
-            <div class="mail-body">
-              <h3>BambooHR Self-Assessment fällig</h3>
-              <p>BambooHR · Mi 28 · 07:03</p>
-            </div>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1811ad50a1d5b6" target="_blank" rel="noopener">In Gmail öffnen</a>
-          </article>
         </div>
       </section>
 
@@ -1339,7 +1353,7 @@
 
         <section class="panel">
           <h2>Confluence · frisch</h2>
-                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 29 Okt 2026 · 10:55 Berlin</p>
+                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 29 Okt 2026 · 14:34 Berlin</p>
           <table>
             <thead><tr><th>Space</th><th>Seite</th><th></th></tr></thead>
             <tbody>
@@ -1430,7 +1444,7 @@
     </section>
 
     <footer class="note">
-      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 29 Okt 2026 · 10:55 Berlin.
+      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 29 Okt 2026 · 14:34 Berlin.
       Todos/Notizen/Mails: localStorage. Zugang: Passwort-Gate (Client-seitig, Sitzung pro Tab).
       Live: <a href="https://marcelkraemerriedesel-pixel.github.io/ai-command-center/" target="_blank" rel="noopener">marcelkraemerriedesel-pixel.github.io/ai-command-center</a>
     </footer>
