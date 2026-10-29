@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
-<meta name="mcc-build" content="2026-10-29T10:20+01:00" />
+<meta name="mcc-build" content="2026-10-29T10:55+01:00" />
 <title>Marcel · AI Command Center</title>
 <style>
   :root {
@@ -803,6 +803,15 @@
     flex: 0 0 auto;
   }
   .todo-board li .del:hover { color: var(--danger); border-color: var(--danger); }
+  .todo-board .todo-note { display: none; padding: 0 8px 8px; }
+  .todo-board li.todo.done .todo-note { display: block; }
+  .todo-board .todo-note input {
+    width: 100%; height: 30px; border-radius: 7px;
+    border: 1px solid var(--line); background: rgba(0,0,0,0.25);
+    color: var(--text); font: inherit; font-size: 12.5px; padding: 0 8px;
+  }
+  .todo-board .todo-note input:focus { outline: none; border-color: var(--line-strong); }
+  body.hide-done li.todo.done.noting { display: block !important; opacity: 1; }
   @media (max-width: 1100px) {
     .todo-board { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   }
@@ -841,7 +850,7 @@
         <span class="chip"><i></i>Miro</span>
         <span class="chip"><i></i>Cursor</span>
       </nav>
-      <time class="stamp">29 Okt 2026 · 10:20 Berlin</time>
+      <time class="stamp">29 Okt 2026 · 10:55 Berlin</time>
       <button type="button" class="logout-btn" id="btn-logout" title="Sitzung beenden">Abmelden</button>
     </header>
 
@@ -856,7 +865,7 @@
 
     <section class="panel stack">
       <h2>Jira workload</h2>
-      <p class="sub">assignee = currentUser(), unresolved · 18 von 18 · letzter Abruf 29 Okt 2026 · 10:20 Berlin</p>
+      <p class="sub">assignee = currentUser(), unresolved · 18 von 18 · letzter Abruf 29 Okt 2026 · 10:55 Berlin</p>
       <div class="bar" aria-hidden="true"><i class="ip"></i><i class="pr"></i><i class="bl"></i><i class="bk"></i></div>
       <div class="legend">
         <span><i class="l-ip"></i>In Progress 9</span>
@@ -1330,7 +1339,7 @@
 
         <section class="panel">
           <h2>Confluence · frisch</h2>
-                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 29 Okt 2026 · 10:20 Berlin</p>
+                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 29 Okt 2026 · 10:55 Berlin</p>
           <table>
             <thead><tr><th>Space</th><th>Seite</th><th></th></tr></thead>
             <tbody>
@@ -1421,7 +1430,7 @@
     </section>
 
     <footer class="note">
-      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 29 Okt 2026 · 10:20 Berlin.
+      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 29 Okt 2026 · 10:55 Berlin.
       Todos/Notizen/Mails: localStorage. Zugang: Passwort-Gate (Client-seitig, Sitzung pro Tab).
       Live: <a href="https://marcelkraemerriedesel-pixel.github.io/ai-command-center/" target="_blank" rel="noopener">marcelkraemerriedesel-pixel.github.io/ai-command-center</a>
     </footer>
@@ -1796,12 +1805,76 @@
     if (el) el.textContent = String(open);
   }
 
+  function doneRecord(id) {
+    var v = done[id];
+    if (!v) return null;
+    if (typeof v === 'object') return { at: v.at || Date.now(), note: v.note || '' };
+    return { at: v, note: '' };
+  }
+
+  function paintDoneNote(li) {
+    var id = li.getAttribute('data-id');
+    var slot = li.querySelector('.todo-note');
+    if (!slot) {
+      slot = document.createElement('div');
+      slot.className = 'todo-note';
+      var input = document.createElement('input');
+      input.type = 'text';
+      input.maxLength = 180;
+      input.placeholder = 'Kurznotiz zur Erledigung…';
+      input.setAttribute('aria-label', 'Notiz zur Erledigung');
+      slot.appendChild(input);
+      li.appendChild(slot);
+      input.addEventListener('mousedown', function (e) { e.stopPropagation(); });
+      input.addEventListener('click', function (e) { e.stopPropagation(); });
+      input.addEventListener('input', function () {
+        var rec = doneRecord(id);
+        if (!rec) return;
+        done[id] = { at: rec.at, note: input.value.slice(0, 180) };
+        save(KEY_DONE, done);
+      });
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); input.blur(); }
+      });
+      input.addEventListener('blur', function () {
+        if (!li.classList.contains('noting')) return;
+        li.classList.remove('noting');
+        if (hideDone) applyFilter();
+      });
+    }
+    var input = slot.querySelector('input');
+    if (document.activeElement !== input) {
+      var rec = doneRecord(id);
+      input.value = rec ? rec.note : '';
+    }
+  }
+
   function applyDone(li) {
     var id = li.getAttribute('data-id');
     var box = li.querySelector('input[type=checkbox]');
     var isDone = !!done[id];
     li.classList.toggle('done', isDone);
     if (box) box.checked = isDone;
+    paintDoneNote(li);
+  }
+
+  function commitDone(li, id, checked) {
+    if (checked) {
+      var prev = doneRecord(id);
+      done[id] = { at: Date.now(), note: prev ? prev.note : '' };
+      li.classList.add('noting');
+    } else {
+      delete done[id];
+      li.classList.remove('noting');
+    }
+    save(KEY_DONE, done);
+    applyDone(li);
+    renderFilters();
+    applyFilter();
+    if (checked) {
+      var input = li.querySelector('.todo-note input');
+      if (input) setTimeout(function () { input.focus(); }, 30);
+    }
   }
 
   function applyFilter() {
@@ -1856,12 +1929,7 @@
       if (box && !box._wired) {
         box._wired = true;
         box.addEventListener('change', function () {
-          if (box.checked) done[id] = Date.now();
-          else delete done[id];
-          save(KEY_DONE, done);
-          applyDone(li);
-          renderFilters();
-          applyFilter();
+          commitDone(li, id, box.checked);
         });
       }
       var sel = li.querySelector('select.todo-row-cat');
@@ -1936,12 +2004,7 @@
       ul.appendChild(li);
       applyDone(li);
       box.addEventListener('change', function () {
-        if (box.checked) done[item.id] = Date.now();
-        else delete done[item.id];
-        save(KEY_DONE, done);
-        applyDone(li);
-        renderFilters();
-        applyFilter();
+        commitDone(li, item.id, box.checked);
       });
       sel.addEventListener('change', function () {
         item.cat = sel.value;
