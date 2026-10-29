@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
-<meta name="mcc-build" content="2026-10-29T09:08+01:00" />
+<meta name="mcc-build" content="2026-10-29T10:05+01:00" />
 <title>Marcel · AI Command Center</title>
 <style>
   :root {
@@ -36,7 +36,7 @@
   a { color: inherit; text-decoration: none; }
   a:hover { color: #fff; }
   .app {
-    max-width: 1120px;
+    max-width: 1380px;
     margin: 0 auto;
     padding: 22px 22px 72px;
   }
@@ -625,6 +625,112 @@
   .note-pads button.active { color: #fff; border-color: var(--line-strong); background: #1c1c22; }
   .note-pads .add-pad { border-style: dashed; color: var(--faint); }
 
+
+  .todo-board ul.actions li.todo label span {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+  }
+  .todo-board .todo-chips {
+    display: flex; flex-wrap: wrap; gap: 5px; align-items: center;
+  }
+  .todo-board .todo-text {
+    display: block; font-size: 12.5px; line-height: 1.4; color: var(--text);
+  }
+  .todo-board li.todo.done .todo-text { color: var(--faint); text-decoration: line-through; }
+
+  /* —— Todo board (Spalte pro Kunde) —— */
+  #todos-panel { padding-bottom: 14px; }
+  #todos-panel > .todo-head h2 { font-size: 15px; }
+  .todo-toolbar {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    margin: 8px 0 10px;
+  }
+  .todo-toolbar .todo-search {
+    flex: 1 1 220px; margin: 0; min-width: 180px;
+  }
+  .due-filters { display: flex; flex-wrap: wrap; gap: 6px; }
+  .due-filters button {
+    height: 26px; padding: 0 10px; border-radius: 7px;
+    border: 1px solid var(--line); background: var(--bg-raise);
+    color: var(--muted); font-size: 12px; cursor: pointer;
+  }
+  .due-filters button.active {
+    color: #fff; border-color: var(--line-strong); background: #1c1c22;
+  }
+  .due-filters button[data-due="heute"].active {
+    color: #ffd0d6; background: rgba(255,90,110,0.18); border-color: rgba(255,122,144,0.45);
+  }
+  .todo-board {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(220px, 1fr));
+    gap: 10px; margin-top: 4px; align-items: start;
+  }
+  .todo-col {
+    background: var(--bg-raise); border: 1px solid var(--line);
+    border-radius: 12px; min-height: 180px;
+    display: flex; flex-direction: column; min-width: 0;
+  }
+  .todo-col[data-col="wichtig"] {
+    border-color: rgba(255,90,110,0.35);
+    background: linear-gradient(180deg, rgba(255,70,90,0.10), rgba(18,18,22,0.4) 48px);
+  }
+  .todo-col-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; padding: 12px 12px 8px; border-bottom: 1px solid var(--line);
+  }
+  .todo-col-head h3 { margin: 0; font-size: 12.5px; font-weight: 650; letter-spacing: 0.01em; }
+  .todo-col-head .count {
+    font-size: 11px; font-variant-numeric: tabular-nums; color: var(--faint);
+    background: rgba(255,255,255,0.05); border-radius: 99px; padding: 2px 7px;
+  }
+  .todo-col[data-col="wichtig"] .todo-col-head h3 { color: #ff7a90; }
+  .todo-col[data-col="wuestenrot"] .todo-col-head h3 { color: var(--live); }
+  .todo-col[data-col="allianz"] .todo-col-head h3 { color: var(--danger); }
+  .todo-col[data-col="strenger"] .todo-col-head h3 { color: var(--warn); }
+  .todo-col[data-col="andere"] .todo-col-head h3 { color: var(--info); }
+  ul.todo-col-list {
+    list-style: none; margin: 0; padding: 8px;
+    display: flex; flex-direction: column; gap: 7px; flex: 1;
+  }
+  ul.todo-col-list:empty::after {
+    content: 'Keine offenen'; display: block; padding: 14px 8px;
+    text-align: center; color: var(--faint); font-size: 12px;
+  }
+  .todo-board ul.actions { display: contents; }
+  .todo-board li.todo {
+    display: block; margin: 0; padding: 0; position: relative;
+    border: 1px solid var(--line); border-radius: 10px; background: var(--panel);
+  }
+  .todo-board li.todo.pinned { border-left: 2px solid var(--warn); padding-left: 0; }
+  .todo-board ul.actions li.todo label {
+    display: grid; grid-template-columns: 16px 1fr; gap: 8px;
+    padding: 10px 10px 6px; align-items: start;
+  }
+  .todo-board .todo-meta {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    padding: 0 10px 8px 34px; opacity: 0.55; max-height: 28px; overflow: hidden;
+    transition: opacity .15s ease;
+  }
+  .todo-board li.todo:hover .todo-meta,
+  .todo-board li.todo:focus-within .todo-meta { opacity: 1; max-height: 64px; }
+  .todo-board .todo-row-cat { height: 26px; font-size: 11px; padding: 0 6px; flex: 1 1 90px; min-width: 0; }
+  .todo-board ul.actions.mine li .del { float: none; position: absolute; right: 6px; top: 6px; }
+  .todo-board .cat-pill { display: none; }
+  .todo-board li.todo[data-bucket="andere"] .cat-pill { display: inline-flex; }
+  .todo-board .src-pill, .todo-board .due-pill { font-size: 9.5px; height: 16px; padding: 0 5px; margin-right: 0; }
+  body.todo-due-heute .todo-board li.todo:not([data-due="heute"]) { display: none !important; }
+  body.todo-due-woche .todo-board li.todo:not([data-due="heute"]):not([data-due="woche"]) { display: none !important; }
+  #snap-todos.board-source, #mine-todos.board-source { display: none !important; }
+  .cat-filters { display: none; }
+  @media (max-width: 1100px) {
+    .todo-board { grid-template-columns: repeat(3, minmax(200px, 1fr)); }
+  }
+  @media (max-width: 720px) {
+    .todo-board {
+      grid-template-columns: repeat(5, minmax(240px, 1fr));
+      overflow-x: auto; padding-bottom: 6px;
+    }
+  }
+
 </style>
 </head>
 <body class="locked">
@@ -655,7 +761,7 @@
         <span class="chip"><i></i>Miro</span>
         <span class="chip"><i></i>Cursor</span>
       </nav>
-      <time class="stamp">29 Okt 2026 · 09:08 Berlin</time>
+      <time class="stamp">29 Okt 2026 · 10:05 Berlin</time>
       <button type="button" class="logout-btn" id="btn-logout" title="Sitzung beenden">Abmelden</button>
     </header>
 
@@ -670,7 +776,7 @@
 
     <section class="panel stack">
       <h2>Jira workload</h2>
-      <p class="sub">assignee = currentUser(), unresolved · 18 von 18 · letzter Abruf 29 Okt 2026 · 09:08 Berlin</p>
+      <p class="sub">assignee = currentUser(), unresolved · 18 von 18 · letzter Abruf 29 Okt 2026 · 10:05 Berlin</p>
       <div class="bar" aria-hidden="true"><i class="ip"></i><i class="pr"></i><i class="bl"></i><i class="bk"></i></div>
       <div class="legend">
         <span><i class="l-ip"></i>In Progress 9</span>
@@ -771,11 +877,11 @@
         </table>
       </section>
 
-      <section class="panel" id="todos-panel">
+            <section class="panel" id="todos-panel">
         <div class="todo-head">
           <div>
-            <h2>Todos</h2>
-            <p class="sub" style="margin-bottom:0">Kategorien · bleiben lokal, bis abgehakt</p>
+            <h2>Todos · nach Kunde</h2>
+            <p class="sub" style="margin-bottom:0">Eine Spalte pro Kunde · Snapshot + Meeting-Todos + eigene · lokal</p>
           </div>
           <div class="tools">
             <span class="persist-chip">lokal gespeichert</span>
@@ -783,8 +889,43 @@
             <button type="button" id="btn-clear-done">Erledigte löschen</button>
           </div>
         </div>
-        <div class="cat-filters" id="cat-filters" role="tablist" aria-label="Kategoriefilter"></div>
-        <ul class="actions" id="snap-todos">
+        <form class="todo-add" id="mine-form">
+          <select id="mine-cat" aria-label="Kategorie">
+<option value="wichtig">WICHTIG</option>
+<option value="wuestenrot">Wüstenrot</option>
+<option value="allianz">Allianz</option>
+<option value="strenger">Strenger</option>
+<option value="bavaria">Bavaria Direkt</option>
+<option value="tophypho">TopHypo</option>
+<option value="slf">SLF / Intern</option>
+<option value="nachfassen" selected>Nachfassen</option>
+<option value="sonstiges">Sonstiges</option>
+          </select>
+          <select id="mine-due" aria-label="Fälligkeit">
+<option value="heute">Heute</option>
+<option value="woche" selected>Diese Woche</option>
+<option value="spaeter">Später</option>
+          </select>
+          <input type="text" id="mine-input" placeholder="Neues Todo…" autocomplete="off" maxlength="280" />
+          <button type="submit">Hinzufügen</button>
+        </form>
+        <div class="todo-toolbar">
+          <input type="search" class="todo-search" id="todo-search" placeholder="In allen Spalten suchen…" autocomplete="off" />
+          <div class="due-filters" id="due-filters" role="tablist" aria-label="Fälligkeit">
+            <button type="button" data-due="all" class="active">Alle</button>
+            <button type="button" data-due="heute">Heute</button>
+            <button type="button" data-due="woche">Diese Woche</button>
+          </div>
+        </div>
+        <div class="cat-filters" id="cat-filters" hidden aria-hidden="true"></div>
+        <div class="todo-board" id="todo-board">
+          <div class="todo-col" data-col="wichtig"><div class="todo-col-head"><h3>WICHTIG</h3><span class="count" data-count>0</span></div><ul class="actions todo-col-list" data-col-list="wichtig"></ul></div>
+          <div class="todo-col" data-col="wuestenrot"><div class="todo-col-head"><h3>Wüstenrot</h3><span class="count" data-count>0</span></div><ul class="actions todo-col-list" data-col-list="wuestenrot"></ul></div>
+          <div class="todo-col" data-col="allianz"><div class="todo-col-head"><h3>Allianz</h3><span class="count" data-count>0</span></div><ul class="actions todo-col-list" data-col-list="allianz"></ul></div>
+          <div class="todo-col" data-col="strenger"><div class="todo-col-head"><h3>Strenger</h3><span class="count" data-count>0</span></div><ul class="actions todo-col-list" data-col-list="strenger"></ul></div>
+          <div class="todo-col" data-col="andere"><div class="todo-col-head"><h3>Andere</h3><span class="count" data-count>0</span></div><ul class="actions todo-col-list" data-col-list="andere"></ul></div>
+        </div>
+        <ul class="actions board-source" id="snap-todos">
           <li class="todo" data-id="s:ww-trigger-signal" data-cat="wuestenrot" data-due="heute" data-src="mail"><label><input type="checkbox" /><span>Lead Dashboard: „Trigger“ in „Signal“ umbenennen (Anja)</span></label><div class="todo-meta"><select class="todo-row-cat" aria-label="Kategorie" data-for="s:ww-trigger-signal"><option value="wichtig">WICHTIG</option>
 <option value="wuestenrot" selected>Wüstenrot</option>
 <option value="allianz">Allianz</option>
@@ -912,31 +1053,9 @@
 <option value="nachfassen">Nachfassen</option>
 <option value="sonstiges">Sonstiges</option></select></div></li>
         </ul>
-        <input type="search" class="todo-search" id="todo-search" placeholder="Todos filtern…" autocomplete="off" />
-        <h2 style="margin-top:14px">Meine Todos</h2>
-        <p class="sub">Kategorie · Fälligkeit · Meeting-Todos kommen automatisch</p>
-        <form class="todo-add" id="mine-form">
-          <select id="mine-cat" aria-label="Kategorie">
-<option value="wichtig">WICHTIG</option>
-<option value="wuestenrot">Wüstenrot</option>
-<option value="allianz">Allianz</option>
-<option value="strenger">Strenger</option>
-<option value="bavaria">Bavaria Direkt</option>
-<option value="tophypho">TopHypo</option>
-<option value="slf">SLF / Intern</option>
-<option value="nachfassen" selected>Nachfassen</option>
-<option value="sonstiges">Sonstiges</option>
-          </select>
-          <select id="mine-due" aria-label="Fälligkeit">
-<option value="heute">Heute</option>
-<option value="woche" selected>Diese Woche</option>
-<option value="spaeter">Später</option>
-          </select>
-          <input type="text" id="mine-input" placeholder="Neues Todo…" autocomplete="off" maxlength="280" />
-          <button type="submit">Hinzufügen</button>
-        </form>
-        <ul class="actions mine" id="mine-todos"></ul>
+        <ul class="actions mine board-source" id="mine-todos"></ul>
       </section>
+
     </div>
 
     <section class="panel stack" id="jira-panel">
@@ -1134,7 +1253,7 @@
 
         <section class="panel">
           <h2>Confluence · frisch</h2>
-                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 29 Okt 2026 · 09:08 Berlin</p>
+                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 29 Okt 2026 · 10:05 Berlin</p>
           <table>
             <thead><tr><th>Space</th><th>Seite</th><th></th></tr></thead>
             <tbody>
@@ -1225,7 +1344,7 @@
     </section>
 
     <footer class="note">
-      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 29 Okt 2026 · 09:08 Berlin.
+      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 29 Okt 2026 · 10:05 Berlin.
       Todos/Notizen/Mails: localStorage. Zugang: Passwort-Gate (Client-seitig, Sitzung pro Tab).
       Live: <a href="https://marcelkraemerriedesel-pixel.github.io/ai-command-center/" target="_blank" rel="noopener">marcelkraemerriedesel-pixel.github.io/ai-command-center</a>
     </footer>
@@ -1388,12 +1507,211 @@
     save(KEY_MEETING_INGEST, meetingIngested);
   }
 
+  function ingestSnapTodos() {
+    document.querySelectorAll('#snap-todos li.todo').forEach(function (li) {
+      var id = li.getAttribute('data-id') || '';
+      var key = 'snap:' + id;
+      var span = li.querySelector('label span');
+      var text = span ? span.textContent.trim() : (li.textContent || '').trim();
+      var cat = li.getAttribute('data-cat') || 'sonstiges';
+      var due = li.getAttribute('data-due') || 'woche';
+      var src = li.getAttribute('data-src') || 'snap';
+      if (meetingIngested[key]) { li.remove(); return; }
+      if (id && mine.some(function (x) { return x.id === id; })) {
+        meetingIngested[key] = 1; li.remove(); return;
+      }
+      if (text && mine.some(function (x) { return normTodoText(x.text) === normTodoText(text) || todosOverlap(x.text, text); })) {
+        meetingIngested[key] = 1; li.remove(); return;
+      }
+      if (text) {
+        mine.unshift({
+          id: id || ('sauto:' + Date.now()),
+          text: text, cat: cat, due: due, pinned: false,
+          src: src === 'meeting' ? 'meeting' : (src || 'snap'),
+          created: Date.now()
+        });
+      }
+      meetingIngested[key] = 1;
+      li.remove();
+    });
+    save(KEY_MINE, mine);
+    save(KEY_MEETING_INGEST, meetingIngested);
+  }
+
   function catLabel(id) { return CAT_MAP[id] || id || 'Sonstiges'; }
+
+  var BOARD_COLS = ['wichtig', 'wuestenrot', 'allianz', 'strenger', 'andere'];
+  var dueFilter = 'all';
+  try {
+    var _df = localStorage.getItem('mcc:v1:dueFilter');
+    if (_df) dueFilter = JSON.parse(_df) || 'all';
+  } catch (e) {}
+
+  function boardBucket(cat) {
+    if (cat === 'wichtig' || cat === 'wuestenrot' || cat === 'allianz' || cat === 'strenger') return cat;
+    return 'andere';
+  }
+
+  function normTodoText(t) {
+    return String(t || '').toLowerCase().replace(/\s+/g, ' ').trim();
+  }
+
+  function todoTokens(t) {
+    var stop = 'heute woche später meeting mail slack jira snap mit und oder für von dem den die der das prüfen klären geben machen sollen bitte noch auch dann nach';
+    return normTodoText(t).split(/[^a-zäöüß0-9]+/).filter(function (w) {
+      return w.length >= 4 && stop.indexOf(w) === -1;
+    });
+  }
+
+  function clientHint(t) {
+    var s = normTodoText(t);
+    if (s.indexOf('wüstenrot') !== -1 || s.indexOf('wuestenrot') !== -1 || s.indexOf('mewa') !== -1) return 'wuestenrot';
+    if (s.indexOf('allianz') !== -1) return 'allianz';
+    if (s.indexOf('strenger') !== -1 || s.indexOf('sharon') !== -1 || s.indexOf('sharepoint') !== -1 || s.indexOf('citadel') !== -1) return 'strenger';
+    if (s.indexOf('bavaria') !== -1) return 'bavaria';
+    if (s.indexOf('tophypho') !== -1 || s.indexOf('top hypo') !== -1 || s.indexOf('slf-716') !== -1) return 'tophypho';
+    return '';
+  }
+
+  function todosOverlap(a, b) {
+    var ca = clientHint(a), cb = clientHint(b);
+    if (ca && cb && ca !== cb) return false;
+    var ta = todoTokens(a), tb = todoTokens(b);
+    if (!ta.length || !tb.length) return false;
+    var set = {};
+    tb.forEach(function (w) { set[w] = 1; });
+    var hit = 0;
+    ta.forEach(function (w) { if (set[w]) hit++; });
+    var ratio = hit / Math.min(ta.length, tb.length);
+    var keys = ['unsubscribe', 'mewa', 'sharepoint', 'subdomain', 'miro', 'trigger', 'signal', 'hierarchie', 'citadel', 'localazy', 'stille'];
+    var sharedKey = keys.filter(function (k) {
+      return normTodoText(a).indexOf(k) !== -1 && normTodoText(b).indexOf(k) !== -1;
+    });
+    if (sharedKey.length) return true;
+    return hit >= 3 && ratio >= 0.55;
+  }
+
+  function ensureDuePill(li) {
+    if (li.querySelector('.due-pill')) return;
+    var due = li.getAttribute('data-due') || '';
+    if (!due) return;
+    var chips = li.querySelector('.todo-chips');
+    var host = chips || li.querySelector('label span');
+    if (!host) return;
+    var pill = document.createElement('span');
+    pill.className = 'due-pill ' + due;
+    pill.textContent = due === 'heute' ? 'Heute' : (due === 'woche' ? 'Woche' : 'Später');
+    host.insertBefore(pill, host.firstChild);
+  }
+
+  function layoutTodoBoard() {
+    var board = document.getElementById('todo-board');
+    if (!board) return;
+    var lists = {};
+    BOARD_COLS.forEach(function (c) {
+      var ul = board.querySelector('[data-col-list="' + c + '"]');
+      if (ul) lists[c] = ul;
+    });
+    var items = [];
+    var seen = {};
+    document.querySelectorAll('#todo-board li.todo, #snap-todos li.todo, #mine-todos li.todo').forEach(function (li) {
+      var id = li.getAttribute('data-id') || li.textContent;
+      if (seen[id]) return;
+      seen[id] = 1;
+      items.push(li);
+    });
+    items.sort(function (a, b) {
+      var pa = a.classList.contains('pinned') ? 0 : 1;
+      var pb = b.classList.contains('pinned') ? 0 : 1;
+      if (pa !== pb) return pa - pb;
+      var order = { heute: 0, woche: 1, spaeter: 2 };
+      return (order[a.getAttribute('data-due')] || 9) - (order[b.getAttribute('data-due')] || 9);
+    });
+    var kept = [];
+    items.forEach(function (li) {
+      var t = (li.querySelector('.todo-text') || li.querySelector('label span') || li).textContent || '';
+      var dup = kept.some(function (k) {
+        var kt = (k.querySelector('.todo-text') || k.querySelector('label span') || k).textContent || '';
+        return todosOverlap(kt, t);
+      });
+      if (dup) { li.style.display = 'none'; li.setAttribute('data-dup', '1'); return; }
+      li.removeAttribute('data-dup');
+      li.style.display = '';
+      kept.push(li);
+    });
+    items = kept;
+    var counts = { wichtig: 0, wuestenrot: 0, allianz: 0, strenger: 0, andere: 0 };
+    items.forEach(function (li) {
+      ensureDuePill(li);
+      var cat = li.getAttribute('data-cat') || 'sonstiges';
+      var bucket = boardBucket(cat);
+      li.setAttribute('data-bucket', bucket);
+      if (lists[bucket]) lists[bucket].appendChild(li);
+      if (!li.classList.contains('done') && !li.hidden) counts[bucket]++;
+    });
+    BOARD_COLS.forEach(function (c) {
+      var col = board.querySelector('.todo-col[data-col="' + c + '"]');
+      if (!col) return;
+      var badge = col.querySelector('[data-count]');
+      if (badge) badge.textContent = String(counts[c] || 0);
+      var hasAny = (lists[c] && lists[c].children.length) || 0;
+      col.style.opacity = hasAny ? '1' : '0.55';
+    });
+    applyDueFilter();
+    updateKpi();
+  }
+
+  function applyDueFilter() {
+    document.body.classList.remove('todo-due-heute', 'todo-due-woche');
+    if (dueFilter === 'heute') document.body.classList.add('todo-due-heute');
+    if (dueFilter === 'woche') document.body.classList.add('todo-due-woche');
+    document.querySelectorAll('#due-filters button').forEach(function (btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-due') === dueFilter);
+    });
+    var board = document.getElementById('todo-board');
+    if (!board) return;
+    BOARD_COLS.forEach(function (c) {
+      var col = board.querySelector('.todo-col[data-col="' + c + '"]');
+      if (!col) return;
+      var n = 0;
+      col.querySelectorAll('li.todo').forEach(function (li) {
+        if (li.getAttribute('data-dup') === '1') return;
+        if (li.classList.contains('done') && hideDone) return;
+        if (li.hidden) return;
+        if (dueFilter === 'heute' && li.getAttribute('data-due') !== 'heute') return;
+        if (dueFilter === 'woche' && li.getAttribute('data-due') !== 'heute' && li.getAttribute('data-due') !== 'woche') return;
+        if (!li.classList.contains('done')) n++;
+      });
+      var badge = col.querySelector('[data-count]');
+      if (badge) badge.textContent = String(n);
+    });
+  }
+
+  function wireDueFilters() {
+    var host = document.getElementById('due-filters');
+    if (!host || host._wired) return;
+    host._wired = true;
+    host.querySelectorAll('button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        dueFilter = btn.getAttribute('data-due') || 'all';
+        try { localStorage.setItem('mcc:v1:dueFilter', JSON.stringify(dueFilter)); } catch (e) {}
+        applyDueFilter();
+        updateKpi();
+      });
+    });
+  }
 
   function updateKpi() {
     var open = 0;
-    document.querySelectorAll('#snap-todos li.todo, #mine-todos li.todo').forEach(function (li) {
+    var seen = {};
+    document.querySelectorAll('#todo-board li.todo, #snap-todos li.todo, #mine-todos li.todo').forEach(function (li) {
+      var id = li.getAttribute('data-id') || '';
+      if (seen[id]) return;
+      seen[id] = 1;
+      if (li.getAttribute('data-dup') === '1' || li.style.display === 'none') return;
       if (li.hidden) return;
+      if (dueFilter === 'heute' && li.getAttribute('data-due') !== 'heute') return;
+      if (dueFilter === 'woche' && li.getAttribute('data-due') !== 'heute' && li.getAttribute('data-due') !== 'woche') return;
       if (!li.classList.contains('done')) open++;
     });
     var el = document.getElementById('kpi-open');
@@ -1409,13 +1727,14 @@
   }
 
   function applyFilter() {
-    document.querySelectorAll('#snap-todos li.todo, #mine-todos li.todo').forEach(function (li) {
+    document.querySelectorAll('#todo-board li.todo, #snap-todos li.todo, #mine-todos li.todo').forEach(function (li) {
       var cat = li.getAttribute('data-cat') || 'sonstiges';
       li.hidden = !(filter === 'all' || cat === filter);
     });
     document.querySelectorAll('#cat-filters button').forEach(function (btn) {
       btn.classList.toggle('active', btn.getAttribute('data-cat') === filter);
     });
+    layoutTodoBoard();
     updateKpi();
   }
 
@@ -1424,7 +1743,12 @@
     if (!host) return;
     var counts = { all: 0 };
     CATS.forEach(function (c) { counts[c.id] = 0; });
-    document.querySelectorAll('#snap-todos li.todo, #mine-todos li.todo').forEach(function (li) {
+    var seen = {};
+    document.querySelectorAll('#todo-board li.todo, #snap-todos li.todo, #mine-todos li.todo').forEach(function (li) {
+      var id = li.getAttribute('data-id') || '';
+      if (seen[id]) return;
+      seen[id] = 1;
+      if (li.getAttribute('data-dup') === '1') return;
       if (li.classList.contains('done') && hideDone) return;
       var cat = li.getAttribute('data-cat') || 'sonstiges';
       counts.all++;
@@ -1482,6 +1806,7 @@
   function renderMine() {
     var ul = document.getElementById('mine-todos');
     if (!ul) return;
+    document.querySelectorAll('#todo-board li.todo').forEach(function (li) { li.remove(); });
     ul.innerHTML = '';
     var q = ((document.getElementById('todo-search') || {}).value || '').trim().toLowerCase();
     var sorted = mine.slice().sort(function (a, b) {
@@ -1504,19 +1829,27 @@
       var pin = document.createElement('button');
       pin.type = 'button'; pin.className = 'pin-btn' + (item.pinned ? ' on' : '');
       pin.textContent = item.pinned ? '★' : '☆'; pin.title = 'Pin';
-      span.appendChild(pin);
-      if (item.src === 'meeting') {
-        var src = document.createElement('span'); src.className = 'src-pill'; src.textContent = 'Meeting'; span.appendChild(src);
+      var chips = document.createElement('span');
+      chips.className = 'todo-chips';
+      chips.appendChild(pin);
+      if (item.src === 'meeting' || item.src === 'snap' || item.src === 'mail' || item.src === 'slack' || item.src === 'jira') {
+        var src = document.createElement('span'); src.className = 'src-pill';
+        src.textContent = item.src === 'meeting' ? 'Meeting' : (item.src === 'mail' ? 'Mail' : (item.src === 'slack' ? 'Slack' : (item.src === 'jira' ? 'Jira' : 'Snap')));
+        chips.appendChild(src);
       }
       var due = document.createElement('span');
       due.className = 'due-pill ' + (item.due || '');
       due.textContent = item.due === 'heute' ? 'Heute' : (item.due === 'woche' ? 'Woche' : 'Später');
-      span.appendChild(due);
+      chips.appendChild(due);
       var pill = document.createElement('span');
       pill.className = 'cat-pill c-' + (item.cat || 'sonstiges');
       pill.textContent = catLabel(item.cat);
-      span.appendChild(pill);
-      span.appendChild(document.createTextNode(item.text));
+      chips.appendChild(pill);
+      span.appendChild(chips);
+      var txt = document.createElement('span');
+      txt.className = 'todo-text';
+      txt.textContent = item.text;
+      span.appendChild(txt);
       label.appendChild(box);
       label.appendChild(span);
       var del = document.createElement('button');
@@ -1997,11 +2330,14 @@
   }
 
   ingestMeetingTodos();
+  ingestSnapTodos();
   ingestSnapshotMails();
   renderMails();
   syncMailHideBtn();
+  wireDueFilters();
   wireSnap();
   renderMine();
+  layoutTodoBoard();
   renderMiroPins();
   wireJira();
   syncHideBtn();
