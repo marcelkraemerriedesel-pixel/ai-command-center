@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
-<meta name="mcc-build" content="2026-10-29T14:34+01:00" />
+<meta name="mcc-build" content="2026-10-30T09:09+01:00" />
 <title>Marcel · AI Command Center</title>
 <style>
   :root {
@@ -178,8 +178,8 @@
     height: 100%;
     border-radius: 99px;
   }
-  .bar .ip { background: var(--info); width: 50%; }
-  .bar .pr { background: #9db7d4; width: 0%; }
+  .bar .ip { background: var(--info); width: 44.4%; }
+  .bar .pr { background: #9db7d4; width: 5.6%; }
   .bar .bl { background: var(--danger); width: 16.7%; }
   .bar .bk { background: #3f3f46; width: 33.3%; }
   .legend {
@@ -850,7 +850,7 @@
         <span class="chip"><i></i>Miro</span>
         <span class="chip"><i></i>Cursor</span>
       </nav>
-      <time class="stamp">29 Okt 2026 · 14:34 Berlin</time>
+      <time class="stamp">30 Okt 2026 · 09:09 Berlin</time>
       <button type="button" class="logout-btn" id="btn-logout" title="Sitzung beenden">Abmelden</button>
     </header>
 
@@ -858,18 +858,18 @@
 
     <section class="kpis" aria-label="Kennzahlen">
       <div class="kpi info"><b>18</b><span>Offene Jira-Issues</span></div>
-      <div class="kpi"><b>9</b><span>In Progress</span></div>
+      <div class="kpi"><b>8</b><span>In Progress</span></div>
       <div class="kpi danger"><b>3</b><span>Blocked</span></div>
       <div class="kpi warn"><b id="kpi-open">6</b><span>Offene Todos</span></div>
     </section>
 
     <section class="panel stack">
       <h2>Jira workload</h2>
-      <p class="sub">assignee = currentUser(), unresolved · 18 von 18 · letzter Abruf 29 Okt 2026 · 14:34 Berlin</p>
+      <p class="sub">assignee = currentUser(), unresolved · 18 von 18 · letzter Abruf 30 Okt 2026 · 09:09 Berlin</p>
       <div class="bar" aria-hidden="true"><i class="ip"></i><i class="pr"></i><i class="bl"></i><i class="bk"></i></div>
       <div class="legend">
-        <span><i class="l-ip"></i>In Progress 9</span>
-        <span><i class="l-pr"></i>Review 0</span>
+        <span><i class="l-ip"></i>In Progress 8</span>
+        <span><i class="l-pr"></i>Review 1</span>
         <span><i class="l-bl"></i>Blocked 3</span>
         <span><i class="l-bk"></i>Backlog 6</span>
       </div>
@@ -879,8 +879,9 @@
       <section class="panel">
         <h2>Heute <em>Nächste Termine</em></h2>
         <ul class="today-list" id="today-cal">
-          <li><span class="when">Do 29 Okt · 06:00</span><span>Wüstenrot Onsite</span></li>
-          <li><span class="when">Do 29 Okt · 11:00</span><span>Workshop Meine Wohnwelt</span></li>
+          <li><span class="when">Fr 30 Okt · 11:05</span><span>Follow-up Architektur · AZ CIAM</span></li>
+          <li><span class="when">Fr 30 Okt · 16:00</span><span>Tickets and Emails cleaning</span></li>
+          <li><span class="when">Fr 30 Okt · 16:30</span><span>Planning next Week</span></li>
         </ul>
       </section>
       <section class="panel">
@@ -895,26 +896,16 @@
           <div class="focus-stat danger"><b id="stat-jira-bl">–</b><span>Blocked Jira</span></div>
           <div class="focus-stat"><b id="stat-jira-open">–</b><span>Offene Jira</span></div>
         </div>
-        <p class="sub" id="today-hint">Onsite Wüstenrot bis 18:30 · Workshop Wohnwelt bis 15:00 · Fr: AZ CIAM 11:05 · Mo: Wüstenrot Standup 09:00.</p>
+        <p class="sub" id="today-hint">Fr: AZ CIAM 11:05 · Tickets 16:00 · Planning 16:30 · Mo: Wüstenrot Standup 09:00.</p>
       </section>
     </section>
 
     <section class="panel">
                 <h2>Nächste Termine</h2>
-        <p class="sub">Google Calendar · 29 Okt – 3 Nov · Mittagsblöcke ausgeblendet · Enterprise Planning abgesagt · SF Planning abgesagt</p>
+        <p class="sub">Google Calendar · 30 Okt – 4 Nov · Mittagsblöcke ausgeblendet</p>
         <table>
           <thead><tr><th>Wann</th><th>Termin</th><th></th></tr></thead>
           <tbody>
-            <tr>
-              <td class="when">Do 29 Okt · 06:00</td>
-              <td>Wüstenrot Onsite</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td class="when">Do 29 Okt · 11:00</td>
-              <td>Workshop Meine Wohnwelt</td>
-              <td></td>
-            </tr>
             <tr>
               <td class="when">Fr 30 Okt · 11:05</td>
               <td>Follow-up Architektur · AZ CIAM</td>
@@ -974,6 +965,16 @@
               <td class="when">Di 3 Nov · 16:30</td>
               <td>SF × SmartApps PM</td>
               <td><a class="join" href="https://meet.google.com/qht-ztrp-fvr" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+            <tr>
+              <td class="when">Mi 4 Nov · 11:00</td>
+              <td>Marcel × Charles</td>
+              <td><a class="join" href="https://meet.google.com/epa-xdws-ieg" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+            <tr>
+              <td class="when">Mi 4 Nov · 13:30</td>
+              <td>Bi-weekly PH:Wüstenrot</td>
+              <td></td>
             </tr>
           </tbody>
         </table>
@@ -1169,17 +1170,17 @@
       <table class="jira-table">
         <thead><tr><th></th><th>Key</th><th>Status</th><th>Summary</th></tr></thead>
         <tbody>
+                    <tr class="jira-row" data-id="j:SLF-1932" data-key="SLF-1932" data-summary="Strenger · scatter charts etc" data-status-class="pr">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-1932 erledigt" /></td>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1932" target="_blank" rel="noopener">SLF-1932</a></td>
+            <td><span class="status pr">Internal QA</span></td>
+            <td>Strenger · scatter charts etc</td>
+          </tr>
                     <tr class="jira-row" data-id="j:SLF-1710" data-key="SLF-1710" data-summary="CTA-to-agent · opening message pre-fill" data-status-class="">
             <td><input class="jira-check" type="checkbox" aria-label="SLF-1710 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1710" target="_blank" rel="noopener">SLF-1710</a></td>
             <td><span class="status">Backlog</span></td>
             <td>CTA-to-agent · opening message pre-fill</td>
-          </tr>
-                    <tr class="jira-row" data-id="j:SLF-1932" data-key="SLF-1932" data-summary="Strenger · scatter charts etc" data-status-class="ip">
-            <td><input class="jira-check" type="checkbox" aria-label="SLF-1932 erledigt" /></td>
-            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1932" target="_blank" rel="noopener">SLF-1932</a></td>
-            <td><span class="status ip">In Progress</span></td>
-            <td>Strenger · scatter charts etc</td>
           </tr>
                     <tr class="jira-row" data-id="j:SLF-1291" data-key="SLF-1291" data-summary="Bavaria Direkt · application workflow" data-status-class="ip">
             <td><input class="jira-check" type="checkbox" aria-label="SLF-1291 erledigt" /></td>
@@ -1253,17 +1254,17 @@
             <td><span class="status bl">Blocked externally</span></td>
             <td>TopHypo · Ownership Portal V1</td>
           </tr>
-                    <tr class="jira-row" data-id="j:SLF-1027" data-key="SLF-1027" data-summary="Deutsche Bank · ownership portal" data-status-class="bl">
-            <td><input class="jira-check" type="checkbox" aria-label="SLF-1027 erledigt" /></td>
-            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1027" target="_blank" rel="noopener">SLF-1027</a></td>
-            <td><span class="status bl">Blocked externally</span></td>
-            <td>Deutsche Bank · ownership portal</td>
-          </tr>
                     <tr class="jira-row" data-id="j:SLF-1709" data-key="SLF-1709" data-summary="CRM handoff for agent-sourced leads" data-status-class="">
             <td><input class="jira-check" type="checkbox" aria-label="SLF-1709 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1709" target="_blank" rel="noopener">SLF-1709</a></td>
             <td><span class="status">Backlog</span></td>
             <td>CRM handoff for agent-sourced leads</td>
+          </tr>
+                    <tr class="jira-row" data-id="j:SLF-1027" data-key="SLF-1027" data-summary="Deutsche Bank · ownership portal" data-status-class="bl">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-1027 erledigt" /></td>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1027" target="_blank" rel="noopener">SLF-1027</a></td>
+            <td><span class="status bl">Blocked externally</span></td>
+            <td>Deutsche Bank · ownership portal</td>
           </tr>
                     <tr class="jira-row" data-id="j:SLF-1828" data-key="SLF-1828" data-summary="Apobank" data-status-class="">
             <td><input class="jira-check" type="checkbox" aria-label="SLF-1828 erledigt" /></td>
@@ -1291,29 +1292,37 @@
           <button type="button" id="btn-mail-clear-done">Erledigte Mails löschen</button>
         </div>
         <div class="mail" id="mail-list">
-          <article class="mail-item" data-id="e:1a18749cc08ef0bd" data-title="Immo-Dealfinder · Input" data-meta="Sandra · heute 11:51" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a18749cc08ef0bd">
+          <article class="mail-item" data-id="e:1a188b80006c2990" data-title="PS-5459 · Hierarchie-Update" data-meta="Mihail · Do 29 · 18:32" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a188b80006c2990">
+            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
+            <div class="mail-body">
+              <h3>PS-5459 · Hierarchie-Update</h3>
+              <p>Mihail · Do 29 · 18:32</p>
+            </div>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a188b80006c2990" target="_blank" rel="noopener">In Gmail öffnen</a>
+          </article>
+          <article class="mail-item" data-id="e:1a188a5d82f9a4f3" data-title="Allianz · Leads Engine" data-meta="Stephan · Do 29 · 18:12" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a188a5d82f9a4f3">
+            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
+            <div class="mail-body">
+              <h3>Allianz · Leads Engine</h3>
+              <p>Stephan · Do 29 · 18:12</p>
+            </div>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a188a5d82f9a4f3" target="_blank" rel="noopener">In Gmail öffnen</a>
+          </article>
+          <article class="mail-item" data-id="e:1a18749cc08ef0bd" data-title="Immo-Dealfinder · Input" data-meta="Sandra · Do 29 · 11:51" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a18749cc08ef0bd">
             <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
             <div class="mail-body">
               <h3>Immo-Dealfinder · Input</h3>
-              <p>Sandra · heute 11:51</p>
+              <p>Sandra · Do 29 · 11:51</p>
             </div>
             <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a18749cc08ef0bd" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
-          <article class="mail-item" data-id="e:1a18726b3ddd1a86" data-title="Unsubscribe · Meine Wohnwelt" data-meta="Ruth · heute 11:13" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a18726b3ddd1a86">
+          <article class="mail-item" data-id="e:1a18726b3ddd1a86" data-title="Unsubscribe · Meine Wohnwelt" data-meta="Ruth · Do 29 · 11:13" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a18726b3ddd1a86">
             <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
             <div class="mail-body">
               <h3>Unsubscribe · Meine Wohnwelt</h3>
-              <p>Ruth · heute 11:13</p>
+              <p>Ruth · Do 29 · 11:13</p>
             </div>
             <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a18726b3ddd1a86" target="_blank" rel="noopener">In Gmail öffnen</a>
-          </article>
-          <article class="mail-item" data-id="e:1a1858f08ede0659" data-title="Jira fällig · SLF-1932 + SLF-716" data-meta="Jira · heute 03:48" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1858f08ede0659">
-            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
-            <div class="mail-body">
-              <h3>Jira fällig · SLF-1932 + SLF-716</h3>
-              <p>Jira · heute 03:48</p>
-            </div>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1858f08ede0659" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
           <article class="mail-item" data-id="e:1a181ff5f3ee7251" data-title="Lead-Dashboard · Trigger-Wording" data-meta="Anja · Mi 28 · 11:12" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a181ff5f3ee7251">
             <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
@@ -1322,14 +1331,6 @@
               <p>Anja · Mi 28 · 11:12</p>
             </div>
             <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a181ff5f3ee7251" target="_blank" rel="noopener">In Gmail öffnen</a>
-          </article>
-          <article class="mail-item" data-id="e:1a181b6f82199b87" data-title="PS-5459 · Hierarchie-Update" data-meta="Jira · Mi 28 · 09:53" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a181b6f82199b87">
-            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
-            <div class="mail-body">
-              <h3>PS-5459 · Hierarchie-Update</h3>
-              <p>Jira · Mi 28 · 09:53</p>
-            </div>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a181b6f82199b87" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
         </div>
       </section>
@@ -1353,7 +1354,7 @@
 
         <section class="panel">
           <h2>Confluence · frisch</h2>
-                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 29 Okt 2026 · 14:34 Berlin</p>
+                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 30 Okt 2026 · 09:09 Berlin</p>
           <table>
             <thead><tr><th>Space</th><th>Seite</th><th></th></tr></thead>
             <tbody>
@@ -1444,7 +1445,7 @@
     </section>
 
     <footer class="note">
-      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 29 Okt 2026 · 14:34 Berlin.
+      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 30 Okt 2026 · 09:09 Berlin.
       Todos/Notizen/Mails: localStorage. Zugang: Passwort-Gate (Client-seitig, Sitzung pro Tab).
       Live: <a href="https://marcelkraemerriedesel-pixel.github.io/ai-command-center/" target="_blank" rel="noopener">marcelkraemerriedesel-pixel.github.io/ai-command-center</a>
     </footer>
