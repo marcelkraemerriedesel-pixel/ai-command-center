@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
-<meta name="mcc-build" content="2026-11-02T09:05+01:00" />
+<meta name="mcc-build" content="2026-11-02T14:40+01:00" />
 <title>Marcel · AI Command Center</title>
 <style>
   :root {
@@ -850,7 +850,7 @@
         <span class="chip"><i></i>Miro</span>
         <span class="chip"><i></i>Cursor</span>
       </nav>
-      <time class="stamp">2 Nov 2026 · 09:05 Berlin</time>
+      <time class="stamp">2 Nov 2026 · 14:40 Berlin</time>
       <button type="button" class="logout-btn" id="btn-logout" title="Sitzung beenden">Abmelden</button>
     </header>
 
@@ -865,7 +865,7 @@
 
     <section class="panel stack">
       <h2>Jira workload</h2>
-      <p class="sub">assignee = currentUser(), unresolved · 18 von 18 · letzter Abruf 2 Nov 2026 · 09:05 Berlin</p>
+      <p class="sub">assignee = currentUser(), unresolved · 18 von 18 · letzter Abruf 2 Nov 2026 · 14:40 Berlin</p>
       <div class="bar" aria-hidden="true"><i class="ip"></i><i class="pr"></i><i class="bl"></i><i class="bk"></i></div>
       <div class="legend">
         <span><i class="l-ip"></i>In Progress 8</span>
@@ -879,10 +879,6 @@
       <section class="panel">
         <h2>Heute <em>Nächste Termine</em></h2>
         <ul class="today-list" id="today-cal">
-          <li><span class="when">Mo 2 Nov · 09:00</span><span>Wüstenrot Standup/Daily</span><a class="join" href="https://meet.google.com/ezt-wwqu-usb" target="_blank" rel="noopener">Join</a></li>
-          <li><span class="when">Mo 2 Nov · 10:00</span><span>Weekly Sync Barbara/Jasser/Marcel</span><a class="join" href="https://meet.google.com/vac-nhhj-sst" target="_blank" rel="noopener">Join</a></li>
-          <li><span class="when">Mo 2 Nov · 11:00</span><span>DACH weekly</span><a class="join" href="https://meet.google.com/fho-dzfd-idx" target="_blank" rel="noopener">Join</a></li>
-          <li><span class="when">Mo 2 Nov · 13:30</span><span>Bi-weekly PH:Wüstenrot</span></li>
           <li><span class="when">Mo 2 Nov · 16:00</span><span>Product Weekly</span><a class="join" href="https://meet.google.com/uca-sqgo-upb" target="_blank" rel="noopener">Join</a></li>
         </ul>
       </section>
@@ -898,7 +894,7 @@
           <div class="focus-stat danger"><b id="stat-jira-bl">–</b><span>Blocked Jira</span></div>
           <div class="focus-stat"><b id="stat-jira-open">–</b><span>Offene Jira</span></div>
         </div>
-        <p class="sub" id="today-hint">Heute: Standup 09:00, Sync 10:00, DACH 11:00, Bi-weekly 13:30, Product Weekly 16:00. Di Strenger 10:30. Do Allianz Workshop 09:00. Mi Charles hat abgesagt.</p>
+        <p class="sub" id="today-hint">Heute: Product Weekly 16:00. Di Allianz bi-weekly 09:00, Strenger 10:30. Do Allianz Workshop 09:00 (Einladung offen). Mi Charles hat abgesagt.</p>
       </section>
     </section>
 
@@ -909,29 +905,14 @@
           <thead><tr><th>Wann</th><th>Termin</th><th></th></tr></thead>
           <tbody>
             <tr>
-              <td class="when">Mo 2 Nov · 09:00</td>
-              <td>Wüstenrot Standup/Daily</td>
-              <td><a class="join" href="https://meet.google.com/ezt-wwqu-usb" target="_blank" rel="noopener">Join</a></td>
-            </tr>
-            <tr>
-              <td class="when">Mo 2 Nov · 10:00</td>
-              <td>Weekly Sync Barbara/Jasser/Marcel</td>
-              <td><a class="join" href="https://meet.google.com/vac-nhhj-sst" target="_blank" rel="noopener">Join</a></td>
-            </tr>
-            <tr>
-              <td class="when">Mo 2 Nov · 11:00</td>
-              <td>DACH weekly</td>
-              <td><a class="join" href="https://meet.google.com/fho-dzfd-idx" target="_blank" rel="noopener">Join</a></td>
-            </tr>
-            <tr>
-              <td class="when">Mo 2 Nov · 13:30</td>
-              <td>Bi-weekly PH:Wüstenrot</td>
-              <td></td>
-            </tr>
-            <tr>
               <td class="when">Mo 2 Nov · 16:00</td>
               <td>Product Weekly</td>
               <td><a class="join" href="https://meet.google.com/uca-sqgo-upb" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+            <tr>
+              <td class="when">Di 3 Nov · 09:00</td>
+              <td>Allianz bi-weekly</td>
+              <td><a class="join" href="https://meet.google.com/qgv-qcwj-fpk" target="_blank" rel="noopener">Join</a></td>
             </tr>
             <tr>
               <td class="when">Di 3 Nov · 10:30</td>
@@ -1182,6 +1163,12 @@
       <table class="jira-table">
         <thead><tr><th></th><th>Key</th><th>Status</th><th>Summary</th></tr></thead>
         <tbody>
+                    <tr class="jira-row" data-id="j:SLF-585" data-key="SLF-585" data-summary="Allianz · insurance ownership portal" data-status-class="ip">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-585 erledigt" /></td>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-585" target="_blank" rel="noopener">SLF-585</a></td>
+            <td><span class="status ip">In Progress</span></td>
+            <td>Allianz · insurance ownership portal</td>
+          </tr>
                     <tr class="jira-row" data-id="j:SLF-1932" data-key="SLF-1932" data-summary="Strenger · scatter charts etc" data-status-class="pr">
             <td><input class="jira-check" type="checkbox" aria-label="SLF-1932 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1932" target="_blank" rel="noopener">SLF-1932</a></td>
@@ -1199,12 +1186,6 @@
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1291" target="_blank" rel="noopener">SLF-1291</a></td>
             <td><span class="status ip">In Progress</span></td>
             <td>Bavaria Direkt · application workflow</td>
-          </tr>
-                    <tr class="jira-row" data-id="j:SLF-585" data-key="SLF-585" data-summary="Allianz · insurance ownership portal" data-status-class="ip">
-            <td><input class="jira-check" type="checkbox" aria-label="SLF-585 erledigt" /></td>
-            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-585" target="_blank" rel="noopener">SLF-585</a></td>
-            <td><span class="status ip">In Progress</span></td>
-            <td>Allianz · insurance ownership portal</td>
           </tr>
                     <tr class="jira-row" data-id="j:SLF-1584" data-key="SLF-1584" data-summary="W&amp;W · follow up" data-status-class="ip">
             <td><input class="jira-check" type="checkbox" aria-label="SLF-1584 erledigt" /></td>
@@ -1304,45 +1285,45 @@
           <button type="button" id="btn-mail-clear-done">Erledigte Mails löschen</button>
         </div>
         <div class="mail" id="mail-list">
-          <article class="mail-item" data-id="e:1a19b3d8a1d0d222" data-title="Release Notes 4.1 · Signalkommunikation" data-meta="Barbara · Mo 2 · 08:50" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a19b3d8a1d0d222">
+          <article class="mail-item" data-id="e:1a19c64afaebdb22" data-title="Allianz · Einwilligungen Portal" data-meta="Ralf · Mo 2 · 14:13" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a19c64afaebdb22">
+            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
+            <div class="mail-body">
+              <h3>Allianz · Einwilligungen Portal</h3>
+              <p>Ralf · Mo 2 · 14:13</p>
+            </div>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a19c64afaebdb22" target="_blank" rel="noopener">In Gmail öffnen</a>
+          </article>
+          <article class="mail-item" data-id="e:1a19bd5a0442f3c6" data-title="Release Notes 4.1 · Signalkommunikation" data-meta="Barbara · Mo 2 · 11:37" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a19bd5a0442f3c6">
             <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
             <div class="mail-body">
               <h3>Release Notes 4.1 · Signalkommunikation</h3>
-              <p>Barbara · Mo 2 · 08:50</p>
+              <p>Barbara · Mo 2 · 11:37</p>
             </div>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a19b3d8a1d0d222" target="_blank" rel="noopener">In Gmail öffnen</a>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a19bd5a0442f3c6" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
-          <article class="mail-item" data-id="e:1a19b306a55389a6" data-title="Unsubscribe · Prozess" data-meta="Barbara · Mo 2 · 08:36" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a19b306a55389a6">
+          <article class="mail-item" data-id="e:1a19bac4733c1a26" data-title="W&amp;W Requirements · Erwähnung" data-meta="Barbara · Mo 2 · 10:52" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a19bac4733c1a26">
+            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
+            <div class="mail-body">
+              <h3>W&amp;W Requirements · Erwähnung</h3>
+              <p>Barbara · Mo 2 · 10:52</p>
+            </div>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a19bac4733c1a26" target="_blank" rel="noopener">In Gmail öffnen</a>
+          </article>
+          <article class="mail-item" data-id="e:1a19b7777e84b9a6" data-title="Unsubscribe · Prozess" data-meta="Corinna · Mo 2 · 09:54" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a19b7777e84b9a6">
             <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
             <div class="mail-body">
               <h3>Unsubscribe · Prozess</h3>
-              <p>Barbara · Mo 2 · 08:36</p>
+              <p>Corinna · Mo 2 · 09:54</p>
             </div>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a19b306a55389a6" target="_blank" rel="noopener">In Gmail öffnen</a>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a19b7777e84b9a6" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
-          <article class="mail-item" data-id="e:1a1914b906fdf821" data-title="PS-5456 · Feedback offen" data-meta="Support · Sa 31 · ungelesen" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1914b906fdf821">
+          <article class="mail-item" data-id="e:1a1914b906fdf821" data-title="PS-5456 · Feedback offen" data-meta="Support · Sa 31" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1914b906fdf821">
             <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
             <div class="mail-body">
               <h3>PS-5456 · Feedback offen</h3>
-              <p>Support · Sa 31 · ungelesen</p>
+              <p>Support · Sa 31</p>
             </div>
             <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1914b906fdf821" target="_blank" rel="noopener">In Gmail öffnen</a>
-          </article>
-          <article class="mail-item" data-id="e:1a18bf8907a5b7db" data-title="Allianz CIAM · Token-Laufzeiten" data-meta="Tanja · Fr 30 · 09:41" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a18bf8907a5b7db">
-            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
-            <div class="mail-body">
-              <h3>Allianz CIAM · Token-Laufzeiten</h3>
-              <p>Tanja · Fr 30 · 09:41</p>
-            </div>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a18bf8907a5b7db" target="_blank" rel="noopener">In Gmail öffnen</a>
-          </article>
-          <article class="mail-item" data-id="e:1a18d80231291003" data-title="Strenger · nächste Schritte 28.10" data-meta="Barbara · Fr 30 · 16:48" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a18d80231291003">
-            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
-            <div class="mail-body">
-              <h3>Strenger · nächste Schritte 28.10</h3>
-              <p>Barbara · Fr 30 · 16:48</p>
-            </div>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a18d80231291003" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
         </div>
       </section>
@@ -1355,16 +1336,24 @@
             <thead><tr><th>Wann</th><th>Meeting</th></tr></thead>
             <tbody>
               <tr><td class="when">Mo 2 · 09:00</td><td><a href="https://notes.granola.ai/d/3568871e-7188-46c5-a2df-afbd8ecaef0d" target="_blank" rel="noopener">Wüstenrot Standup/Daily</a></td></tr>
+              <tr><td class="when">Mo 2 · 10:00</td><td><a href="https://notes.granola.ai/d/ee548b03-4042-4fca-9949-958d97143bef" target="_blank" rel="noopener">Weekly Sync Barbara/Jasser/Marcel</a></td></tr>
+              <tr><td class="when">Mo 2 · 11:00</td><td><a href="https://notes.granola.ai/d/1da55ae5-9df6-4ae7-a379-84ba64172fb1" target="_blank" rel="noopener">DACH weekly</a></td></tr>
+              <tr><td class="when">Mo 2 · 13:30</td><td><a href="https://notes.granola.ai/d/ce8cb71f-0dd8-4f05-9e75-9af4a1054ad3" target="_blank" rel="noopener">Bi-weekly PH:Wüstenrot</a></td></tr>
             </tbody>
           </table>
         </section>
 
         <section class="panel">
           <h2>Confluence · frisch</h2>
-                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 2 Nov 2026 · 09:05 Berlin</p>
+                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 2 Nov 2026 · 14:40 Berlin</p>
           <table>
             <thead><tr><th>Space</th><th>Seite</th><th></th></tr></thead>
             <tbody>
+              <tr>
+                <td class="when">PROD</td>
+                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/568000542/Solution+Factory+-+Weekly" target="_blank" rel="noopener">Solution Factory Weekly</a></td>
+                <td class="when">Mo 2</td>
+              </tr>
               <tr>
                 <td class="when">PROD</td>
                 <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/2821783555/Allianz+CIAM+SSO+Integration" target="_blank" rel="noopener">Allianz CIAM SSO Integration</a></td>
@@ -1379,11 +1368,6 @@
                 <td class="when">PROD</td>
                 <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/2822275073/AKUMA" target="_blank" rel="noopener">AKUMA</a></td>
                 <td class="when">Fr 30</td>
-              </tr>
-              <tr>
-                <td class="when">PROD</td>
-                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/568000542/Solution+Factory+-+Weekly" target="_blank" rel="noopener">Solution Factory Weekly</a></td>
-                <td class="when">Di 27</td>
               </tr>
               <tr>
                 <td class="when">PROD</td>
@@ -1467,7 +1451,7 @@
     </section>
 
     <footer class="note">
-      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 2 Nov 2026 · 09:05 Berlin.
+      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 2 Nov 2026 · 14:40 Berlin.
       Todos/Notizen/Mails: localStorage. Zugang: Passwort-Gate (Client-seitig, Sitzung pro Tab).
       Live: <a href="https://marcelkraemerriedesel-pixel.github.io/ai-command-center/" target="_blank" rel="noopener">marcelkraemerriedesel-pixel.github.io/ai-command-center</a>
     </footer>
