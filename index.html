@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
-<meta name="mcc-build" content="2026-11-11T09:05+01:00" />
+<meta name="mcc-build" content="2026-11-11T14:37+01:00" />
 <title>Marcel · AI Command Center</title>
 <style>
   :root {
@@ -850,7 +850,7 @@
         <span class="chip"><i></i>Miro</span>
         <span class="chip"><i></i>Cursor</span>
       </nav>
-      <time class="stamp">11 Nov 2026 · 09:05 Berlin</time>
+      <time class="stamp">11 Nov 2026 · 14:37 Berlin</time>
       <button type="button" class="logout-btn" id="btn-logout" title="Sitzung beenden">Abmelden</button>
     </header>
 
@@ -865,7 +865,7 @@
 
     <section class="panel stack">
       <h2>Jira workload</h2>
-      <p class="sub">assignee = currentUser(), unresolved · 18 von 18 · letzter Abruf 11 Nov 2026 · 09:05 Berlin</p>
+      <p class="sub">assignee = currentUser(), unresolved · 18 von 18 · letzter Abruf 11 Nov 2026 · 14:37 Berlin</p>
       <div class="bar" aria-hidden="true"><i class="ip"></i><i class="pr"></i><i class="bl"></i><i class="bk"></i></div>
       <div class="legend">
         <span><i class="l-ip"></i>In Progress 8</span>
@@ -879,8 +879,6 @@
       <section class="panel">
         <h2>Heute <em>Nächste Termine</em></h2>
         <ul class="today-list" id="today-cal">
-          <li><span class="when">Mi 11 Nov · 11:00</span><span>Marcel x Charles (Charles abgesagt)</span><a class="join" href="https://meet.google.com/epa-xdws-ieg" target="_blank" rel="noopener">Join</a></li>
-          <li><span class="when">Mi 11 Nov · 13:30</span><span>Bi-weekly PH:Wüstenrot</span></li>
           <li><span class="when">Mi 11 Nov · 15:45</span><span>Allianz Workshop</span><a class="join" href="https://meet.google.com/rtz-rzdz-mnc" target="_blank" rel="noopener">Join</a></li>
         </ul>
       </section>
@@ -896,7 +894,7 @@
           <div class="focus-stat danger"><b id="stat-jira-bl">–</b><span>Blocked Jira</span></div>
           <div class="focus-stat"><b id="stat-jira-open">–</b><span>Offene Jira</span></div>
         </div>
-        <p class="sub" id="today-hint">Heute: Charles 11:00 (abgesagt), Wüstenrot 13:30, Allianz Workshop 15:45. UX/UI 11:30 abgesagt. Urlaub bis Fr 13.</p>
+        <p class="sub" id="today-hint">Heute noch: Allianz Workshop 15:45. Charles 11:00 (abgesagt), Wüstenrot 13:30 abgesagt. Urlaub bis Fr 13.</p>
       </section>
     </section>
 
@@ -912,23 +910,13 @@
               <td></td>
             </tr>
             <tr>
-              <td class="when">Mi 11 Nov · 11:00</td>
-              <td>Marcel x Charles (Charles abgesagt)</td>
-              <td><a class="join" href="https://meet.google.com/epa-xdws-ieg" target="_blank" rel="noopener">Join</a></td>
-            </tr>
-            <tr>
-              <td class="when">Mi 11 Nov · 13:30</td>
-              <td>Bi-weekly PH:Wüstenrot</td>
-              <td></td>
-            </tr>
-            <tr>
               <td class="when">Mi 11 Nov · 15:45</td>
               <td>Allianz Workshop</td>
               <td><a class="join" href="https://meet.google.com/rtz-rzdz-mnc" target="_blank" rel="noopener">Join</a></td>
             </tr>
             <tr>
               <td class="when">Do 12 Nov · 09:00</td>
-              <td>Allianz bi-weekly</td>
+              <td>Allianz bi-weekly (Charles abgesagt)</td>
               <td><a class="join" href="https://meet.google.com/qgv-qcwj-fpk" target="_blank" rel="noopener">Join</a></td>
             </tr>
             <tr>
@@ -1267,6 +1255,14 @@
           <button type="button" id="btn-mail-clear-done">Erledigte Mails löschen</button>
         </div>
         <div class="mail" id="mail-list">
+          <article class="mail-item" data-id="e:1a1caa3636e49535" data-title="Sandra · Bi-weekly Wüstenrot abgesagt" data-meta="Sandra · heute 13:44" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1caa3636e49535">
+            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
+            <div class="mail-body">
+              <h3>Sandra · Bi-weekly Wüstenrot abgesagt</h3>
+              <p>Sandra · heute 13:44</p>
+            </div>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1caa3636e49535" target="_blank" rel="noopener">In Gmail öffnen</a>
+          </article>
           <article class="mail-item" data-id="e:1a1c99f05041eb17" data-title="Barbara · CIAM Login und Logout" data-meta="Barbara · heute 08:59" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1c99f05041eb17">
             <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
             <div class="mail-body">
@@ -1282,14 +1278,6 @@
               <p>Anja · gestern 12:33</p>
             </div>
             <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1c53c60b731754" target="_blank" rel="noopener">In Gmail öffnen</a>
-          </article>
-          <article class="mail-item" data-id="e:1a1c2467d79f537f" data-title="Jasser · Leads Engine" data-meta="Jasser · Mo 22:47" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1c2467d79f537f">
-            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
-            <div class="mail-body">
-              <h3>Jasser · Leads Engine</h3>
-              <p>Jasser · Mo 22:47</p>
-            </div>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1c2467d79f537f" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
           <article class="mail-item" data-id="e:1a1c20087ed679c3" data-title="Dita · Allianz-Workshop Aufzeichnung" data-meta="Dita · Mo 21:29" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a1c20087ed679c3">
             <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
@@ -1324,7 +1312,7 @@
 
         <section class="panel">
           <h2>Confluence · frisch</h2>
-                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 11 Nov 2026 · 09:05 Berlin</p>
+                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 11 Nov 2026 · 14:37 Berlin</p>
           <table>
             <thead><tr><th>Space</th><th>Seite</th><th></th></tr></thead>
             <tbody>
@@ -1426,7 +1414,7 @@
     </section>
 
     <footer class="note">
-      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 11 Nov 2026 · 09:05 Berlin.
+      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 11 Nov 2026 · 14:37 Berlin.
       Todos/Notizen/Mails: localStorage. Zugang: Passwort-Gate (Client-seitig, Sitzung pro Tab).
       Live: <a href="https://marcelkraemerriedesel-pixel.github.io/ai-command-center/" target="_blank" rel="noopener">marcelkraemerriedesel-pixel.github.io/ai-command-center</a>
     </footer>
