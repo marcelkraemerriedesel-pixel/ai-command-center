@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
-<meta name="mcc-build" content="2026-11-25T09:04+01:00" />
+<meta name="mcc-build" content="2026-11-25T14:36+01:00" />
 <title>Marcel · AI Command Center</title>
 <style>
   :root {
@@ -178,10 +178,11 @@
     height: 100%;
     border-radius: 99px;
   }
-  .bar .ip { background: var(--info); width: 44.4%; }
+  .bar .ip { background: var(--info); width: 42.1%; }
   .bar .pr { background: #9db7d4; width: 0%; }
-  .bar .bl { background: var(--danger); width: 22.2%; }
-  .bar .bk { background: #3f3f46; width: 33.3%; }
+  .bar .bl { background: var(--danger); width: 21.1%; }
+  .bar .pp { background: var(--warn); width: 5.3%; }
+  .bar .bk { background: #3f3f46; width: 31.5%; }
   .legend {
     display: flex;
     flex-wrap: wrap;
@@ -199,6 +200,7 @@
   .l-ip { background: var(--info); }
   .l-pr { background: #9db7d4; }
   .l-bl { background: var(--danger); }
+  .l-pp { background: var(--warn); }
   .l-bk { background: #3f3f46; }
   table { width: 100%; border-collapse: collapse; }
   th {
@@ -254,6 +256,7 @@
   }
   .status.ip { background: rgba(142, 200, 255, 0.12); color: var(--info); }
   .status.pr { background: rgba(245, 193, 108, 0.12); color: var(--warn); }
+  .status.pp { background: rgba(245, 193, 108, 0.12); color: var(--warn); }
   .status.bl { background: rgba(255, 122, 144, 0.12); color: var(--danger); }
   ul.actions { list-style: none; margin: 0; padding: 0 0 6px; }
   ul.actions li {
@@ -850,14 +853,14 @@
         <span class="chip"><i></i>Miro</span>
         <span class="chip"><i></i>Cursor</span>
       </nav>
-      <time class="stamp">25 Nov 2026 · 09:04 Berlin</time>
+      <time class="stamp">25 Nov 2026 · 14:36 Berlin</time>
       <button type="button" class="logout-btn" id="btn-logout" title="Sitzung beenden">Abmelden</button>
     </header>
 
     <p class="notice">Tagesfokus oben. Todos aus Meetings werden automatisch übernommen. Jira/Mails bleiben bis abgehakt. Notiz-Pads + Fälligkeit (Heute/Woche) lokal gespeichert.</p>
 
     <section class="kpis" aria-label="Kennzahlen">
-      <div class="kpi info"><b>18</b><span>Offene Jira-Issues</span></div>
+      <div class="kpi info"><b>19</b><span>Offene Jira-Issues</span></div>
       <div class="kpi"><b>8</b><span>In Progress</span></div>
       <div class="kpi danger"><b>4</b><span>Blocked</span></div>
       <div class="kpi warn"><b id="kpi-open">6</b><span>Offene Todos</span></div>
@@ -865,12 +868,13 @@
 
     <section class="panel stack">
       <h2>Jira workload</h2>
-      <p class="sub">assignee = currentUser(), unresolved · 18 von 18 · letzter Abruf 25 Nov 2026 · 09:04 Berlin</p>
-      <div class="bar" aria-hidden="true"><i class="ip"></i><i class="pr"></i><i class="bl"></i><i class="bk"></i></div>
+      <p class="sub">assignee = currentUser(), unresolved · 19 von 19 · letzter Abruf 25 Nov 2026 · 14:36 Berlin</p>
+      <div class="bar" aria-hidden="true"><i class="ip"></i><i class="pr"></i><i class="bl"></i><i class="pp"></i><i class="bk"></i></div>
       <div class="legend">
         <span><i class="l-ip"></i>In Progress 8</span>
         <span><i class="l-pr"></i>Review 0</span>
         <span><i class="l-bl"></i>Blocked 4</span>
+        <span><i class="l-pp"></i>Prioritised 1</span>
         <span><i class="l-bk"></i>Backlog 6</span>
       </div>
     </section>
@@ -879,8 +883,7 @@
       <section class="panel">
         <h2>Heute <em>Nächste Termine</em></h2>
                 <ul class="today-list" id="today-cal">
-          <li><span class="when">Mi 25 Nov · 11:00</span><span>Marcel x Charles weekly sync</span></li>
-          <li><span class="when">Mi 25 Nov · 13:30</span><span>Bi-weekly PH:Wüstenrot</span></li>
+          <li><span class="when">Mi 25 Nov · 15:00</span><span>Strenger · Feedback from yesterday</span></li>
         </ul>
       </section>
       <section class="panel">
@@ -895,7 +898,7 @@
           <div class="focus-stat danger"><b id="stat-jira-bl">–</b><span>Blocked Jira</span></div>
           <div class="focus-stat"><b id="stat-jira-open">–</b><span>Offene Jira</span></div>
         </div>
-        <p class="sub" id="today-hint">Als Nächstes: Marcel x Charles weekly sync 11:00, danach Bi-weekly PH:Wüstenrot 13:30. Donnerstag: Allianz bi-weekly 09:00 und Solution Factory Planning 16:30.</p>
+        <p class="sub" id="today-hint">Als Nächstes: Strenger Feedback 15:00. Donnerstag: Allianz bi-weekly 09:00 und Solution Factory Planning 16:30.</p>
       </section>
     </section>
 
@@ -906,14 +909,9 @@
           <thead><tr><th>Wann</th><th>Termin</th><th></th></tr></thead>
           <tbody>
             <tr>
-              <td class="when">Mi 25 Nov · 11:00</td>
-              <td>Marcel x Charles weekly sync</td>
-              <td><a class="join" href="https://meet.google.com/epa-xdws-ieg" target="_blank" rel="noopener">Join</a></td>
-            </tr>
-            <tr>
-              <td class="when">Mi 25 Nov · 13:30</td>
-              <td>Bi-weekly PH:Wüstenrot</td>
-              <td></td>
+              <td class="when">Mi 25 Nov · 15:00</td>
+              <td>Strenger · Feedback from yesterday</td>
+              <td><a class="join" href="https://meet.google.com/puj-uofh-weh" target="_blank" rel="noopener">Join</a></td>
             </tr>
             <tr>
               <td class="when">Do 26 Nov · 09:00</td>
@@ -1156,11 +1154,23 @@
       <table class="jira-table">
         <thead><tr><th></th><th>Key</th><th>Status</th><th>Summary</th></tr></thead>
         <tbody>
+                    <tr class="jira-row" data-id="j:SLF-2088" data-key="SLF-2088" data-summary="Allianz · owner photo replaces dossier image" data-status-class="pp">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-2088 erledigt" /></td>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-2088" target="_blank" rel="noopener">SLF-2088</a></td>
+            <td><span class="status pp">Prioritised</span></td>
+            <td>Allianz · owner photo replaces dossier image</td>
+          </tr>
                     <tr class="jira-row" data-id="j:SLF-1932" data-key="SLF-1932" data-summary="Strenger · scatter charts etc" data-status-class="bl">
             <td><input class="jira-check" type="checkbox" aria-label="SLF-1932 erledigt" /></td>
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1932" target="_blank" rel="noopener">SLF-1932</a></td>
             <td><span class="status bl">Blocked internally</span></td>
             <td>Strenger · scatter charts etc</td>
+          </tr>
+                    <tr class="jira-row" data-id="j:SLF-1691" data-key="SLF-1691" data-summary="Strenger · investor portal activation" data-status-class="ip">
+            <td><input class="jira-check" type="checkbox" aria-label="SLF-1691 erledigt" /></td>
+            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1691" target="_blank" rel="noopener">SLF-1691</a></td>
+            <td><span class="status ip">In Progress</span></td>
+            <td>Strenger · investor portal activation</td>
           </tr>
                     <tr class="jira-row" data-id="j:SLF-585" data-key="SLF-585" data-summary="Allianz · insurance ownership portal" data-status-class="ip">
             <td><input class="jira-check" type="checkbox" aria-label="SLF-585 erledigt" /></td>
@@ -1203,12 +1213,6 @@
             <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1943" target="_blank" rel="noopener">SLF-1943</a></td>
             <td><span class="status ip">In Progress</span></td>
             <td>Release of Wuestenrot V4.1 Signal Communication</td>
-          </tr>
-                    <tr class="jira-row" data-id="j:SLF-1691" data-key="SLF-1691" data-summary="Strenger · investor portal activation" data-status-class="ip">
-            <td><input class="jira-check" type="checkbox" aria-label="SLF-1691 erledigt" /></td>
-            <td><a class="key" href="https://pricehubble.atlassian.net/browse/SLF-1691" target="_blank" rel="noopener">SLF-1691</a></td>
-            <td><span class="status ip">In Progress</span></td>
-            <td>Strenger · investor portal activation</td>
           </tr>
                     <tr class="jira-row" data-id="j:SLF-716" data-key="SLF-716" data-summary="TopHypo · Kickoff and Planning" data-status-class="ip">
             <td><input class="jira-check" type="checkbox" aria-label="SLF-716 erledigt" /></td>
@@ -1278,6 +1282,14 @@
           <button type="button" id="btn-mail-clear-done">Erledigte Mails löschen</button>
         </div>
         <div class="mail" id="mail-list">
+          <article class="mail-item" data-id="e:1a212d888965591d" data-title="Anja · Dashboard-Export" data-meta="Wüstenrot · Mi 25 14:15" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a212d888965591d">
+            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
+            <div class="mail-body">
+              <h3>Anja · Dashboard-Export</h3>
+              <p>Wüstenrot · Mi 25 14:15</p>
+            </div>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a212d888965591d" target="_blank" rel="noopener">In Gmail öffnen</a>
+          </article>
           <article class="mail-item" data-id="e:1a211b4cbad6c986" data-title="Barbara · PH-Update Zusammenfassung" data-meta="Strenger · Mi 25 08:56" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a211b4cbad6c986">
             <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
             <div class="mail-body">
@@ -1302,14 +1314,6 @@
             </div>
             <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a20d639c12e7ab5" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
-          <article class="mail-item" data-id="e:1a20d1cbd950bb9a" data-title="Jasser · Login und Onboarding" data-meta="Strenger · Di 24 11:31" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a20d1cbd950bb9a">
-            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
-            <div class="mail-body">
-              <h3>Jasser · Login und Onboarding</h3>
-              <p>Strenger · Di 24 11:31</p>
-            </div>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a20d1cbd950bb9a" target="_blank" rel="noopener">In Gmail öffnen</a>
-          </article>
           <article class="mail-item" data-id="e:1a20ce8f580abb13" data-title="Karen · Completeness-Bar" data-meta="Wüstenrot · Di 24 10:35" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a20ce8f580abb13">
             <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
             <div class="mail-body">
@@ -1328,19 +1332,19 @@
           <table>
             <thead><tr><th>Wann</th><th>Meeting</th></tr></thead>
                         <tbody>
+              <tr><td class="when">Mi 25 Nov · 13:30</td><td><a href="https://notes.granola.ai/d/f525c848-285e-4ef0-bfd9-12bffb9da087" target="_blank" rel="noopener">Bi-weekly PH:Wüstenrot</a></td></tr>
+              <tr><td class="when">Mi 25 Nov · 11:00</td><td><a href="https://notes.granola.ai/d/44732493-7320-4374-bac1-a2f76be4056b" target="_blank" rel="noopener">Marcel x Charles weekly sync</a></td></tr>
               <tr><td class="when">Di 24 Nov · 16:00</td><td><a href="https://notes.granola.ai/d/c2244ef6-09b7-446c-9659-7444cdc5d6a7" target="_blank" rel="noopener">Update PriceHubble</a></td></tr>
               <tr><td class="when">Di 24 Nov · 14:00</td><td><a href="https://notes.granola.ai/d/4e58be0d-4991-4c03-aade-6d90d3035cb8" target="_blank" rel="noopener">Weekly Sync SC DACH</a></td></tr>
               <tr><td class="when">Di 24 Nov · 12:00</td><td><a href="https://notes.granola.ai/d/af858387-aa5c-42cf-97d4-6783dcdf5a9a" target="_blank" rel="noopener">Strenger Slides und Prep</a></td></tr>
               <tr><td class="when">Di 24 Nov · 11:30</td><td><a href="https://notes.granola.ai/d/b3c02f5c-bbba-4241-a411-1e312f0cc3e4" target="_blank" rel="noopener">PH x Wüstenrot</a></td></tr>
-              <tr><td class="when">Di 24 Nov · 10:30</td><td><a href="https://notes.granola.ai/d/7bff3576-b9f2-4b20-b499-ba59451851b0" target="_blank" rel="noopener">Strenger Standup/Daily</a></td></tr>
-              <tr><td class="when">Di 24 Nov · 09:00</td><td><a href="https://notes.granola.ai/d/d0de23ae-9bf1-4848-9b83-c8179d893a8b" target="_blank" rel="noopener">Allianz bi-weekly</a></td></tr>
             </tbody>
           </table>
         </section>
 
         <section class="panel">
           <h2>Confluence · frisch</h2>
-                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 25 Nov 2026 · 09:04 Berlin</p>
+                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 25 Nov 2026 · 14:36 Berlin</p>
           <table>
             <thead><tr><th>Space</th><th>Seite</th><th></th></tr></thead>
             <tbody>
@@ -1442,7 +1446,7 @@
     </section>
 
     <footer class="note">
-      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 25 Nov 2026 · 09:04 Berlin.
+      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 25 Nov 2026 · 14:36 Berlin.
       Todos/Notizen/Mails: localStorage. Zugang: Passwort-Gate (Client-seitig, Sitzung pro Tab).
       Live: <a href="https://marcelkraemerriedesel-pixel.github.io/ai-command-center/" target="_blank" rel="noopener">marcelkraemerriedesel-pixel.github.io/ai-command-center</a>
     </footer>
