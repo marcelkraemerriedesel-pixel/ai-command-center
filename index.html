@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
-<meta name="mcc-build" content="2026-11-27T09:07+01:00" />
+<meta name="mcc-build" content="2026-11-27T14:35+01:00" />
 <title>Marcel · AI Command Center</title>
 <style>
   :root {
@@ -853,7 +853,7 @@
         <span class="chip"><i></i>Miro</span>
         <span class="chip"><i></i>Cursor</span>
       </nav>
-      <time class="stamp">27 Nov 2026 · 09:07 Berlin</time>
+      <time class="stamp">27 Nov 2026 · 14:35 Berlin</time>
       <button type="button" class="logout-btn" id="btn-logout" title="Sitzung beenden">Abmelden</button>
     </header>
 
@@ -868,7 +868,7 @@
 
     <section class="panel stack">
       <h2>Jira workload</h2>
-      <p class="sub">assignee = currentUser(), unresolved · 19 von 19 · letzter Abruf 27 Nov 2026 · 09:07 Berlin</p>
+      <p class="sub">assignee = currentUser(), unresolved · 19 von 19 · letzter Abruf 27 Nov 2026 · 14:35 Berlin</p>
       <div class="bar" aria-hidden="true"><i class="ip"></i><i class="pr"></i><i class="bl"></i><i class="pp"></i><i class="bk"></i></div>
       <div class="legend">
         <span><i class="l-ip"></i>In Progress 8</span>
@@ -883,10 +883,7 @@
       <section class="panel">
         <h2>Heute <em>Nächste Termine</em></h2>
                         <ul class="today-list" id="today-cal">
-          <li><span class="when">Fr 27 Nov · 09:00</span><span>Physio</span></li>
-          <li><span class="when">Fr 27 Nov · 11:30</span><span>Strenger · Investor feedback (Antwort offen)</span><a class="join" href="https://meet.google.com/sdj-deqi-nhx" target="_blank" rel="noopener">Join</a></li>
           <li><span class="when">Fr 27 Nov · 13:00</span><span>Strenger · Integrationsblock</span></li>
-          <li><span class="when">Fr 27 Nov · 14:00</span><span>Strenger · Integration</span><a class="join" href="https://meet.google.com/tek-qbbf-ggf" target="_blank" rel="noopener">Join</a></li>
           <li><span class="when">Fr 27 Nov · 16:00</span><span>Tickets and Emails cleaning</span></li>
           <li><span class="when">Fr 27 Nov · 16:30</span><span>Planning next Week</span></li>
         </ul>
@@ -903,7 +900,7 @@
           <div class="focus-stat danger"><b id="stat-jira-bl">–</b><span>Blocked Jira</span></div>
           <div class="focus-stat"><b id="stat-jira-open">–</b><span>Offene Jira</span></div>
         </div>
-        <p class="sub" id="today-hint">Als Nächstes Physio bis 10:30, danach 11:30 Strenger Investor-Feedback (Antwort offen). Freitag: Integrationsblock 13:00, Integration 14:00, Tickets 16:00, Planung 16:30. Montag Wüstenrot-Standup 09:00, DACH weekly 11:00, Update 15:00 (Antwort offen). Dienstag Allianz 09:00, ab 13:00 halber Tag frei (SC-Sync 14:00 und SmartApps 16:30 bleiben). Mittwoch Charles-Sync 11:00.</p>
+        <p class="sub" id="today-hint">Als Nächstes Integrationsblock bis 15:30, danach Tickets 16:00 und Planung 16:30. Montag Wüstenrot-Standup 09:00, DACH weekly 11:00, Update 15:00 (Antwort offen). Dienstag Allianz 09:00, Prototype-Matching 14:30 (Antwort offen), ab 13:00 halber Tag frei (SC-Sync 14:00 und SmartApps 16:30 bleiben). Mittwoch Charles-Sync 11:00.</p>
       </section>
     </section>
 
@@ -914,24 +911,9 @@
           <thead><tr><th>Wann</th><th>Termin</th><th></th></tr></thead>
           <tbody>
             <tr>
-              <td class="when">Fr 27 Nov · 09:00</td>
-              <td>Physio</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td class="when">Fr 27 Nov · 11:30</td>
-              <td>Strenger · Investor feedback (Antwort offen)</td>
-              <td><a class="join" href="https://meet.google.com/sdj-deqi-nhx" target="_blank" rel="noopener">Join</a></td>
-            </tr>
-            <tr>
               <td class="when">Fr 27 Nov · 13:00</td>
               <td>Strenger · Integrationsblock</td>
               <td></td>
-            </tr>
-            <tr>
-              <td class="when">Fr 27 Nov · 14:00</td>
-              <td>Strenger · Integration</td>
-              <td><a class="join" href="https://meet.google.com/tek-qbbf-ggf" target="_blank" rel="noopener">Join</a></td>
             </tr>
             <tr>
               <td class="when">Fr 27 Nov · 16:00</td>
@@ -1002,6 +984,11 @@
               <td class="when">Di 1 Dez · 14:00</td>
               <td>Weekly Sync SC DACH</td>
               <td><a class="join" href="https://meet.google.com/dxj-ynte-fhy" target="_blank" rel="noopener">Join</a></td>
+            </tr>
+            <tr>
+              <td class="when">Di 1 Dez · 14:30</td>
+              <td>Allianz · Prototype-Matching (Antwort offen)</td>
+              <td><a class="join" href="https://meet.google.com/qjt-cmgj-cqn" target="_blank" rel="noopener">Join</a></td>
             </tr>
             <tr>
               <td class="when">Di 1 Dez · 16:30</td>
@@ -1376,13 +1363,29 @@
           <button type="button" id="btn-mail-clear-done">Erledigte Mails löschen</button>
         </div>
         <div class="mail" id="mail-list">
-          <article class="mail-item" data-id="e:1a21bbebc34eee9b" data-title="Matthias · Feedback nächste Schritte" data-meta="Strenger · Fr 27 07:43" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a21bbebc34eee9b">
+          <article class="mail-item" data-id="e:1a21ce3bdd060221" data-title="Jasser · Allianz" data-meta="Allianz · Fr 27 13:03" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a21ce3bdd060221">
             <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
             <div class="mail-body">
-              <h3>Matthias · Feedback nächste Schritte</h3>
-              <p>Strenger · Fr 27 07:43</p>
+              <h3>Jasser · Allianz</h3>
+              <p>Allianz · Fr 27 13:03</p>
             </div>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a21bbebc34eee9b" target="_blank" rel="noopener">In Gmail öffnen</a>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a21ce3bdd060221" target="_blank" rel="noopener">In Gmail öffnen</a>
+          </article>
+          <article class="mail-item" data-id="e:1a21cdf3afbea00b" data-title="Barbara · Feedback nächste Schritte" data-meta="Strenger · Fr 27 12:58" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a21cdf3afbea00b">
+            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
+            <div class="mail-body">
+              <h3>Barbara · Feedback nächste Schritte</h3>
+              <p>Strenger · Fr 27 12:58</p>
+            </div>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a21cdf3afbea00b" target="_blank" rel="noopener">In Gmail öffnen</a>
+          </article>
+          <article class="mail-item" data-id="e:1a21c7eb94b1054f" data-title="Anja · Feedback Testzugang" data-meta="Wüstenrot · Fr 27 11:13" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a21c7eb94b1054f">
+            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
+            <div class="mail-body">
+              <h3>Anja · Feedback Testzugang</h3>
+              <p>Wüstenrot · Fr 27 11:13</p>
+            </div>
+            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a21c7eb94b1054f" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
           <article class="mail-item" data-id="e:1a21878a989e1593" data-title="Klaus · Subdomain" data-meta="Allianz · Do 26 16:28" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a21878a989e1593">
             <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
@@ -1392,14 +1395,6 @@
             </div>
             <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a21878a989e1593" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
-          <article class="mail-item" data-id="e:1a2182a44cdda81e" data-title="Jasser · Allianz" data-meta="Allianz · Do 26 15:02" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a2182a44cdda81e">
-            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
-            <div class="mail-body">
-              <h3>Jasser · Allianz</h3>
-              <p>Allianz · Do 26 15:02</p>
-            </div>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a2182a44cdda81e" target="_blank" rel="noopener">In Gmail öffnen</a>
-          </article>
           <article class="mail-item" data-id="e:1a2197bfba953b50" data-title="Dita · Prototype-Reviews 4. Dez" data-meta="Einladung · Do 26 21:11" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a2197bfba953b50">
             <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
             <div class="mail-body">
@@ -1407,14 +1402,6 @@
               <p>Einladung · Do 26 21:11</p>
             </div>
             <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a2197bfba953b50" target="_blank" rel="noopener">In Gmail öffnen</a>
-          </article>
-          <article class="mail-item" data-id="e:1a216f9f35a68910" data-title="Miro · dir wurde 1 Karte zugewiesen" data-meta="Miro · Do 26 09:30" data-url="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a216f9f35a68910">
-            <label class="check"><input type="checkbox" aria-label="Erledigt" /></label>
-            <div class="mail-body">
-              <h3>Miro · dir wurde 1 Karte zugewiesen</h3>
-              <p>Miro · Do 26 09:30</p>
-            </div>
-            <a class="open" href="https://mail.google.com/mail/?authuser=marcel.kraemer.riedesel@pricehubble.com#all/1a216f9f35a68910" target="_blank" rel="noopener">In Gmail öffnen</a>
           </article>
         </div>
       </section>
@@ -1426,22 +1413,27 @@
           <table>
             <thead><tr><th>Wann</th><th>Meeting</th></tr></thead>
                                     <tbody>
+              <tr><td class="when">Fr 27 Nov · 14:00</td><td><a href="https://notes.granola.ai/d/49da06fd-fa6a-42ef-96be-b22cdccdf034" target="_blank" rel="noopener">Strenger · Integration</a></td></tr>
+              <tr><td class="when">Fr 27 Nov · 11:30</td><td><a href="https://notes.granola.ai/d/31f4147e-9046-4b63-a12c-489df01a8ca7" target="_blank" rel="noopener">Strenger · Investor feedback</a></td></tr>
               <tr><td class="when">Do 26 Nov · 16:00</td><td><a href="https://notes.granola.ai/d/b4686250-5bc2-4994-9511-98817c29236e" target="_blank" rel="noopener">PriceHubble x Strenger</a></td></tr>
               <tr><td class="when">Do 26 Nov · 10:30</td><td><a href="https://notes.granola.ai/d/5d25f9b5-7a3f-47fd-819d-79ae44b27c07" target="_blank" rel="noopener">Marcel / Barbara</a></td></tr>
               <tr><td class="when">Do 26 Nov · 09:00</td><td><a href="https://notes.granola.ai/d/8524c1cc-a865-411a-9c1c-a97cb7052353" target="_blank" rel="noopener">Allianz bi-weekly</a></td></tr>
               <tr><td class="when">Mi 25 Nov · 13:30</td><td><a href="https://notes.granola.ai/d/f525c848-285e-4ef0-bfd9-12bffb9da087" target="_blank" rel="noopener">Bi-weekly PH:Wüstenrot</a></td></tr>
-              <tr><td class="when">Mi 25 Nov · 11:00</td><td><a href="https://notes.granola.ai/d/44732493-7320-4374-bac1-a2f76be4056b" target="_blank" rel="noopener">Marcel x Charles weekly sync</a></td></tr>
-              <tr><td class="when">Di 24 Nov · 16:00</td><td><a href="https://notes.granola.ai/d/c2244ef6-09b7-446c-9659-7444cdc5d6a7" target="_blank" rel="noopener">Update PriceHubble</a></td></tr>
             </tbody>
           </table>
         </section>
 
         <section class="panel">
           <h2>Confluence · frisch</h2>
-                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 27 Nov 2026 · 09:07 Berlin</p>
+                    <p class="sub">von dir mitbearbeitet · letzte 7 Tage · letzter Abruf 27 Nov 2026 · 14:35 Berlin</p>
           <table>
             <thead><tr><th>Space</th><th>Seite</th><th></th></tr></thead>
             <tbody>
+              <tr>
+                <td class="when">PROD</td>
+                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/2887122948/Allianz+Agency+Context+VTNR+Detection" target="_blank" rel="noopener">Allianz Agency Context</a></td>
+                <td class="when">Fr 27</td>
+              </tr>
               <tr>
                 <td class="when">PROD</td>
                 <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/2822275073/AKUMA" target="_blank" rel="noopener">AKUMA</a></td>
@@ -1460,11 +1452,6 @@
               <tr>
                 <td class="when">PROD</td>
                 <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/42598459/PRODUCT+Internal+-+Weekly+meeting" target="_blank" rel="noopener">PRODUCT Internal Weekly</a></td>
-                <td class="when">Mo 23</td>
-              </tr>
-              <tr>
-                <td class="when">PROD</td>
-                <td><a href="https://pricehubble.atlassian.net/wiki/spaces/PROD/pages/2757754883/Alianz+Lead+Engine+V4" target="_blank" rel="noopener">Allianz Lead Engine V4</a></td>
                 <td class="when">Mo 23</td>
               </tr>
             </tbody>
@@ -1545,7 +1532,7 @@
     </section>
 
     <footer class="note">
-      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 27 Nov 2026 · 09:07 Berlin.
+      Snapshot aus Cursor Cloud Agent für Marcel Krämer-Riedesel · Stempel 27 Nov 2026 · 14:35 Berlin.
       Todos/Notizen/Mails: localStorage. Zugang: Passwort-Gate (Client-seitig, Sitzung pro Tab).
       Live: <a href="https://marcelkraemerriedesel-pixel.github.io/ai-command-center/" target="_blank" rel="noopener">marcelkraemerriedesel-pixel.github.io/ai-command-center</a>
     </footer>
